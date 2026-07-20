@@ -1,0 +1,24 @@
+generated: '2026-07-18'
+method: searched
+source: openapi/credilinqai-openapi.yml
+docs: https://docs.credilinq.ai/docs/authentication-1.md
+summary:
+  types:
+  - http
+  model: oauth2-client-credentials
+  notes: >-
+    CrediLinq uses Auth0 for authentication. Customers request client_id /
+    client_secret from the CrediLinq support team (issued per environment:
+    Sandbox, Staging, Production). The client POSTs those credentials to the
+    token endpoint to obtain a Bearer JWT access token (token_type "Bearer",
+    default TTL 8 hours), which is then sent in the Authorization header on all
+    subsequent requests. Tokens should be cached until expiry.
+token_endpoint: https://api.credilinq.ai/v1/auth/generate-token
+token_operation: AuthenticationController_generateToken
+schemes:
+- name: access-token
+  type: http
+  scheme: bearer
+  bearerFormat: JWT
+  sources:
+  - openapi/credilinqai-openapi.yml
