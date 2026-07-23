@@ -1,0 +1,529 @@
+openapi: 3.0.0
+info:
+  title: CrediLinq Authentication Onboarding API
+  description: 'CrediLinq embedded finance API: B2B PayLater and GMV Financing for platforms and marketplaces. Covers Auth0 token generation, merchant onboarding and eligibility, customer and director KYC, credit line and loan (drawdown) management, payments and reconciliation, reporting, and demographic reference data.'
+  version: '1.0'
+  contact:
+    name: CrediLinq Support
+    email: support@credilinq.ai
+    url: https://docs.credilinq.ai/
+servers:
+- url: https://sandbox-api.credilinq.ai
+  description: Sandbox
+- url: https://stage-api.credilinq.ai
+  description: Staging
+- url: https://api.credilinq.ai
+  description: Production
+security:
+- access-token: []
+tags:
+- name: Onboarding
+paths:
+  /v1/onboarding/check-eligibility:
+    post:
+      operationId: OnboardingController_initiateOnboardingApplication
+      summary: Check Eligibility
+      description: ''
+      parameters:
+      - name: accept-language
+        in: header
+        description: 'Language of the response, supported languages: en-us, in'
+        schema:
+          type: string
+          default: en-us
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/InitiateAppDTO'
+      responses:
+        '200':
+          description: Eligibility Checked and application initiated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CheckEligibilityResponse'
+        '400':
+          description: Invalid Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestResponse'
+        '401':
+          description: Invalid credentials
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedResponse'
+        '403':
+          description: Forbidden resource
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenResponse'
+        '500':
+          description: Internal Server Error, Some problem is there, please try after sometime
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalErrorResponse'
+      tags:
+      - Onboarding
+      security:
+      - access-token: []
+  /v1/onboarding/initiate-data-processing:
+    post:
+      operationId: OnboardingController_initiateDaraProcessing
+      summary: Initiate Data Processing
+      description: ''
+      parameters:
+      - name: accept-language
+        in: header
+        description: 'Language of the response, supported languages: en-us, in'
+        schema:
+          type: string
+          default: en-us
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/InitiateDataProcessingDTO'
+      responses:
+        '200':
+          description: Data processing Initiated.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataProcessingResponse'
+        '400':
+          description: Invalid Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestResponse'
+        '401':
+          description: Invalid credentials
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedResponse'
+        '403':
+          description: Forbidden resource
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenResponse'
+        '404':
+          description: Requested Data Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationNotFoundResponse'
+        '500':
+          description: Internal Server Error, Some problem is there, please try after sometime
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalErrorResponse'
+      tags:
+      - Onboarding
+      security:
+      - access-token: []
+  /v1/onboarding/send-agreement:
+    post:
+      operationId: OnboardingController_generateKycDocusign
+      summary: Send Loan Agreement
+      description: ''
+      parameters:
+      - name: accept-language
+        in: header
+        description: 'Language of the response, supported languages: en-us, in'
+        schema:
+          type: string
+          default: en-us
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SendAgreementDto'
+      responses:
+        '200':
+          description: Email sent
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AgreementEmailResponse'
+        '400':
+          description: Invalid request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestResponse'
+        '401':
+          description: Invalid credentials
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedResponse'
+        '403':
+          description: Forbidden resource
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenResponse'
+        '404':
+          description: Application not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationNotFoundResponse'
+        '500':
+          description: Internal Server Error, Some problem is there, please try after sometime
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalErrorResponse'
+      tags:
+      - Onboarding
+      security:
+      - access-token: []
+components:
+  schemas:
+    DataProcessingStatusResponse:
+      type: object
+      properties:
+        dataProcessingId:
+          type: string
+          default: string
+          description: An unique id for Data Processing
+      required:
+      - dataProcessingId
+    InternalErrorResponse:
+      type: object
+      properties:
+        statusCode:
+          type: number
+          default: 500
+          description: The HTTP status code of the error
+        error:
+          type: string
+          default: string
+          description: Human-readable generic error message
+        errorCode:
+          type: string
+          default: E_INTERNAL_ERROR
+          description: Computer-readable code for error handling
+        message:
+          type: string
+          default: string
+          description: Human-readable error message containing all available details about how the error occurred
+        success:
+          type: boolean
+          default: false
+          description: A boolean indicating whether this was a success response or an error response
+      required:
+      - statusCode
+      - error
+      - errorCode
+      - message
+      - success
+    ForbiddenResponse:
+      type: object
+      properties:
+        statusCode:
+          type: number
+          default: 403
+          description: The HTTP status code of the error
+        error:
+          type: string
+          default: string
+          description: Human-readable generic error message
+        errorCode:
+          type: string
+          default: E_FORBIDDEN
+          description: Computer-readable code for error handling
+        message:
+          type: string
+          default: string
+          description: Human-readable error message containing all available details about how the error occurred
+        success:
+          type: boolean
+          default: false
+          description: A boolean indicating whether this was a success response or an error response
+      required:
+      - statusCode
+      - error
+      - errorCode
+      - message
+      - success
+    InitiateAppDTO:
+      type: object
+      properties:
+        customerReferenceNo:
+          type: string
+          maxLength: 100
+          default: ''
+          example: c3eb1619-ff24-4773-97d8-b05264621e60
+          description: "Customer Reference Number of company/business assigned by the platform to uniquely identify the customer. It's a unique number with a combination of alphabets, numeric and some special characters like dash, hash, ampersand and forward slash.\n - ``` /(^[a-zA-Z0-9#/-]+)$/ ```"
+        customerName:
+          type: string
+          maxLength: 200
+          description: "Customer or a Company's Full Name\n - ``` /^[a-zA-Z][a-zA-Z0-9-@.'_/#&+ws]*$ ```"
+          example: John Doe
+        customerEmail:
+          type: string
+          maxLength: 75
+          description: "Email address of Customer/company\n  \n - Should be valid email."
+          example: johndoe2@gmail.com
+        dataConsentProvided:
+          type: boolean
+          description: 'Consent to access platform data. Possible values : true/false'
+          default: true
+        requiredLoanAmount:
+          type: number
+          example: 100000
+          description: Required loan amount
+      required:
+      - customerReferenceNo
+      - customerName
+      - customerEmail
+      - dataConsentProvided
+      - requiredLoanAmount
+    InitiateDataProcessingDTO:
+      type: object
+      properties:
+        customerReferenceNo:
+          type: string
+          maxLength: 100
+          default: ''
+          example: c3eb1619-ff24-4773-97d8-b05264621e60
+          description: "Customer Reference Number of company/business assigned by the platform to uniquely identify the customer. It's a unique number with a combination of alphabets, numeric and some special characters like dash, hash, ampersand and forward slash.\n - ``` /(^[a-zA-Z0-9#/-]+)$/ ```"
+        dataCycle:
+          type: string
+          description: "\nData Cycles.\n    \n We support these two data cycles,\n    \n 1. ```monitoring``` - Monitoring\n    \n 2. ```origination``` - Origination"
+          enum:
+          - monitoring
+          - origination
+          example: monitoring
+        datasetType:
+          type: string
+          description: "\nDataset Types.\n    \n We support these two dataset types,\n    \n 1. ```single``` - Single Operation\n    \n 2. ```batch``` - Batch Operation"
+          enum:
+          - single
+          - batch
+          example: single
+        fileNames:
+          description: File Names
+          example:
+          - tenant_456.xlsx
+          type: array
+          items:
+            type: string
+        s3Paths:
+          description: Data Location S3 Paths
+          example:
+          - https://
+          type: array
+          items:
+            type: string
+        noOfFilesUploaded:
+          type: number
+          description: "No. of files uploaded on the data location\n - ```Min=2 & Max=100000```."
+          example: 24
+        additionalFields:
+          type: object
+          description: Additional Fields for Data Processing
+      required:
+      - customerReferenceNo
+      - dataCycle
+      - datasetType
+      - fileNames
+      - s3Paths
+      - noOfFilesUploaded
+      - additionalFields
+    BadRequestResponse:
+      type: object
+      properties:
+        statusCode:
+          type: number
+          default: 400
+          description: The HTTP status code of the error
+        error:
+          type: string
+          default: string
+          description: Human-readable generic error message
+        errorCode:
+          type: string
+          default: E_BAD_REQUEST
+          description: Computer-readable code for error handling
+        message:
+          type: string
+          default: string
+          description: Human-readable error message containing all available details about how the error occurred
+        success:
+          type: boolean
+          default: false
+          description: A boolean indicating whether this was a success response or an error response
+      required:
+      - statusCode
+      - error
+      - errorCode
+      - message
+      - success
+    CheckEligibilityResponse:
+      type: object
+      properties:
+        statusCode:
+          type: number
+          default: 200
+          description: The HTTP status code of the error
+        data:
+          description: Response Data from the operation
+          allOf:
+          - $ref: '#/components/schemas/NewAppResponse'
+        message:
+          type: string
+          default: Success
+          description: Human-readable message containing all available details about the operation
+        success:
+          type: boolean
+          default: true
+          description: A boolean indicating whether this was a success response or an error response
+      required:
+      - statusCode
+      - data
+      - message
+      - success
+    AgreementEmailResponse:
+      type: object
+      properties:
+        statusCode:
+          type: number
+          default: 200
+          description: The HTTP status code of the error
+        data:
+          type: string
+          description: Agreent sent status of application.
+        message:
+          type: string
+          default: Success
+          description: Human-readable message containing all available details about the operation
+        success:
+          type: boolean
+          default: true
+          description: A boolean indicating whether this was a success response or an error response
+      required:
+      - statusCode
+      - data
+      - message
+      - success
+    ApplicationNotFoundResponse:
+      type: object
+      properties:
+        statusCode:
+          type: number
+          default: 404
+          description: The HTTP status code of the error
+        error:
+          type: string
+          default: string
+          description: Human-readable generic error message
+        errorCode:
+          type: string
+          default: E_O_APPLICATION_NOT_FOUND
+          description: Computer-readable code for error handling
+        message:
+          type: string
+          default: string
+          description: Human-readable error message containing all available details about how the error occurred
+        success:
+          type: boolean
+          default: false
+          description: A boolean indicating whether this was a success response or an error response
+      required:
+      - statusCode
+      - error
+      - errorCode
+      - message
+      - success
+    SendAgreementDto:
+      type: object
+      properties:
+        customerReferenceNo:
+          type: string
+          maxLength: 100
+          default: ''
+          example: c3eb1619-ff24-4773-97d8-b05264621e60
+          description: "Customer Reference Number of company/business assigned by the platform to uniquely identify the customer. It's a unique number with a combination of alphabets, numeric and some special characters like dash, hash, ampersand and forward slash.\n - ``` /(^[a-zA-Z0-9#/-]+)$/ ```"
+      required:
+      - customerReferenceNo
+    NewAppResponse:
+      type: object
+      properties:
+        applicationId:
+          type: string
+          description: An unique id for application
+          default: string
+      required:
+      - applicationId
+    UnauthorizedResponse:
+      type: object
+      properties:
+        statusCode:
+          type: number
+          default: 401
+          description: The HTTP status code of the error
+        error:
+          type: string
+          default: string
+          description: Human-readable generic error message
+        errorCode:
+          type: string
+          default: E_UNAUTHORIZED
+          description: Computer-readable code for error handling
+        message:
+          type: string
+          default: string
+          description: Human-readable error message containing all available details about how the error occurred
+        success:
+          type: boolean
+          default: false
+          description: A boolean indicating whether this was a success response or an error response
+      required:
+      - statusCode
+      - error
+      - errorCode
+      - message
+      - success
+    DataProcessingResponse:
+      type: object
+      properties:
+        statusCode:
+          type: number
+          default: 200
+          description: The HTTP status code of the error
+        data:
+          description: Response Data from the operation
+          allOf:
+          - $ref: '#/components/schemas/DataProcessingStatusResponse'
+        message:
+          type: string
+          default: Success
+          description: Human-readable message containing all available details about the operation
+        success:
+          type: boolean
+          default: true
+          description: A boolean indicating whether this was a success response or an error response
+      required:
+      - statusCode
+      - data
+      - message
+      - success
+  securitySchemes:
+    access-token:
+      scheme: bearer
+      bearerFormat: JWT
+      type: http

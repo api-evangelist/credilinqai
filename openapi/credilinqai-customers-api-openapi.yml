@@ -1,0 +1,874 @@
+openapi: 3.0.0
+info:
+  title: CrediLinq Authentication Customers API
+  description: 'CrediLinq embedded finance API: B2B PayLater and GMV Financing for platforms and marketplaces. Covers Auth0 token generation, merchant onboarding and eligibility, customer and director KYC, credit line and loan (drawdown) management, payments and reconciliation, reporting, and demographic reference data.'
+  version: '1.0'
+  contact:
+    name: CrediLinq Support
+    email: support@credilinq.ai
+    url: https://docs.credilinq.ai/
+servers:
+- url: https://sandbox-api.credilinq.ai
+  description: Sandbox
+- url: https://stage-api.credilinq.ai
+  description: Staging
+- url: https://api.credilinq.ai
+  description: Production
+security:
+- access-token: []
+tags:
+- name: Customers
+paths:
+  /v1/customer/{customerReferenceNo}/payment-methods:
+    get:
+      operationId: ClientController_getCustomerChosenPaymentMethods
+      summary: Get Payment Methods
+      description: ''
+      parameters:
+      - name: accept-language
+        in: header
+        description: 'Language of the response, supported languages: en-us, in'
+        schema:
+          type: string
+          default: en-us
+      - name: customerReferenceNo
+        required: true
+        in: path
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Get Payment Methods
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomerChosenPaymentsResponse'
+        '400':
+          description: Invalid Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestResponse'
+        '401':
+          description: Invalid credentials
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedResponse'
+        '403':
+          description: Forbidden resource
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenResponse'
+        '404':
+          description: Requested Data Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomerNotFoundResponse'
+        '500':
+          description: Internal Server Error, Some problem is there, please try after sometime
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalErrorResponse'
+      tags:
+      - Customers
+      security:
+      - access-token: []
+  /v1/customer/{customerReferenceNo}/line-details:
+    get:
+      operationId: ClientController_getCustomerCreditLineDetails
+      summary: Get Creditline Summary
+      description: ''
+      parameters:
+      - name: accept-language
+        in: header
+        description: 'Language of the response, supported languages: en-us, in'
+        schema:
+          type: string
+          default: en-us
+      - name: customerReferenceNo
+        required: true
+        in: path
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Customer's credit line summary details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreditLineResponse'
+        '400':
+          description: Invalid Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestResponse'
+        '401':
+          description: Invalid credentials
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedResponse'
+        '403':
+          description: Forbidden resource
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenResponse'
+        '404':
+          description: Requested Data Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomerNotFoundResponse'
+        '500':
+          description: Internal Server Error, Some problem is there, please try after sometime
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalErrorResponse'
+      tags:
+      - Customers
+      security:
+      - access-token: []
+  /v1/customer/{customerReferenceNo}/loans:
+    get:
+      operationId: ClientController_getCustomerActiveLoans
+      summary: Get Active Loans
+      description: ''
+      parameters:
+      - name: accept-language
+        in: header
+        description: 'Language of the response, supported languages: en-us, in'
+        schema:
+          type: string
+          default: en-us
+      - name: customerReferenceNo
+        required: true
+        in: path
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Get customer's active loans
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomerActiveLoansResponse'
+        '400':
+          description: Invalid Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestResponse'
+        '401':
+          description: Invalid credentials
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedResponse'
+        '403':
+          description: Forbidden resource
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenResponse'
+        '404':
+          description: Requested Data Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomerNotFoundResponse'
+        '500':
+          description: Internal Server Error, Some problem is there, please try after sometime
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalErrorResponse'
+      tags:
+      - Customers
+      security:
+      - access-token: []
+  /v1/customer/holidays/{customerReferenceNo}:
+    get:
+      operationId: ClientController_getHolidaysByCustomer
+      summary: Get list of Holidays by customer
+      description: ''
+      parameters:
+      - name: accept-language
+        in: header
+        description: 'Language of the response, supported languages: en-us, in'
+        schema:
+          type: string
+          default: en-us
+      - name: customerReferenceNo
+        required: true
+        in: path
+        schema:
+          type: string
+      - name: startDate
+        required: false
+        in: query
+        description: Start Date
+        example: '2024-04-01'
+        schema:
+          type: string
+      - name: endDate
+        required: false
+        in: query
+        description: End Date
+        example: '2024-04-30'
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Get list of holidays
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HolidayListResponse'
+        '400':
+          description: Invalid Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestResponse'
+        '401':
+          description: Invalid credentials
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedResponse'
+        '403':
+          description: Forbidden resource
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenResponse'
+        '404':
+          description: Requested Data Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomerNotFoundResponse'
+        '500':
+          description: Internal Server Error, Some problem is there, please try after sometime
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalErrorResponse'
+      tags:
+      - Customers
+      security:
+      - access-token: []
+components:
+  schemas:
+    ForbiddenResponse:
+      type: object
+      properties:
+        statusCode:
+          type: number
+          default: 403
+          description: The HTTP status code of the error
+        error:
+          type: string
+          default: string
+          description: Human-readable generic error message
+        errorCode:
+          type: string
+          default: E_FORBIDDEN
+          description: Computer-readable code for error handling
+        message:
+          type: string
+          default: string
+          description: Human-readable error message containing all available details about how the error occurred
+        success:
+          type: boolean
+          default: false
+          description: A boolean indicating whether this was a success response or an error response
+      required:
+      - statusCode
+      - error
+      - errorCode
+      - message
+      - success
+    InternalErrorResponse:
+      type: object
+      properties:
+        statusCode:
+          type: number
+          default: 500
+          description: The HTTP status code of the error
+        error:
+          type: string
+          default: string
+          description: Human-readable generic error message
+        errorCode:
+          type: string
+          default: E_INTERNAL_ERROR
+          description: Computer-readable code for error handling
+        message:
+          type: string
+          default: string
+          description: Human-readable error message containing all available details about how the error occurred
+        success:
+          type: boolean
+          default: false
+          description: A boolean indicating whether this was a success response or an error response
+      required:
+      - statusCode
+      - error
+      - errorCode
+      - message
+      - success
+    LoanSummaryResponse:
+      type: object
+      properties:
+        loanId:
+          type: string
+          default: string
+          description: Id of the created loan
+        loanStatus:
+          type: string
+          description: "Status of loan\n    \n We support these three statuses,\n    \n 1. ```pending-for-approval``` - Loan is pending for approval\n    \n 2. ```waiting-for-disbursal``` - Loan is pending for disbursal,\n    \n 3. ```active``` - Loan is active,\n    \n 4. ```rejected``` - Loan is rejected for some reason,\n    \n 5. ```closed``` - Loan is paid & closed"
+          example: active
+        loanReferenceNo:
+          type: string
+          default: BNPL180820235070
+          description: Loan Reference number
+        loanType:
+          type: string
+          description: "Type of loan\n    \n We support these 4 types,\n    \n 1. ```BNPL``` - Buyer Financing\n    \n 2. ```BNPL_Term``` - Buyer Financing Term Loan\n    \n 3. ```GMV``` - Seller Financing\n    \n 4. ```GMV_Term``` - Seller Financing Term Loan"
+          example: BNPL
+        customerReferenceNo:
+          type: string
+          default: ''
+          description: Customer Reference number, for which loan is created
+        loanTerm:
+          type: number
+          example: 30
+          description: Duration of the loan. Based on loan terms selected at the cusomer level, The customer for whom loan is being created should be
+          enum:
+          - 30
+          - 45
+          - 60
+          - 90
+          - 120
+          - 150
+          - 180
+          - 210
+          - 240
+          - 270
+          - 300
+          - 330
+          - 360
+          default: 30
+        loanAmount:
+          type: number
+          description: Loan Amount
+          example: 3500
+        totalServiceFee:
+          type: number
+          description: Total Service fee applied on loan
+          example: 99.17
+        totalServiceFeeDue:
+          type: number
+          description: Total Service fee Due for loan
+          example: 99.17
+        expectedRepaymentAmount:
+          type: number
+          description: Total Expected Repayment Amount
+          default: 3599.17
+        totalDueAmount:
+          type: number
+          description: Total Due amount that is remaining to repay
+          default: 3599.17
+        loanDueDate:
+          type: string
+          description: Loan Due Date eg. 18 September 2023
+          default: 18 September 2023
+          example: 18 September 2023
+        dueDatePostGracePeriod:
+          type: string
+          description: Due date with Grace Period, eg. Loan Due date is 18 September 2023, and grace period is 3 days. so dueDatePostGracePeriod will be 21 September 2023
+          default: 18 September 2023
+          example: 21 September 2023
+        gracePeriodInDays:
+          type: number
+          description: Grace Period(In Days), After which loan goes into overdue.
+          default: 3
+          example: 3
+        totalPenaltyDue:
+          type: number
+          description: Penalty outstanding that needs to repay
+          default: 0
+          example: 0
+        currency:
+          type: string
+          default: SGD
+          description: Currency Code
+        requestedDate:
+          type: string
+          description: Loan Due Date eg. 18 Aug 2023
+          default: 18 Aug 2023
+          example: 18 Aug 2023
+        repaymentSchedule:
+          description: Repayment schedule for loan
+          type: array
+          items:
+            $ref: '#/components/schemas/RepaymentScheduleV2Response'
+        payments:
+          description: All payments done by customer for the loan
+          type: array
+          items:
+            $ref: '#/components/schemas/LoanPayment'
+      required:
+      - loanId
+      - loanStatus
+      - loanReferenceNo
+      - loanType
+      - customerReferenceNo
+      - loanTerm
+      - loanAmount
+      - totalServiceFee
+      - totalServiceFeeDue
+      - expectedRepaymentAmount
+      - totalDueAmount
+      - loanDueDate
+      - dueDatePostGracePeriod
+      - gracePeriodInDays
+      - totalPenaltyDue
+      - currency
+      - requestedDate
+      - repaymentSchedule
+      - payments
+    LoanPayment:
+      type: object
+      properties:
+        paymentId:
+          type: string
+          default: string
+          description: Id of the payment
+        paymentDate:
+          type: string
+          default: '2025-01-08T05:12:17.404Z'
+          description: Date of the payment in UTC Format eg. 2023-03-30T11:46:42.195Z
+        paymentAmount:
+          type: number
+          default: 1000
+          description: Payment Amount
+        paymentMethod:
+          type: string
+          default: 1000
+          description: Payment Amount
+          example: Bank Transfer/UEN Payment/QR Code Payment
+        paymentReferenceNo:
+          type: string
+          default: string
+          description: Payment reference number provided while making payment
+        accountNumber:
+          type: string
+          default: string
+          description: "Account Number varies based on payment types.\n      \n\nSo for bank transfer payment( this field will contain ```bank account number``` & for UEN number payment this will contain ```UEN Number```"
+        accountName:
+          type: string
+          default: string
+          description: Account Name to which payment has been made.
+        bankName:
+          type: string
+          default: string
+          description: "Bank Name varies based on payment types.\n      \n\nSo for bank transfer payment this field will be present, for rest of the types it will be empty"
+        bankSwiftCode:
+          type: string
+          default: string
+          description: "Bank Swift Code varies based on payment types.\n      \n\nSo for bank transfer payment this field will be present, for rest of the types it will be empty"
+        paymentStatus:
+          type: number
+          default: 2
+          description: "We have 3 types of payment status codes. \n    \n For payment rejected: ```0``` \n    \n For payment done, but verification pending: ```1```\n    \n For payment done & verified: ```2```"
+        loanId:
+          type: string
+          default: string
+          description: Loan Id, for which payment has been made.
+        customerReferenceNo:
+          type: string
+          default: string
+          description: Customer Reference Number, for which payment has been made.
+        metadata:
+          type: string
+          default: string
+          description: Metadata for payments. It can be used for reporting, reconciliation purpose.
+        createdAt:
+          type: string
+          default: '2025-01-08T05:12:17.405Z'
+          description: Created Timestamp of the payment in UTC Format eg. 2023-03-30T11:46:42.195Z
+        updatedAt:
+          type: string
+          default: '2025-01-08T05:12:17.405Z'
+          description: Updated Timestamp of the payment in UTC Format eg. 2023-03-30T11:46:42.195Z
+        currency:
+          type: string
+          default: SGD
+          description: Currency Code
+      required:
+      - paymentId
+      - paymentDate
+      - paymentAmount
+      - paymentMethod
+      - paymentReferenceNo
+      - accountNumber
+      - accountName
+      - bankName
+      - bankSwiftCode
+      - paymentStatus
+      - loanId
+      - customerReferenceNo
+      - metadata
+      - createdAt
+      - updatedAt
+      - currency
+    BadRequestResponse:
+      type: object
+      properties:
+        statusCode:
+          type: number
+          default: 400
+          description: The HTTP status code of the error
+        error:
+          type: string
+          default: string
+          description: Human-readable generic error message
+        errorCode:
+          type: string
+          default: E_BAD_REQUEST
+          description: Computer-readable code for error handling
+        message:
+          type: string
+          default: string
+          description: Human-readable error message containing all available details about how the error occurred
+        success:
+          type: boolean
+          default: false
+          description: A boolean indicating whether this was a success response or an error response
+      required:
+      - statusCode
+      - error
+      - errorCode
+      - message
+      - success
+    BankTransferType:
+      type: object
+      properties:
+        bankName:
+          type: string
+          default: ''
+          description: Deutche Bank
+        accountNumber:
+          type: number
+          description: For Eg. 1177441144
+          default: 0
+        bankSwiftCode:
+          type: string
+          description: IC114744
+          default: ''
+        accountName:
+          type: string
+          description: John Doe
+          default: ''
+      required:
+      - bankName
+      - accountNumber
+      - bankSwiftCode
+      - accountName
+    HolidayListResponse:
+      type: object
+      properties:
+        statusCode:
+          type: number
+          default: 200
+          description: The HTTP status code of the error
+        data:
+          description: Response Data from the operation
+          type: array
+          items:
+            $ref: '#/components/schemas/HolidayResponse'
+        message:
+          type: string
+          default: Success
+          description: Human-readable message containing all available details about the operation
+        success:
+          type: boolean
+          default: true
+          description: A boolean indicating whether this was a success response or an error response
+      required:
+      - statusCode
+      - data
+      - message
+      - success
+    CustomerCreditLine:
+      type: object
+      properties:
+        customerReferenceNo:
+          type: string
+          default: string
+          description: Customer Reference Number
+        availableCredit:
+          type: number
+          default: 10000
+          description: Customer's available credit limit
+        approvedCredit:
+          type: number
+          default: 15000
+          description: Customer's approved credit limit
+        totalOutstandingAmount:
+          type: number
+          default: 1500000
+          description: Total payable outstanding amount by customer
+        totalUtilised:
+          type: number
+          default: 10000
+          description: Total utilised credit by customer
+        totalChargesApplied:
+          type: number
+          default: 500
+          description: Total charges applied on loans
+        totalLoanAmount:
+          type: number
+          default: 500
+          description: Total loan amount excluding charges
+        currency:
+          type: string
+          default: SGD
+          description: Currency Code
+      required:
+      - customerReferenceNo
+      - availableCredit
+      - approvedCredit
+      - totalOutstandingAmount
+      - totalUtilised
+      - totalChargesApplied
+      - totalLoanAmount
+      - currency
+    RepaymentScheduleV2Response:
+      type: object
+      properties:
+        dueDate:
+          type: string
+          description: Loan Due Date eg. 18 September 2023
+          default: 18 September 2023
+          example: 18 September 2023
+        totalDueForPeriod:
+          type: number
+          description: Total due payment for current period
+          example: 3599.17
+        penaltyDueForPeriod:
+          type: number
+          description: Total due penalty for current period
+          example: 0
+        totalServiceFeeForPeriod:
+          type: number
+          description: Total Service fee for current period
+          example: 99.17
+        totalServiceFeeDueForPeriod:
+          type: number
+          description: Total Service fee due for current period
+          example: 99.17
+        principalDueForPeriod:
+          type: number
+          description: Total due principal for current period
+          example: 3500
+        dueDatePostGracePeriod:
+          type: string
+          description: Due date with grace period eg. 21 September 2023
+          example: 21 September 2023
+        paid:
+          type: boolean
+          description: indicates that payment is completed or not
+          example: false
+      required:
+      - dueDate
+      - totalDueForPeriod
+      - penaltyDueForPeriod
+      - totalServiceFeeForPeriod
+      - totalServiceFeeDueForPeriod
+      - principalDueForPeriod
+      - dueDatePostGracePeriod
+      - paid
+    CustomerActiveLoansResponse:
+      type: object
+      properties:
+        statusCode:
+          type: number
+          default: 200
+          description: The HTTP status code of the error
+        data:
+          description: Response Data from the operation
+          type: array
+          items:
+            $ref: '#/components/schemas/LoanSummaryResponse'
+        message:
+          type: string
+          default: Success
+          description: Human-readable message containing all available details about the operation
+        success:
+          type: boolean
+          default: true
+          description: A boolean indicating whether this was a success response or an error response
+      required:
+      - statusCode
+      - data
+      - message
+      - success
+    CreditLineResponse:
+      type: object
+      properties:
+        statusCode:
+          type: number
+          default: 200
+          description: The HTTP status code of the error
+        data:
+          description: Response Data from the operation
+          allOf:
+          - $ref: '#/components/schemas/CustomerCreditLine'
+        message:
+          type: string
+          default: Success
+          description: Human-readable message containing all available details about the operation
+        success:
+          type: boolean
+          default: true
+          description: A boolean indicating whether this was a success response or an error response
+      required:
+      - statusCode
+      - data
+      - message
+      - success
+    CustomerNotFoundResponse:
+      type: object
+      properties:
+        statusCode:
+          type: number
+          default: 404
+          description: The HTTP status code of the error
+        error:
+          type: string
+          default: string
+          description: Human-readable generic error message
+        errorCode:
+          type: string
+          default: E_C_CUSTOMER_NOT_FOUND
+          description: Computer-readable code for error handling
+        message:
+          type: string
+          default: string
+          description: Human-readable error message containing all available details about how the error occurred
+        success:
+          type: boolean
+          default: false
+          description: A boolean indicating whether this was a success response or an error response
+      required:
+      - statusCode
+      - error
+      - errorCode
+      - message
+      - success
+    HolidayResponse:
+      type: object
+      properties:
+        date:
+          type: string
+          description: Date String
+          example: 01 Jan 2024
+        dateUTC:
+          type: string
+          description: Date ISO String
+          example: '2023-12-31T18:30:00.000Z'
+        isHoliday:
+          type: boolean
+          description: Date is holiday or not
+          example: true
+      required:
+      - date
+      - dateUTC
+      - isHoliday
+    UnauthorizedResponse:
+      type: object
+      properties:
+        statusCode:
+          type: number
+          default: 401
+          description: The HTTP status code of the error
+        error:
+          type: string
+          default: string
+          description: Human-readable generic error message
+        errorCode:
+          type: string
+          default: E_UNAUTHORIZED
+          description: Computer-readable code for error handling
+        message:
+          type: string
+          default: string
+          description: Human-readable error message containing all available details about how the error occurred
+        success:
+          type: boolean
+          default: false
+          description: A boolean indicating whether this was a success response or an error response
+      required:
+      - statusCode
+      - error
+      - errorCode
+      - message
+      - success
+    CustomerChosenPaymentsResponse:
+      type: object
+      properties:
+        statusCode:
+          type: number
+          default: 200
+          description: The HTTP status code of the error
+        data:
+          description: Response Data from the operation
+          type: array
+          items:
+            $ref: '#/components/schemas/PaymentMethodsResponse'
+        message:
+          type: string
+          default: Success
+          description: Human-readable message containing all available details about the operation
+        success:
+          type: boolean
+          default: true
+          description: A boolean indicating whether this was a success response or an error response
+      required:
+      - statusCode
+      - data
+      - message
+      - success
+    PaymentMethodsResponse:
+      type: object
+      properties:
+        bankTransfer:
+          description: Bank Transfer Payment Method
+          allOf:
+          - $ref: '#/components/schemas/BankTransferType'
+        uenPayment:
+          description: UEN Payment Method
+          allOf:
+          - $ref: '#/components/schemas/BankTransferType'
+        qrPayment:
+          type: string
+          description: QR Payment Method
+      required:
+      - bankTransfer
+      - uenPayment
+      - qrPayment
+  securitySchemes:
+    access-token:
+      scheme: bearer
+      bearerFormat: JWT
+      type: http

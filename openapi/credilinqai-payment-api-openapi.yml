@@ -1,0 +1,700 @@
+openapi: 3.0.0
+info:
+  title: CrediLinq Authentication Payment API
+  description: 'CrediLinq embedded finance API: B2B PayLater and GMV Financing for platforms and marketplaces. Covers Auth0 token generation, merchant onboarding and eligibility, customer and director KYC, credit line and loan (drawdown) management, payments and reconciliation, reporting, and demographic reference data.'
+  version: '1.0'
+  contact:
+    name: CrediLinq Support
+    email: support@credilinq.ai
+    url: https://docs.credilinq.ai/
+servers:
+- url: https://sandbox-api.credilinq.ai
+  description: Sandbox
+- url: https://stage-api.credilinq.ai
+  description: Staging
+- url: https://api.credilinq.ai
+  description: Production
+security:
+- access-token: []
+tags:
+- name: Payment
+paths:
+  /v1/payments/loan/initiate-payment:
+    post:
+      operationId: PaymentsController_initiatePaymentBNPLV1
+      summary: Initiate payment
+      description: ''
+      parameters:
+      - name: accept-language
+        in: header
+        description: 'Language of the response, supported languages: en-us, in'
+        schema:
+          type: string
+          default: en-us
+      - name: idempotency-key
+        in: header
+        description: Idempotency Key for retries
+        schema:
+          type: string
+          default: ''
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MakeLoanPaymentV1Dto'
+      responses:
+        '200':
+          description: Loan Payment Done Successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MakeLoanPaymentResponse'
+        '400':
+          description: Invalid Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestDrawdownResponse'
+        '401':
+          description: Invalid credentials
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedResponse'
+        '403':
+          description: Forbidden resource
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenResponse'
+        '500':
+          description: Internal Server Error, Some problem is there, please try after sometime
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalErrorResponse'
+      tags:
+      - Payment
+      security:
+      - access-token: []
+  /v1/payments/loan/make-payment:
+    post:
+      operationId: PaymentsController_makePaymentBNPLV1
+      summary: Make payment
+      description: ''
+      parameters:
+      - name: accept-language
+        in: header
+        description: 'Language of the response, supported languages: en-us, in'
+        schema:
+          type: string
+          default: en-us
+      - name: idempotency-key
+        in: header
+        description: Idempotency Key for retries
+        schema:
+          type: string
+          default: ''
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MakeLoanPaymentV1Dto'
+      responses:
+        '200':
+          description: Loan Payment done and verify Successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MakeLoanPaymentResponse'
+        '400':
+          description: Invalid Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestDrawdownResponse'
+        '401':
+          description: Invalid credentials
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedResponse'
+        '403':
+          description: Forbidden resource
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenResponse'
+        '500':
+          description: Internal Server Error, Some problem is there, please try after sometime
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalErrorResponse'
+      tags:
+      - Payment
+      security:
+      - access-token: []
+  /v1/payments/loans/reconcilepayment:
+    post:
+      operationId: PaymentsController_verifyPaymentBNPL
+      summary: Reconcile payment
+      description: ''
+      parameters:
+      - name: accept-language
+        in: header
+        description: 'Language of the response, supported languages: en-us, in'
+        schema:
+          type: string
+          default: en-us
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VerifyPaymentV1Dto'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VerifyLoanPaymentsResponse'
+        '400':
+          description: Invalid Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestDrawdownResponse'
+        '401':
+          description: Invalid credentials
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedResponse'
+        '403':
+          description: Forbidden resource
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenResponse'
+        '404':
+          description: Requested Data Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DrawdownNotFoundResponse'
+        '500':
+          description: Internal Server Error, Some problem is there, please try after sometime
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalErrorResponse'
+      tags:
+      - Payment
+      security:
+      - access-token: []
+  /v1/payments/loans/payment/{loanId}:
+    get:
+      operationId: PaymentsController_getAllPaymentsV1
+      summary: Payment History
+      description: ''
+      parameters:
+      - name: accept-language
+        in: header
+        description: 'Language of the response, supported languages: en-us, in'
+        schema:
+          type: string
+          default: en-us
+      - name: loanId
+        required: true
+        in: path
+        schema:
+          type: string
+      responses:
+        '200':
+          description: All Loan Payments
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetLoanPaymentsResponse'
+        '400':
+          description: Invalid Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestDrawdownResponse'
+        '401':
+          description: Invalid credentials
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedResponse'
+        '403':
+          description: Forbidden resource
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenResponse'
+        '404':
+          description: Requested Data Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DrawdownNotFoundResponse'
+        '500':
+          description: Internal Server Error, Some problem is there, please try after sometime
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalErrorResponse'
+      tags:
+      - Payment
+      security:
+      - access-token: []
+components:
+  schemas:
+    ForbiddenResponse:
+      type: object
+      properties:
+        statusCode:
+          type: number
+          default: 403
+          description: The HTTP status code of the error
+        error:
+          type: string
+          default: string
+          description: Human-readable generic error message
+        errorCode:
+          type: string
+          default: E_FORBIDDEN
+          description: Computer-readable code for error handling
+        message:
+          type: string
+          default: string
+          description: Human-readable error message containing all available details about how the error occurred
+        success:
+          type: boolean
+          default: false
+          description: A boolean indicating whether this was a success response or an error response
+      required:
+      - statusCode
+      - error
+      - errorCode
+      - message
+      - success
+    InternalErrorResponse:
+      type: object
+      properties:
+        statusCode:
+          type: number
+          default: 500
+          description: The HTTP status code of the error
+        error:
+          type: string
+          default: string
+          description: Human-readable generic error message
+        errorCode:
+          type: string
+          default: E_INTERNAL_ERROR
+          description: Computer-readable code for error handling
+        message:
+          type: string
+          default: string
+          description: Human-readable error message containing all available details about how the error occurred
+        success:
+          type: boolean
+          default: false
+          description: A boolean indicating whether this was a success response or an error response
+      required:
+      - statusCode
+      - error
+      - errorCode
+      - message
+      - success
+    LoanPayment:
+      type: object
+      properties:
+        paymentId:
+          type: string
+          default: string
+          description: Id of the payment
+        paymentDate:
+          type: string
+          default: '2025-01-08T05:12:17.404Z'
+          description: Date of the payment in UTC Format eg. 2023-03-30T11:46:42.195Z
+        paymentAmount:
+          type: number
+          default: 1000
+          description: Payment Amount
+        paymentMethod:
+          type: string
+          default: 1000
+          description: Payment Amount
+          example: Bank Transfer/UEN Payment/QR Code Payment
+        paymentReferenceNo:
+          type: string
+          default: string
+          description: Payment reference number provided while making payment
+        accountNumber:
+          type: string
+          default: string
+          description: "Account Number varies based on payment types.\n      \n\nSo for bank transfer payment( this field will contain ```bank account number``` & for UEN number payment this will contain ```UEN Number```"
+        accountName:
+          type: string
+          default: string
+          description: Account Name to which payment has been made.
+        bankName:
+          type: string
+          default: string
+          description: "Bank Name varies based on payment types.\n      \n\nSo for bank transfer payment this field will be present, for rest of the types it will be empty"
+        bankSwiftCode:
+          type: string
+          default: string
+          description: "Bank Swift Code varies based on payment types.\n      \n\nSo for bank transfer payment this field will be present, for rest of the types it will be empty"
+        paymentStatus:
+          type: number
+          default: 2
+          description: "We have 3 types of payment status codes. \n    \n For payment rejected: ```0``` \n    \n For payment done, but verification pending: ```1```\n    \n For payment done & verified: ```2```"
+        loanId:
+          type: string
+          default: string
+          description: Loan Id, for which payment has been made.
+        customerReferenceNo:
+          type: string
+          default: string
+          description: Customer Reference Number, for which payment has been made.
+        metadata:
+          type: string
+          default: string
+          description: Metadata for payments. It can be used for reporting, reconciliation purpose.
+        createdAt:
+          type: string
+          default: '2025-01-08T05:12:17.405Z'
+          description: Created Timestamp of the payment in UTC Format eg. 2023-03-30T11:46:42.195Z
+        updatedAt:
+          type: string
+          default: '2025-01-08T05:12:17.405Z'
+          description: Updated Timestamp of the payment in UTC Format eg. 2023-03-30T11:46:42.195Z
+        currency:
+          type: string
+          default: SGD
+          description: Currency Code
+      required:
+      - paymentId
+      - paymentDate
+      - paymentAmount
+      - paymentMethod
+      - paymentReferenceNo
+      - accountNumber
+      - accountName
+      - bankName
+      - bankSwiftCode
+      - paymentStatus
+      - loanId
+      - customerReferenceNo
+      - metadata
+      - createdAt
+      - updatedAt
+      - currency
+    DrawdownNotFoundResponse:
+      type: object
+      properties:
+        statusCode:
+          type: number
+          default: 404
+          description: The HTTP status code of the error
+        error:
+          type: string
+          default: string
+          description: Human-readable generic error message
+        errorCode:
+          type: string
+          default: E_D_NOT_FOUND
+          description: Computer-readable code for error handling
+        message:
+          type: string
+          default: string
+          description: Human-readable error message containing all available details about how the error occurred
+        success:
+          type: boolean
+          default: false
+          description: A boolean indicating whether this was a success response or an error response
+      required:
+      - statusCode
+      - error
+      - errorCode
+      - message
+      - success
+    VerifyLoanPaymentsResponse:
+      type: object
+      properties:
+        statusCode:
+          type: number
+          default: 201
+          description: The HTTP status code of the error
+        data:
+          description: Response Data from the operation
+          allOf:
+          - $ref: '#/components/schemas/VerifyPayment'
+        message:
+          type: string
+          default: Success
+          description: Human-readable message containing all available details about the operation
+        success:
+          type: boolean
+          default: true
+          description: A boolean indicating whether this was a success response or an error response
+      required:
+      - statusCode
+      - data
+      - message
+      - success
+    VerifyPayment:
+      type: object
+      properties:
+        paymentId:
+          type: string
+          default: string
+          description: Id of the payment
+        paymentDate:
+          type: string
+          default: '2025-01-08T05:12:17.404Z'
+          description: Date of the payment in UTC Format eg. 2023-03-30T11:46:42.195Z
+        paymentAmount:
+          type: number
+          default: 1000
+          description: Payment Amount
+        paymentMethod:
+          type: string
+          default: 1000
+          description: Payment Amount
+          example: Bank Transfer/UEN Payment/QR Code Payment
+        paymentReferenceNo:
+          type: string
+          default: string
+          description: Payment reference number provided while making payment
+        accountNumber:
+          type: string
+          default: string
+          description: "Account Number varies based on payment types.\n      \n\nSo for bank transfer payment( this field will contain ```bank account number``` & for UEN number payment this will contain ```UEN Number```"
+        accountName:
+          type: string
+          default: string
+          description: Account Name to which payment has been made.
+        bankName:
+          type: string
+          default: string
+          description: "Bank Name varies based on payment types.\n      \n\nSo for bank transfer payment this field will be present, for rest of the types it will be empty"
+        bankSwiftCode:
+          type: string
+          default: string
+          description: "Bank Swift Code varies based on payment types.\n      \n\nSo for bank transfer payment this field will be present, for rest of the types it will be empty"
+        paymentStatus:
+          type: number
+          default: 2
+          description: "We have 3 types of payment status codes. \n    \n For payment rejected: ```0``` \n    \n For payment done, but verification pending: ```1```\n    \n For payment done & verified: ```2```"
+        loanId:
+          type: string
+          default: string
+          description: Loan Id, for which payment has been made.
+        customerReferenceNo:
+          type: string
+          default: string
+          description: Customer Reference Number, for which payment has been made.
+        metadata:
+          type: string
+          default: string
+          description: Metadata for payments. It can be used for reporting, reconciliation purpose.
+        createdAt:
+          type: string
+          default: '2025-01-08T05:12:17.405Z'
+          description: Created Timestamp of the payment in UTC Format eg. 2023-03-30T11:46:42.195Z
+        updatedAt:
+          type: string
+          default: '2025-01-08T05:12:17.405Z'
+          description: Updated Timestamp of the payment in UTC Format eg. 2023-03-30T11:46:42.195Z
+        currency:
+          type: string
+          default: SGD
+          description: Currency Code
+        remark:
+          type: string
+          default: string
+          description: Payment Remark
+      required:
+      - paymentId
+      - paymentDate
+      - paymentAmount
+      - paymentMethod
+      - paymentReferenceNo
+      - accountNumber
+      - accountName
+      - bankName
+      - bankSwiftCode
+      - paymentStatus
+      - loanId
+      - customerReferenceNo
+      - metadata
+      - createdAt
+      - updatedAt
+      - currency
+      - remark
+    MakeLoanPaymentResponse:
+      type: object
+      properties:
+        statusCode:
+          type: number
+          default: 200
+          description: The HTTP status code of the error
+        data:
+          description: Response Data from the operation
+          allOf:
+          - $ref: '#/components/schemas/LoanPayment'
+        message:
+          type: string
+          default: Success
+          description: Human-readable message containing all available details about the operation
+        success:
+          type: boolean
+          default: true
+          description: A boolean indicating whether this was a success response or an error response
+      required:
+      - statusCode
+      - data
+      - message
+      - success
+    VerifyPaymentV1Dto:
+      type: object
+      properties:
+        paymentId:
+          type: string
+          description: Payment Id.
+        remark:
+          type: string
+          description: Comments if any.
+          default: Received
+      required:
+      - paymentId
+      - remark
+    BadRequestDrawdownResponse:
+      type: object
+      properties:
+        statusCode:
+          type: number
+          default: 400
+        error:
+          default: ''
+          oneOf:
+          - type: string
+          - type: array
+            items:
+              type: string
+        errorCode:
+          default: ''
+          oneOf:
+          - type: string
+          - type: array
+            items:
+              type: string
+        message:
+          default: Error
+          oneOf:
+          - type: string
+          - type: array
+            items:
+              type: string
+        success:
+          type: boolean
+          default: false
+      required:
+      - statusCode
+      - error
+      - errorCode
+      - message
+      - success
+    GetLoanPaymentsResponse:
+      type: object
+      properties:
+        statusCode:
+          type: number
+          default: 200
+          description: The HTTP status code of the error
+        data:
+          description: Response Data from the operation
+          type: array
+          items:
+            $ref: '#/components/schemas/LoanPayment'
+        message:
+          type: string
+          default: Success
+          description: Human-readable message containing all available details about the operation
+        success:
+          type: boolean
+          default: true
+          description: A boolean indicating whether this was a success response or an error response
+      required:
+      - statusCode
+      - data
+      - message
+      - success
+    UnauthorizedResponse:
+      type: object
+      properties:
+        statusCode:
+          type: number
+          default: 401
+          description: The HTTP status code of the error
+        error:
+          type: string
+          default: string
+          description: Human-readable generic error message
+        errorCode:
+          type: string
+          default: E_UNAUTHORIZED
+          description: Computer-readable code for error handling
+        message:
+          type: string
+          default: string
+          description: Human-readable error message containing all available details about how the error occurred
+        success:
+          type: boolean
+          default: false
+          description: A boolean indicating whether this was a success response or an error response
+      required:
+      - statusCode
+      - error
+      - errorCode
+      - message
+      - success
+    MakeLoanPaymentV1Dto:
+      type: object
+      properties:
+        loanId:
+          type: string
+          default: ''
+          example: c3eb1619-ff24-4773-97d8-b05264621e60
+          description: Loan Id, for which you want to make payment
+        paymentAmount:
+          type: number
+          example: 1000
+          description: "Payment Amount.\n    \n - Support decimal values as well."
+        paymentTypeId:
+          type: number
+          example: 1
+          description: "We have 3 types of payments. \n    \n For payment via bank transfer: ```1``` \n    \n For payment using UEN number: ```2```\n    \n For payment using QR code: ```3```"
+        paymentReferenceNo:
+          type: string
+          example: asd123
+          description: Payment reference number.
+      required:
+      - loanId
+      - paymentAmount
+      - paymentTypeId
+  securitySchemes:
+    access-token:
+      scheme: bearer
+      bearerFormat: JWT
+      type: http

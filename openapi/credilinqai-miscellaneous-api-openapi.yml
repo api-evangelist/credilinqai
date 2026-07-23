@@ -1,0 +1,437 @@
+openapi: 3.0.0
+info:
+  title: CrediLinq Authentication Miscellaneous API
+  description: 'CrediLinq embedded finance API: B2B PayLater and GMV Financing for platforms and marketplaces. Covers Auth0 token generation, merchant onboarding and eligibility, customer and director KYC, credit line and loan (drawdown) management, payments and reconciliation, reporting, and demographic reference data.'
+  version: '1.0'
+  contact:
+    name: CrediLinq Support
+    email: support@credilinq.ai
+    url: https://docs.credilinq.ai/
+servers:
+- url: https://sandbox-api.credilinq.ai
+  description: Sandbox
+- url: https://stage-api.credilinq.ai
+  description: Staging
+- url: https://api.credilinq.ai
+  description: Production
+security:
+- access-token: []
+tags:
+- name: Miscellaneous
+paths:
+  /v1/others/demographic-info/postal-codes:
+    get:
+      operationId: OthersController_getPostalCodes
+      summary: Get Postal Codes
+      description: ''
+      parameters:
+      - name: country
+        required: true
+        in: query
+        example: indonesia
+        description: Country Name
+        schema:
+          default: ''
+          type: string
+      responses:
+        '200':
+          description: Country wise postal codes
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetPostalCodesResponse'
+        '403':
+          description: Forbidden resource
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenResponse'
+        '500':
+          description: Internal Server Error, Some problem is there, please try after sometime
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalErrorResponse'
+      tags:
+      - Miscellaneous
+  /v1/others/demographic-info/countries:
+    get:
+      operationId: OthersController_getCountries
+      summary: Get Countries
+      description: ''
+      parameters: []
+      responses:
+        '200':
+          description: Available Countries
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetCountriesResponse'
+        '403':
+          description: Forbidden resource
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenResponse'
+        '500':
+          description: Internal Server Error, Some problem is there, please try after sometime
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalErrorResponse'
+      tags:
+      - Miscellaneous
+  /v1/others/demographic-info/addresses:
+    get:
+      operationId: OthersController_getFullAddresses
+      summary: Get Addresses
+      description: ''
+      parameters:
+      - name: country
+        required: true
+        in: query
+        example: indonesia
+        description: Country Name
+        schema:
+          default: ''
+          type: string
+      - name: postalCode
+        required: true
+        in: query
+        example: '95765'
+        description: Postal Code
+        schema:
+          default: ''
+          type: string
+      responses:
+        '200':
+          description: Address details by country and postal code
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetAddressResponse'
+        '403':
+          description: Forbidden resource
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenResponse'
+        '500':
+          description: Internal Server Error, Some problem is there, please try after sometime
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalErrorResponse'
+      tags:
+      - Miscellaneous
+  /v1/others/kyc/document-types:
+    get:
+      operationId: OthersController_getKycDocumentType
+      summary: Get Document Types
+      description: ''
+      parameters:
+      - name: entityType
+        required: false
+        in: query
+        description: 'Entity type.
+
+          - Should be one of below values.'
+        example: business
+        schema:
+          enum:
+          - business
+          - director
+          - individual
+          type: string
+      - name: entityTypeIn
+        required: false
+        in: query
+        description: 'Entity type.
+
+          - Should be one of below values.'
+        example:
+        - business
+        - director
+        - individual
+        schema:
+          type: array
+          items:
+            type: string
+            enum:
+            - business
+            - director
+            - individual
+      - name: country
+        required: true
+        in: query
+        example: indonesia
+        description: Country Name
+        schema:
+          default: ''
+          type: string
+      responses:
+        '200':
+          description: Get All Document Types of a Country and Entity Type
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetDocumentTypesResponse'
+        '403':
+          description: Forbidden resource
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenResponse'
+        '500':
+          description: Internal Server Error, Some problem is there, please try after sometime
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalErrorResponse'
+      tags:
+      - Miscellaneous
+components:
+  schemas:
+    ForbiddenResponse:
+      type: object
+      properties:
+        statusCode:
+          type: number
+          default: 403
+          description: The HTTP status code of the error
+        error:
+          type: string
+          default: string
+          description: Human-readable generic error message
+        errorCode:
+          type: string
+          default: E_FORBIDDEN
+          description: Computer-readable code for error handling
+        message:
+          type: string
+          default: string
+          description: Human-readable error message containing all available details about how the error occurred
+        success:
+          type: boolean
+          default: false
+          description: A boolean indicating whether this was a success response or an error response
+      required:
+      - statusCode
+      - error
+      - errorCode
+      - message
+      - success
+    InternalErrorResponse:
+      type: object
+      properties:
+        statusCode:
+          type: number
+          default: 500
+          description: The HTTP status code of the error
+        error:
+          type: string
+          default: string
+          description: Human-readable generic error message
+        errorCode:
+          type: string
+          default: E_INTERNAL_ERROR
+          description: Computer-readable code for error handling
+        message:
+          type: string
+          default: string
+          description: Human-readable error message containing all available details about how the error occurred
+        success:
+          type: boolean
+          default: false
+          description: A boolean indicating whether this was a success response or an error response
+      required:
+      - statusCode
+      - error
+      - errorCode
+      - message
+      - success
+    GetCountriesResponse:
+      type: object
+      properties:
+        statusCode:
+          type: number
+          default: 200
+          description: The HTTP status code of the error
+        data:
+          description: Response Data from the operation
+          allOf:
+          - $ref: '#/components/schemas/GetCountries'
+        message:
+          type: string
+          default: Success
+          description: Human-readable message containing all available details about the operation
+        success:
+          type: boolean
+          default: true
+          description: A boolean indicating whether this was a success response or an error response
+      required:
+      - statusCode
+      - data
+      - message
+      - success
+    GetAddress:
+      type: object
+      properties:
+        country:
+          type: string
+          description: Country Name
+        state:
+          description: Available States of the country by postal code
+          type: array
+          items:
+            type: string
+        district:
+          description: Available Districts of the country by postal code
+          type: array
+          items:
+            type: string
+        city:
+          description: Available Cities of the country by postal code
+          type: array
+          items:
+            type: string
+        area:
+          description: Available Areas of the country by postal code
+          type: array
+          items:
+            type: string
+      required:
+      - country
+      - state
+      - district
+      - city
+      - area
+    Country:
+      type: object
+      properties:
+        country:
+          type: string
+          description: Name of the country
+        countryCode:
+          type: string
+          description: Code of the country
+      required:
+      - country
+      - countryCode
+    GetDocumentTypesResponse:
+      type: object
+      properties:
+        statusCode:
+          type: number
+          default: 200
+          description: The HTTP status code of the error
+        data:
+          description: Response Data from the operation
+          allOf:
+          - $ref: '#/components/schemas/GetDocumentTypes'
+        message:
+          type: string
+          default: Success
+          description: Human-readable message containing all available details about the operation
+        success:
+          type: boolean
+          default: true
+          description: A boolean indicating whether this was a success response or an error response
+      required:
+      - statusCode
+      - data
+      - message
+      - success
+    GetCountries:
+      type: object
+      properties:
+        countries:
+          description: Available Counties
+          type: array
+          items:
+            $ref: '#/components/schemas/Country'
+      required:
+      - countries
+    GetAddressResponse:
+      type: object
+      properties:
+        statusCode:
+          type: number
+          default: 200
+          description: The HTTP status code of the error
+        data:
+          description: Response Data from the operation
+          allOf:
+          - $ref: '#/components/schemas/GetAddress'
+        message:
+          type: string
+          default: Success
+          description: Human-readable message containing all available details about the operation
+        success:
+          type: boolean
+          default: true
+          description: A boolean indicating whether this was a success response or an error response
+      required:
+      - statusCode
+      - data
+      - message
+      - success
+    GetPostalCodes:
+      type: object
+      properties:
+        postalCodes:
+          description: Available Postal Codes of the country
+          type: array
+          items:
+            type: string
+      required:
+      - postalCodes
+    GetPostalCodesResponse:
+      type: object
+      properties:
+        statusCode:
+          type: number
+          default: 200
+          description: The HTTP status code of the error
+        data:
+          description: Response Data from the operation
+          allOf:
+          - $ref: '#/components/schemas/GetPostalCodes'
+        message:
+          type: string
+          default: Success
+          description: Human-readable message containing all available details about the operation
+        success:
+          type: boolean
+          default: true
+          description: A boolean indicating whether this was a success response or an error response
+      required:
+      - statusCode
+      - data
+      - message
+      - success
+    GetDocumentTypes:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Document Type Id
+        localName:
+          type: string
+          description: Document Type Id
+        docType:
+          type: string
+          description: Document Type (Utility Bill/ Passport etc.)
+        optional:
+          type: boolean
+          description: Is this document type optional or not.
+      required:
+      - id
+      - localName
+      - docType
+      - optional
+  securitySchemes:
+    access-token:
+      scheme: bearer
+      bearerFormat: JWT
+      type: http

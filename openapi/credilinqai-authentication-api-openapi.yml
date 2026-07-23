@@ -1,0 +1,152 @@
+openapi: 3.0.0
+info:
+  title: CrediLinq Authentication API
+  description: 'CrediLinq embedded finance API: B2B PayLater and GMV Financing for platforms and marketplaces. Covers Auth0 token generation, merchant onboarding and eligibility, customer and director KYC, credit line and loan (drawdown) management, payments and reconciliation, reporting, and demographic reference data.'
+  version: '1.0'
+  contact:
+    name: CrediLinq Support
+    email: support@credilinq.ai
+    url: https://docs.credilinq.ai/
+servers:
+- url: https://sandbox-api.credilinq.ai
+  description: Sandbox
+- url: https://stage-api.credilinq.ai
+  description: Staging
+- url: https://api.credilinq.ai
+  description: Production
+security:
+- access-token: []
+tags:
+- name: Authentication
+paths:
+  /v1/auth/generate-token:
+    post:
+      operationId: AuthenticationController_generateToken
+      summary: Generate Token
+      description: ''
+      parameters:
+      - name: accept-language
+        in: header
+        description: 'Language of the response, supported languages: en-us, in'
+        schema:
+          type: string
+          default: en-us
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GenerateTokenDto'
+      responses:
+        '200':
+          description: Token Generated Successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenerateTokenSuccessResponse'
+        '400':
+          description: Invalid Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestResponse'
+      tags:
+      - Authentication
+components:
+  schemas:
+    GenerateTokenDto:
+      type: object
+      properties:
+        client_id:
+          type: string
+          description: Provide Client ID shared with you
+          example: 2Hancbwhybyfy2nusfbuwbuwb
+        client_secret:
+          type: string
+          description: Provide Client Secret shared with you
+          example: y6tydyy-swfnv34-fnjjnve_eknk
+      required:
+      - client_id
+      - client_secret
+    BadRequestResponse:
+      type: object
+      properties:
+        statusCode:
+          type: number
+          default: 400
+          description: The HTTP status code of the error
+        error:
+          type: string
+          default: string
+          description: Human-readable generic error message
+        errorCode:
+          type: string
+          default: E_BAD_REQUEST
+          description: Computer-readable code for error handling
+        message:
+          type: string
+          default: string
+          description: Human-readable error message containing all available details about how the error occurred
+        success:
+          type: boolean
+          default: false
+          description: A boolean indicating whether this was a success response or an error response
+      required:
+      - statusCode
+      - error
+      - errorCode
+      - message
+      - success
+    TokenResponse:
+      type: object
+      properties:
+        access_token:
+          type: string
+          default: <token>
+          description: Access-Token, which will be used for all operations
+        scope:
+          type: string
+          default: <scope>
+          description: Scope of the access-token
+        expires_in:
+          type: number
+          default: 200000
+          description: Expiry of the access-token
+        token_type:
+          type: string
+          default: Bearer
+          description: Access-Token type
+      required:
+      - access_token
+      - scope
+      - expires_in
+      - token_type
+    GenerateTokenSuccessResponse:
+      type: object
+      properties:
+        statusCode:
+          type: number
+          default: 200
+          description: The HTTP status code of the error
+        data:
+          description: Response Data from the operation
+          allOf:
+          - $ref: '#/components/schemas/TokenResponse'
+        message:
+          type: string
+          default: Success
+          description: Human-readable message containing all available details about the operation
+        success:
+          type: boolean
+          default: true
+          description: A boolean indicating whether this was a success response or an error response
+      required:
+      - statusCode
+      - data
+      - message
+      - success
+  securitySchemes:
+    access-token:
+      scheme: bearer
+      bearerFormat: JWT
+      type: http
