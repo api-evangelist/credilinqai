@@ -1,0 +1,20 @@
+generated: '2026-07-18'
+method: searched
+source: https://docs.credilinq.ai/docs/change-logs
+scheme: semver-ish (V<major>.<minor>)
+docs: https://docs.credilinq.ai/docs/change-logs
+note: >-
+  CrediLinq maintains a versioned change log of all API changes and notifies
+  developers/consumers through its official communication channels. The
+  published page lists Upcoming and Announced releases only.
+entries:
+- version: V1.3
+  date: '2023-09-01'
+  status: announced
+  highlights:
+  - List of planned features and changes.
+- version: V1.2
+  date: '2023-06-01'
+  status: upcoming
+  highlights:
+  - List of upcoming features and changes.

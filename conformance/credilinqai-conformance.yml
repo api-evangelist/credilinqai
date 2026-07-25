@@ -1,0 +1,25 @@
+generated: '2026-07-18'
+method: derived
+source: openapi/credilinqai-openapi.yml
+standards:
+- id: oauth2-client-credentials
+  conforms: true
+  evidence: >-
+    Docs describe an Auth0 client-credentials flow (client_id/client_secret ->
+    Bearer JWT) at /v1/auth/generate-token; the token is used as a bearer JWT
+    on all operations.
+- id: oidc
+  conforms: partial
+  evidence: Authentication is delegated to Auth0 (an OIDC provider), but no OIDC discovery document is published.
+- id: jwt
+  conforms: true
+  evidence: securityScheme access-token is http bearer with bearerFormat JWT.
+- id: rfc9457-problem-details
+  conforms: false
+  evidence: Errors use a custom JSON envelope (statusCode/error/errorCode/message/success), not application/problem+json.
+- id: webhooks-hmac-signing
+  conforms: true
+  evidence: Webhook payloads are signed with HMAC SHA-256 over "<timestamp>.<body>" using the shared client_secret.
+- id: openapi-3
+  conforms: true
+  evidence: Provider publishes an OpenAPI 3.0.0 definition (harvested from docs.credilinq.ai reference pages).

@@ -1,0 +1,24 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for CrediLinq API
+  version: 1.0.0
+extends: openapi/credilinqai-openapi.yml
+actions:
+- target: $.info
+  update:
+    x-apievangelist-enriched: '2026-07-18'
+    x-apievangelist-provider: credilinqai
+    x-api-industry: [fintech, embedded-finance, lending, bnpl]
+- target: $.info
+  update:
+    x-authentication: oauth2-client-credentials-auth0-bearer-jwt
+    x-webhooks: https://docs.credilinq.ai/docs/webhooks
+    x-environments:
+      sandbox: https://sandbox-api.credilinq.ai
+      staging: https://stage-api.credilinq.ai
+      production: https://api.credilinq.ai
+- target: $.info
+  update:
+    x-error-envelope: custom-envelope (statusCode/error/errorCode/message/success)
+    x-idempotency: not-supported
+    x-localization: accept-language header (en-us, in)

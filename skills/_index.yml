@@ -1,0 +1,20 @@
+generated: '2026-07-18'
+method: generated
+source: openapi/credilinqai-openapi.yml
+skills:
+- file: credilinqai-authenticate.md
+  name: Authenticate with CrediLinq
+  api: openapi/credilinqai-openapi.yml
+  operations: [AuthenticationController_generateToken]
+- file: credilinqai-onboard-and-kyc.md
+  name: Onboard a customer and complete KYC
+  api: openapi/credilinqai-openapi.yml
+  operations: [OnboardingController_initiateOnboardingApplication, OnboardingController_initiateDaraProcessing, KycController_createCustomerKYCV2, KycController_addDirectorKycV2, KycController_sendKycForReview, KycController_getKycData, OnboardingController_generateKycDocusign]
+- file: credilinqai-create-and-disburse-loan.md
+  name: Create and disburse a loan (drawdown)
+  api: openapi/credilinqai-openapi.yml
+  operations: [ClientController_getCustomerCreditLineDetails, DrawdownController_calculateRepaymentScheduleBNPL, DrawdownController_createDrawdownBNPL, DrawdownController_disburseDrawdownBNPL, DrawdownController_getDrawdownBNPL]
+- file: credilinqai-collect-and-reconcile-payment.md
+  name: Collect and reconcile a loan payment
+  api: openapi/credilinqai-openapi.yml
+  operations: [PaymentsController_initiatePaymentBNPLV1, PaymentsController_makePaymentBNPLV1, PaymentsController_verifyPaymentBNPL, PaymentsController_getAllPaymentsV1]

@@ -1,0 +1,28 @@
+{
+  "provider": "credilinqai",
+  "sources": [
+    "credilinqai-authentication-api-openapi.yml",
+    "credilinqai-customers-api-openapi.yml",
+    "credilinqai-kyc-api-openapi.yml",
+    "credilinqai-loans-api-openapi.yml",
+    "credilinqai-miscellaneous-api-openapi.yml",
+    "credilinqai-onboarding-api-openapi.yml",
+    "credilinqai-payment-api-openapi.yml",
+    "credilinqai-report-api-openapi.yml"
+  ],
+  "outputs": [
+    "credilinqai-authentication-api-openapi.yml",
+    "credilinqai-customers-api-openapi.yml",
+    "credilinqai-kyc-api-openapi.yml",
+    "credilinqai-loans-api-openapi.yml",
+    "credilinqai-miscellaneous-api-openapi.yml",
+    "credilinqai-onboarding-api-openapi.yml",
+    "credilinqai-payment-api-openapi.yml",
+    "credilinqai-report-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}

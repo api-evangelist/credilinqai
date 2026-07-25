@@ -1,0 +1,62 @@
+generated: '2026-07-18'
+method: derived
+source: openapi/credilinqai-openapi.yml
+format: custom-envelope
+envelope:
+  description: >-
+    CrediLinq returns a consistent JSON error envelope (not RFC 9457
+    problem+json). Errors carry a numeric statusCode, a human-readable error
+    string, a computer-readable errorCode (e.g. E_BAD_REQUEST), a message with
+    details, and success:false.
+  fields:
+    statusCode: HTTP status code of the error
+    error: Human-readable generic error message
+    errorCode: Computer-readable code for error handling
+    message: Human-readable error message with all available details
+    success: Boolean, false on error responses
+problems:
+- status: 400
+  errorCode: E_BAD_REQUEST
+  title: Invalid Request
+  schema: BadRequestResponse
+  remediation: Validate the request body and parameters against the operation schema.
+- status: 400
+  errorCode: E_BAD_REQUEST
+  title: Invalid loan/drawdown request
+  schema: BadRequestDrawdownResponse
+  remediation: Check drawdown/loan amount, tenure and eligibility before creating a loan.
+- status: 401
+  errorCode: E_UNAUTHORIZED
+  title: Unauthorized
+  schema: UnauthorizedResponse
+  remediation: Obtain a fresh Bearer token from /v1/auth/generate-token and set the Authorization header.
+- status: 403
+  errorCode: E_FORBIDDEN
+  title: Forbidden
+  schema: ForbiddenResponse
+  remediation: The token is valid but lacks access to this resource; contact CrediLinq support for entitlement.
+- status: 404
+  errorCode: E_O_APPLICATION_NOT_FOUND
+  title: Application not found
+  schema: ApplicationNotFoundResponse
+  remediation: Verify the onboarding applicationId.
+- status: 404
+  errorCode: E_C_CUSTOMER_NOT_FOUND
+  title: Customer not found
+  schema: CustomerNotFoundResponse
+  remediation: Verify the customerReferenceNo.
+- status: 404
+  errorCode: E_D_NOT_FOUND
+  title: Drawdown/Loan not found
+  schema: DrawdownNotFoundResponse
+  remediation: Verify the loanId.
+- status: 404
+  errorCode: E_P_PARTNER_NOT_FOUND
+  title: Partner not found
+  schema: PartnerNotFoundResponse
+  remediation: Verify the partner/customer reference used for reporting.
+- status: 500
+  errorCode: E_INTERNAL_ERROR
+  title: Internal server error
+  schema: InternalErrorResponse
+  remediation: Retry with backoff; if persistent, contact support@credilinq.ai.

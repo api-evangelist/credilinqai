@@ -1,0 +1,53 @@
+# Credilinq API Documentation
+
+> Credilinq.ai provides a streamlined and expedited process for businesses to obtain capital through their proprietary platform, which utilizes advanced AI and Data Analytics systems.  The platform offers comprehensive guides and documentation to assist users with onboarding and implementation, and contact our support is available for any issues or obstacles.
+
+## Guides
+- [About CrediLinq](https://docs.credilinq.ai/docs/about-credilinq.md): Embed | Experience | Elevate
+- [Why CrediLinq](https://docs.credilinq.ai/docs/why-credilinq.md)
+- [CrediLinq Product Suite](https://docs.credilinq.ai/docs/credilinq-product-suite.md)
+- [B2B PayLater](https://docs.credilinq.ai/docs/b2b-paylater.md): Embedded solution for buyers on your platform.
+- [GMV Financing](https://docs.credilinq.ai/docs/gmv-financing.md): Embedded solution for sellers on your platform.
+- [Introduction](https://docs.credilinq.ai/docs/introduction.md)
+- [Authentication](https://docs.credilinq.ai/docs/authentication-1.md)
+- [Platform Guidelines](https://docs.credilinq.ai/docs/platform-guidelines.md)
+- [Platform Best Practices](https://docs.credilinq.ai/docs/platform-best-practices.md)
+
+## API Reference
+- [Authentication](https://docs.credilinq.ai/reference/authentication-3.md)
+- [Generate Token](https://docs.credilinq.ai/reference/authenticationcontroller_generatetoken-2.md)
+- [Onboarding](https://docs.credilinq.ai/reference/onboarding.md)
+- [Check Eligibility](https://docs.credilinq.ai/reference/onboardingcontroller_initiateonboardingapplication.md)
+- [Initiate Data Processing](https://docs.credilinq.ai/reference/onboardingcontroller_initiatedaraprocessing.md)
+- [Send Loan Agreement](https://docs.credilinq.ai/reference/onboardingcontroller_generatekycdocusign.md): Send loan agreement.
+- [Initiate Customer KYC](https://docs.credilinq.ai/reference/kyccontroller_createcustomerkycv2.md)
+- [Update Customer KYC](https://docs.credilinq.ai/reference/kyccontroller_updatecustomerkycv2.md)
+- [Initiate Director KYC](https://docs.credilinq.ai/reference/kyccontroller_adddirectorkycv2.md)
+- [Update Director KYC](https://docs.credilinq.ai/reference/kyccontroller_updatedirectorinformationv2.md)
+- [Send KYC For Review](https://docs.credilinq.ai/reference/kyccontroller_sendkycforreview.md)
+- [Get KYC Data](https://docs.credilinq.ai/reference/kyccontroller_getkycdata.md)
+- [Initiate Individual KYC](https://docs.credilinq.ai/reference/kyccontroller_createindividualcustomerkyc.md)
+- [Update Individual KYC](https://docs.credilinq.ai/reference/kyccontroller_updateindividualcustomerkyc.md)
+- [Customers](https://docs.credilinq.ai/reference/customers-3.md)
+- [Get Payment Methods](https://docs.credilinq.ai/reference/clientcontroller_getcustomerchosenpaymentmethods.md)
+- [Get Creditline Summary](https://docs.credilinq.ai/reference/clientcontroller_getcustomercreditlinedetails.md)
+- [Get Active Loans](https://docs.credilinq.ai/reference/clientcontroller_getcustomeractiveloans.md)
+- [Get list of Holidays by customer](https://docs.credilinq.ai/reference/clientcontroller_getholidaysbycustomer.md)
+- [Loans](https://docs.credilinq.ai/reference/loans.md)
+- [Preview Loan](https://docs.credilinq.ai/reference/drawdowncontroller_calculaterepaymentschedulebnpl.md): Preview Loan
+- [Create Loan](https://docs.credilinq.ai/reference/drawdowncontroller_createdrawdownbnpl.md)
+- [Disburse loan](https://docs.credilinq.ai/reference/drawdowncontroller_disbursedrawdownbnpl.md)
+- [Loan Summary](https://docs.credilinq.ai/reference/drawdowncontroller_getdrawdownbnpl.md): Loan Summary
+- [Payment](https://docs.credilinq.ai/reference/payment.md)
+- [Initiate payment](https://docs.credilinq.ai/reference/paymentscontroller_initiatepaymentbnplv1.md)
+- [Make payment](https://docs.credilinq.ai/reference/paymentscontroller_makepaymentbnplv1.md)
+- [Reconcile payment](https://docs.credilinq.ai/reference/paymentscontroller_verifypaymentbnpl.md)
+- [Payment History](https://docs.credilinq.ai/reference/paymentscontroller_getallpaymentsv1.md): Loan Payments History
+- [Report](https://docs.credilinq.ai/reference/report.md)
+- [Get Partner Report](https://docs.credilinq.ai/reference/reportcontroller_getpartnerreport.md)
+- [Get Customer Dashboard](https://docs.credilinq.ai/reference/reportcontroller_getclientdashboarddata.md)
+- [Get Credit History](https://docs.credilinq.ai/reference/reportcontroller_getallcredithistorybyrefno.md)
+- [Get Postal Codes](https://docs.credilinq.ai/reference/otherscontroller_getpostalcodes.md)
+- [Get Countries](https://docs.credilinq.ai/reference/otherscontroller_getcountries.md)
+- [Get Addresses](https://docs.credilinq.ai/reference/otherscontroller_getfulladdresses.md)
+- [Get Document Types](https://docs.credilinq.ai/reference/otherscontroller_getkycdocumenttype.md)

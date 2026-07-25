@@ -1,0 +1,48 @@
+# generated: 2026-07-18
+# method: generated
+# source: openapi/credilinqai-openapi.yml
+arazzo: 1.0.1
+info:
+  title: CrediLinq — Onboard a customer and complete KYC
+  version: 1.0.0
+  description: Authenticate, check eligibility, run data processing, capture customer KYC, and send it for review.
+sourceDescriptions:
+- name: credilinq
+  url: ../openapi/credilinqai-openapi.yml
+  type: openapi
+workflows:
+- workflowId: onboardAndKyc
+  summary: Start an onboarding application and complete customer KYC.
+  inputs:
+    type: object
+    properties:
+      client_id: { type: string }
+      client_secret: { type: string }
+  steps:
+  - stepId: authenticate
+    operationId: AuthenticationController_generateToken
+    requestBody:
+      contentType: application/json
+      payload:
+        client_id: $inputs.client_id
+        client_secret: $inputs.client_secret
+    outputs:
+      access_token: $response.body#/data/access_token
+  - stepId: checkEligibility
+    operationId: OnboardingController_initiateOnboardingApplication
+    outputs:
+      applicationId: $response.body#/data/applicationId
+  - stepId: dataProcessing
+    operationId: OnboardingController_initiateDaraProcessing
+  - stepId: customerKyc
+    operationId: KycController_createCustomerKYCV2
+  - stepId: sendForReview
+    operationId: KycController_sendKycForReview
+  - stepId: kycStatus
+    operationId: KycController_getKycData
+    parameters:
+    - name: applicationId
+      in: path
+      value: $steps.checkEligibility.outputs.applicationId
+  outputs:
+    applicationId: $steps.checkEligibility.outputs.applicationId

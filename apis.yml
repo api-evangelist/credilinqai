@@ -1,20 +1,144 @@
 aid: credilinqai
 name: Credilinq.ai
-description: Credilinq.ai is a company surfaced as a portfolio company of 500-global and added to the
-  API Evangelist network as a stub for enrichment. This profile is a lead awaiting the enrichment pipeline.
+description: >-
+  CrediLinq is a Singapore-founded embedded-finance and B2B lending fintech that lets
+  platforms and marketplaces offer white-labeled credit to their business customers.
+  Its API-first "Credit as a Service" powers two products: B2B PayLater (buy-now-pay-later
+  for buyers) and GMV Financing (working-capital advances for sellers), with AI/data-driven
+  credit underwriting, automated onboarding and KYC, credit-line management, loan drawdowns,
+  repayments and reconciliation, and partner reporting. The CrediLinq REST API (OpenAPI 3.0,
+  Auth0 client-credentials bearer auth, sandbox/staging/production environments, HMAC-signed
+  webhooks) is documented at docs.credilinq.ai.
 url: https://raw.githubusercontent.com/api-evangelist/credilinqai/refs/heads/main/apis.yml
 x-type: company
 x-source: vc-portfolio
 x-backed-by:
 - 500-global
-x-tier: stub
-x-tier-reason: portfolio-lead
+x-tier: profiled
+x-tier-reason: enriched-from-published-api
+accessModel:
+  pricing: unknown
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Self-serve signup
+  confidence: medium
+  source:
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://credilinq.ai/wp-content/uploads/2025/08/Layer_1-1.svg
 specificationVersion: '0.20'
 created: '2026-07-17'
-modified: '2026-07-17'
+modified: '2026-07-18'
 tags:
 - Company
-apis: []
+- Fintech
+- Embedded Finance
+- Lending
+- BNPL
+- Credit
+- Payments
+- KYC
+- B2B
+apis:
+- aid: credilinqai:credilinqai-authentication-api
+  name: Credilinq.ai Authentication API
+  description: The Authentication API from Credilinq.ai — 1 operation(s) for authentication.
+  humanURL: https://docs.credilinq.ai/
+  baseURL: https://api.credilinq.ai
+  tags:
+  - Authentication
+  properties:
+  - type: OpenAPI
+    url: openapi/credilinqai-authentication-api-openapi.yml
+  - type: APIReference
+    url: https://docs.credilinq.ai/reference/authentication-3
+- aid: credilinqai:credilinqai-customers-api
+  name: Credilinq.ai Customers API
+  description: The Customers API from Credilinq.ai — 4 operation(s) for customers.
+  humanURL: https://docs.credilinq.ai/
+  baseURL: https://api.credilinq.ai
+  tags:
+  - Customers
+  properties:
+  - type: OpenAPI
+    url: openapi/credilinqai-customers-api-openapi.yml
+  - type: APIReference
+    url: https://docs.credilinq.ai/reference/authentication-3
+- aid: credilinqai:credilinqai-kyc-api
+  name: Credilinq.ai KYC API
+  description: The KYC API from Credilinq.ai — 8 operation(s) for kyc.
+  humanURL: https://docs.credilinq.ai/
+  baseURL: https://api.credilinq.ai
+  tags:
+  - KYC
+  properties:
+  - type: OpenAPI
+    url: openapi/credilinqai-kyc-api-openapi.yml
+  - type: APIReference
+    url: https://docs.credilinq.ai/reference/authentication-3
+- aid: credilinqai:credilinqai-loans-api
+  name: Credilinq.ai Loans API
+  description: The Loans API from Credilinq.ai — 4 operation(s) for loans.
+  humanURL: https://docs.credilinq.ai/
+  baseURL: https://api.credilinq.ai
+  tags:
+  - Loans
+  properties:
+  - type: OpenAPI
+    url: openapi/credilinqai-loans-api-openapi.yml
+  - type: APIReference
+    url: https://docs.credilinq.ai/reference/authentication-3
+- aid: credilinqai:credilinqai-miscellaneous-api
+  name: Credilinq.ai Miscellaneous API
+  description: The Miscellaneous API from Credilinq.ai — 4 operation(s) for miscellaneous.
+  humanURL: https://docs.credilinq.ai/
+  baseURL: https://api.credilinq.ai
+  tags:
+  - Miscellaneous
+  properties:
+  - type: OpenAPI
+    url: openapi/credilinqai-miscellaneous-api-openapi.yml
+  - type: APIReference
+    url: https://docs.credilinq.ai/reference/authentication-3
+- aid: credilinqai:credilinqai-onboarding-api
+  name: Credilinq.ai Onboarding API
+  description: The Onboarding API from Credilinq.ai — 3 operation(s) for onboarding.
+  humanURL: https://docs.credilinq.ai/
+  baseURL: https://api.credilinq.ai
+  tags:
+  - Onboarding
+  properties:
+  - type: OpenAPI
+    url: openapi/credilinqai-onboarding-api-openapi.yml
+  - type: APIReference
+    url: https://docs.credilinq.ai/reference/authentication-3
+- aid: credilinqai:credilinqai-payment-api
+  name: Credilinq.ai Payment API
+  description: The Payment API from Credilinq.ai — 4 operation(s) for payment.
+  humanURL: https://docs.credilinq.ai/
+  baseURL: https://api.credilinq.ai
+  tags:
+  - Payment
+  properties:
+  - type: OpenAPI
+    url: openapi/credilinqai-payment-api-openapi.yml
+  - type: APIReference
+    url: https://docs.credilinq.ai/reference/authentication-3
+- aid: credilinqai:credilinqai-report-api
+  name: Credilinq.ai Report API
+  description: The Report API from Credilinq.ai — 3 operation(s) for report.
+  humanURL: https://docs.credilinq.ai/
+  baseURL: https://api.credilinq.ai
+  tags:
+  - Report
+  properties:
+  - type: OpenAPI
+    url: openapi/credilinqai-report-api-openapi.yml
+  - type: APIReference
+    url: https://docs.credilinq.ai/reference/authentication-3
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
@@ -23,3 +147,68 @@ maintainers:
 common:
 - type: Website
   url: https://credilinq.ai
+- type: DeveloperPortal
+  url: https://docs.credilinq.ai/
+- type: Documentation
+  url: https://docs.credilinq.ai/
+- type: APIReference
+  url: https://docs.credilinq.ai/reference/authentication-3
+- type: GettingStarted
+  url: https://docs.credilinq.ai/docs/introduction
+- type: Blog
+  url: https://credilinq.ai/guide
+- type: Support
+  url: https://credilinq.ai/contact
+- type: SignUp
+  url: https://portal.credilinq.ai/customer-login/
+- type: TermsOfService
+  url: https://credilinq.ai/termsandcondition/
+- type: PrivacyPolicy
+  url: https://credilinq.ai/privacy-policy/
+- type: ChangeLog
+  url: https://docs.credilinq.ai/docs/change-logs
+- type: OpenAPI
+  url: openapi/credilinqai-openapi.yml
+- type: Overlay
+  url: overlays/credilinqai-openapi-overlay.yaml
+- type: Authentication
+  url: authentication/credilinqai-authentication.yml
+- type: AgenticAccess
+  url: agentic-access/credilinqai-agentic-access.yml
+- type: DomainSecurity
+  url: security/credilinqai-domain-security.yml
+- type: ErrorCatalog
+  url: errors/credilinqai-problem-types.yml
+- type: Conventions
+  url: conventions/credilinqai-conventions.yml
+- type: Lifecycle
+  url: lifecycle/credilinqai-lifecycle.yml
+- type: ChangeLog
+  url: changelog/credilinqai-changelog.yml
+- type: Conformance
+  url: conformance/credilinqai-conformance.yml
+- type: Sandbox
+  url: sandbox/credilinqai-sandbox.yml
+- type: DataModel
+  url: data-model/credilinqai-data-model.yml
+- type: Webhooks
+  url: asyncapi/credilinqai-webhooks.yml
+- type: AsyncAPI
+  url: asyncapi/credilinqai-asyncapi.yml
+- type: MCPServer
+  url: mcp/credilinqai-mcp.yml
+- type: LLMsTxt
+  url: llms/credilinqai-llms.txt
+- type: AgentSkill
+  url: skills/_index.yml
+- type: Arazzo
+  name: Onboard a customer and complete KYC
+  url: arazzo/credilinqai-onboard-and-kyc.yml
+- type: Arazzo
+  name: Create and disburse a loan (drawdown)
+  url: arazzo/credilinqai-create-and-disburse-loan.yml
+x-enrichment:
+  date: '2026-07-19'
+  status: backfilled
+  pass: local-v1
+  note: backfilled from .gitignore signal + verified work evidence

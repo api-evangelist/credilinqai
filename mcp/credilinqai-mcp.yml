@@ -1,0 +1,165 @@
+generated: '2026-07-18'
+method: derived
+source: openapi/credilinqai-openapi.yml
+note: No official hosted/remote CrediLinq MCP server was found. This is a candidate tool list derived one-per-operation from the OpenAPI, for forging an MCP server.
+server:
+  name: credilinq
+  transport: stdio
+  url: null
+status: candidate
+tools:
+- name: authentication_generate_token
+  description: Generate Token
+  method: POST
+  path: /v1/auth/generate-token
+  source_operation: openapi/credilinqai-openapi.yml#AuthenticationController_generateToken
+- name: onboarding_initiate_onboarding_application
+  description: Check Eligibility
+  method: POST
+  path: /v1/onboarding/check-eligibility
+  source_operation: openapi/credilinqai-openapi.yml#OnboardingController_initiateOnboardingApplication
+- name: onboarding_initiate_dara_processing
+  description: Initiate Data Processing
+  method: POST
+  path: /v1/onboarding/initiate-data-processing
+  source_operation: openapi/credilinqai-openapi.yml#OnboardingController_initiateDaraProcessing
+- name: onboarding_generate_kyc_docusign
+  description: Send Loan Agreement
+  method: POST
+  path: /v1/onboarding/send-agreement
+  source_operation: openapi/credilinqai-openapi.yml#OnboardingController_generateKycDocusign
+- name: kyc_create_customer_k_y_c_v2
+  description: Initiate Customer KYC
+  method: POST
+  path: /v2/kyc/customer/create
+  source_operation: openapi/credilinqai-openapi.yml#KycController_createCustomerKYCV2
+- name: kyc_update_customer_k_y_c_v2
+  description: Update Customer KYC
+  method: PUT
+  path: /v2/kyc/customer/update
+  source_operation: openapi/credilinqai-openapi.yml#KycController_updateCustomerKYCV2
+- name: kyc_add_director_kyc_v2
+  description: Initiate Director KYC
+  method: POST
+  path: /v2/kyc/director/create
+  source_operation: openapi/credilinqai-openapi.yml#KycController_addDirectorKycV2
+- name: kyc_update_director_information_v2
+  description: Update Director KYC
+  method: PUT
+  path: /v2/kyc/director/update
+  source_operation: openapi/credilinqai-openapi.yml#KycController_updateDirectorInformationV2
+- name: kyc_send_kyc_for_review
+  description: Send KYC For Review
+  method: POST
+  path: /v1/kyc/send-for-review
+  source_operation: openapi/credilinqai-openapi.yml#KycController_sendKycForReview
+- name: kyc_get_kyc_data
+  description: Get KYC Data
+  method: GET
+  path: /v1/kyc/details/{applicationId}
+  source_operation: openapi/credilinqai-openapi.yml#KycController_getKycData
+- name: kyc_create_individual_customer_k_y_c
+  description: Initiate Individual KYC
+  method: POST
+  path: /v1/kyc/individual/create
+  source_operation: openapi/credilinqai-openapi.yml#KycController_createIndividualCustomerKYC
+- name: kyc_update_individual_customer_k_y_c
+  description: Update Individual KYC
+  method: PUT
+  path: /v1/kyc/individual/update
+  source_operation: openapi/credilinqai-openapi.yml#KycController_updateIndividualCustomerKYC
+- name: client_get_customer_chosen_payment_methods
+  description: Get Payment Methods
+  method: GET
+  path: /v1/customer/{customerReferenceNo}/payment-methods
+  source_operation: openapi/credilinqai-openapi.yml#ClientController_getCustomerChosenPaymentMethods
+- name: client_get_customer_credit_line_details
+  description: Get Creditline Summary
+  method: GET
+  path: /v1/customer/{customerReferenceNo}/line-details
+  source_operation: openapi/credilinqai-openapi.yml#ClientController_getCustomerCreditLineDetails
+- name: client_get_customer_active_loans
+  description: Get Active Loans
+  method: GET
+  path: /v1/customer/{customerReferenceNo}/loans
+  source_operation: openapi/credilinqai-openapi.yml#ClientController_getCustomerActiveLoans
+- name: client_get_holidays_by_customer
+  description: Get list of Holidays by customer
+  method: GET
+  path: /v1/customer/holidays/{customerReferenceNo}
+  source_operation: openapi/credilinqai-openapi.yml#ClientController_getHolidaysByCustomer
+- name: drawdown_calculate_repayment_schedule_b_n_p_l
+  description: Preview Loan
+  method: POST
+  path: /v1/loan/calculateloanschedule
+  source_operation: openapi/credilinqai-openapi.yml#DrawdownController_calculateRepaymentScheduleBNPL
+- name: drawdown_create_drawdown_b_n_p_l
+  description: Create Loan
+  method: POST
+  path: /v1/loan
+  source_operation: openapi/credilinqai-openapi.yml#DrawdownController_createDrawdownBNPL
+- name: drawdown_disburse_drawdown_b_n_p_l
+  description: Disburse loan
+  method: POST
+  path: /v1/loan/disburse
+  source_operation: openapi/credilinqai-openapi.yml#DrawdownController_disburseDrawdownBNPL
+- name: drawdown_get_drawdown_b_n_p_l
+  description: Loan Summary
+  method: GET
+  path: /v1/loan/summary/{loanId}
+  source_operation: openapi/credilinqai-openapi.yml#DrawdownController_getDrawdownBNPL
+- name: payments_initiate_payment_b_n_p_l_v1
+  description: Initiate payment
+  method: POST
+  path: /v1/payments/loan/initiate-payment
+  source_operation: openapi/credilinqai-openapi.yml#PaymentsController_initiatePaymentBNPLV1
+- name: payments_make_payment_b_n_p_l_v1
+  description: Make payment
+  method: POST
+  path: /v1/payments/loan/make-payment
+  source_operation: openapi/credilinqai-openapi.yml#PaymentsController_makePaymentBNPLV1
+- name: payments_verify_payment_b_n_p_l
+  description: Reconcile payment
+  method: POST
+  path: /v1/payments/loans/reconcilepayment
+  source_operation: openapi/credilinqai-openapi.yml#PaymentsController_verifyPaymentBNPL
+- name: payments_get_all_payments_v1
+  description: Payment History
+  method: GET
+  path: /v1/payments/loans/payment/{loanId}
+  source_operation: openapi/credilinqai-openapi.yml#PaymentsController_getAllPaymentsV1
+- name: report_get_partner_report
+  description: Get Partner Report
+  method: GET
+  path: /v1/reports/partner/partner-report
+  source_operation: openapi/credilinqai-openapi.yml#ReportController_getPartnerReport
+- name: report_get_client_dashboard_data
+  description: Get Customer Dashboard
+  method: GET
+  path: /v1/reports/customer/{customerReferenceNo}/dashboard
+  source_operation: openapi/credilinqai-openapi.yml#ReportController_getClientDashboardData
+- name: report_get_all_credit_history_by_ref_no
+  description: Get Credit History
+  method: GET
+  path: /v1/reports/credit-history/{customerReferenceNo}
+  source_operation: openapi/credilinqai-openapi.yml#ReportController_GetAllCreditHistoryByRefNo
+- name: others_get_postal_codes
+  description: Get Postal Codes
+  method: GET
+  path: /v1/others/demographic-info/postal-codes
+  source_operation: openapi/credilinqai-openapi.yml#OthersController_getPostalCodes
+- name: others_get_countries
+  description: Get Countries
+  method: GET
+  path: /v1/others/demographic-info/countries
+  source_operation: openapi/credilinqai-openapi.yml#OthersController_getCountries
+- name: others_get_full_addresses
+  description: Get Addresses
+  method: GET
+  path: /v1/others/demographic-info/addresses
+  source_operation: openapi/credilinqai-openapi.yml#OthersController_getFullAddresses
+- name: others_get_kyc_document_type
+  description: Get Document Types
+  method: GET
+  path: /v1/others/kyc/document-types
+  source_operation: openapi/credilinqai-openapi.yml#OthersController_getKycDocumentType

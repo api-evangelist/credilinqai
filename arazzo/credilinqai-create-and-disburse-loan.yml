@@ -1,0 +1,53 @@
+# generated: 2026-07-18
+# method: generated
+# source: openapi/credilinqai-openapi.yml
+arazzo: 1.0.1
+info:
+  title: CrediLinq — Create and disburse a loan
+  version: 1.0.0
+  description: Authenticate, confirm the credit line, preview the schedule, create a drawdown, and disburse it.
+sourceDescriptions:
+- name: credilinq
+  url: ../openapi/credilinqai-openapi.yml
+  type: openapi
+workflows:
+- workflowId: createAndDisburseLoan
+  summary: Create a BNPL drawdown for an approved customer and disburse it.
+  inputs:
+    type: object
+    properties:
+      client_id: { type: string }
+      client_secret: { type: string }
+      customerReferenceNo: { type: string }
+  steps:
+  - stepId: authenticate
+    operationId: AuthenticationController_generateToken
+    requestBody:
+      contentType: application/json
+      payload:
+        client_id: $inputs.client_id
+        client_secret: $inputs.client_secret
+    outputs:
+      access_token: $response.body#/data/access_token
+  - stepId: creditLine
+    operationId: ClientController_getCustomerCreditLineDetails
+    parameters:
+    - name: customerReferenceNo
+      in: path
+      value: $inputs.customerReferenceNo
+  - stepId: previewSchedule
+    operationId: DrawdownController_calculateRepaymentScheduleBNPL
+  - stepId: createLoan
+    operationId: DrawdownController_createDrawdownBNPL
+    outputs:
+      loanId: $response.body#/data/loanId
+  - stepId: disburseLoan
+    operationId: DrawdownController_disburseDrawdownBNPL
+  - stepId: loanSummary
+    operationId: DrawdownController_getDrawdownBNPL
+    parameters:
+    - name: loanId
+      in: path
+      value: $steps.createLoan.outputs.loanId
+  outputs:
+    loanId: $steps.createLoan.outputs.loanId

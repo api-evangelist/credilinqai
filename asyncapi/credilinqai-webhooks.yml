@@ -1,0 +1,43 @@
+generated: '2026-07-18'
+method: searched
+source: https://docs.credilinq.ai/docs/webhooks
+spec_type: Webhooks
+transport: HTTP POST to a partner-configured redirect_url (webhook_url)
+subscription:
+  model: support-managed
+  note: >-
+    CrediLinq configures the partner account so notifications are delivered to a
+    configured webhook URL. To subscribe, email support@credilinq.ai with your
+    id, redirect_url (webhook_url) and the events to subscribe to.
+signature:
+  algorithm: HMAC SHA-256
+  signed_content: "<timestamp>.<body>"
+  signing_secret: The partner's client_secret is used as the signing secret.
+  verification: Recompute HMAC-SHA256(timestamp + "." + body) with the client_secret and compare to the received signature.
+events:
+- name: DRAWDOWN_INITIATED
+  description: Drawdown/Loan is initiated
+- name: DRAWDOWN_APPROVED
+  description: Drawdown/Loan is approved
+- name: DRAWDOWN_DISBURSED
+  description: Drawdown/Loan is disbursed
+- name: DRAWDOWN_PAYMENT_VERIFIED
+  description: Drawdown/Loan payment is verified
+- name: DATA_PROCESSING_COMPLETED
+  description: Customer Data Processing Completed
+- name: DATA_PROCESSING_FAILED
+  description: Customer Data Processing Failed
+- name: CUSTOMER_KYC_ACCEPTED
+  description: Customer's KYC is accepted
+- name: CUSTOMER_KYC_REJECTED
+  description: Customer's KYC is rejected
+- name: CUSTOMER_APP_ACCEPTED
+  description: Customer's KYC Application is accepted, and final credit limits are assigned
+- name: CUSTOMER_APP_REJECTED
+  description: Customer's KYC Application is rejected
+- name: DIRECTOR_SIGNATURE_UPDATED
+  description: Once Director signs Loan Agreement
+- name: LOO_AGREEMENT_SIGNED
+  description: All Directors completed their signature on Loan Agreement
+- name: CREDIT_LINE_UPDATED
+  description: Once Customer's credit line has changed

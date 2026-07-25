@@ -1,0 +1,25 @@
+generated: '2026-07-18'
+method: searched
+source: https://docs.credilinq.ai/docs/api-environments.md
+environments:
+- name: Sandbox
+  base_url: https://sandbox-api.credilinq.ai/
+  purpose: Fewer restrictions than staging; used by developers to try the full development life cycle quickly.
+- name: Staging
+  base_url: https://stage-api.credilinq.ai/
+  purpose: Close replica (less the data) of production; used to test upgrades and patches before production.
+- name: Production
+  base_url: https://api.credilinq.ai/
+  purpose: Live environment consumers switch to once their application is ready.
+credentials:
+  model: oauth2-client-credentials (Auth0)
+  note: >-
+    The CrediLinq support team provisions separate Auth0 client_id / client_secret
+    pairs for Sandbox, Staging and Production on request. There are no self-serve
+    keys; test-vs-live separation is by environment base URL plus the per-environment
+    credential set.
+test_values:
+  note: >-
+    CrediLinq does not publish magic test card numbers, test bank accounts or
+    hosted test tokens. Sandbox behavior is exercised with support-issued sandbox
+    credentials against the sandbox base URL. (No fabricated test values recorded.)

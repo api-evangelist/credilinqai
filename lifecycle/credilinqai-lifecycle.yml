@@ -1,0 +1,21 @@
+generated: '2026-07-18'
+method: searched
+source: https://docs.credilinq.ai/docs/change-logs.md
+versioning:
+  scheme: uri-path
+  versions: [v1, v2]
+  current: v1
+  docs: https://docs.credilinq.ai/docs/api-environments.md
+change_notifications:
+  note: CrediLinq notifies developers/consumers about API changes through its official communication channels.
+  changelog: https://docs.credilinq.ai/docs/change-logs
+  ref: changelog/credilinqai-changelog.yml
+deprecation:
+  policy_url: null
+  sunset_header: false
+  note: No formal deprecation policy or RFC 8594 Sunset/Deprecation header support is documented.
+sla:
+  url: null
+  note: No published SLA / uptime target found.
+status_page: null
+deprecated_operations: []

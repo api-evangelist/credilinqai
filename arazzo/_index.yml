@@ -1,0 +1,12 @@
+generated: '2026-07-18'
+method: derived
+source: arazzo/*.yml
+workflows:
+- file: credilinqai-onboard-and-kyc.yml
+  workflowId: onboardAndKyc
+  title: Onboard a customer and complete KYC
+  summary: Authenticate, check eligibility, run data processing, capture customer KYC, and send it for review.
+- file: credilinqai-create-and-disburse-loan.yml
+  workflowId: createAndDisburseLoan
+  title: Create and disburse a loan (drawdown)
+  summary: Authenticate, confirm the credit line, preview the schedule, create a drawdown, and disburse it.

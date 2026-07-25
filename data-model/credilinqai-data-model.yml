@@ -1,0 +1,73 @@
+generated: '2026-07-18'
+method: derived
+source: openapi/credilinqai-openapi.yml
+note: >-
+  Entity-relationship graph derived from OpenAPI path parameters and id-reference
+  fields (applicationId, customerReferenceNo, loanId, partner). CrediLinq does not
+  publish object id-prefixes, so identifiers are described by their reference field.
+entities:
+- name: Application
+  key: applicationId
+  description: An onboarding/eligibility application for embedded financing.
+  operations: [OnboardingController_initiateOnboardingApplication, OnboardingController_initiateDaraProcessing, OnboardingController_generateKycDocusign, KycController_getKycData]
+- name: Customer
+  key: customerReferenceNo
+  description: A financed customer (SME buyer/seller) on the partner platform.
+  operations: [ClientController_getCustomerChosenPaymentMethods, ClientController_getCustomerCreditLineDetails, ClientController_getCustomerActiveLoans, ClientController_getHolidaysByCustomer]
+- name: Director
+  key: directorId
+  description: A director of the customer entity, subject to KYC and loan-agreement signature.
+  operations: [KycController_addDirectorKycV2, KycController_updateDirectorInformationV2]
+- name: KYC
+  key: applicationId
+  description: KYC record for a customer/individual/director within an application.
+  operations: [KycController_createCustomerKYCV2, KycController_updateCustomerKYCV2, KycController_createIndividualCustomerKYC, KycController_updateIndividualCustomerKYC, KycController_sendKycForReview]
+- name: CreditLine
+  key: customerReferenceNo
+  description: The customer's approved credit line / limit.
+  operations: [ClientController_getCustomerCreditLineDetails]
+- name: Loan
+  key: loanId
+  description: A drawdown (BNPL loan) against the customer's credit line.
+  operations: [DrawdownController_calculateRepaymentScheduleBNPL, DrawdownController_createDrawdownBNPL, DrawdownController_disburseDrawdownBNPL, DrawdownController_getDrawdownBNPL]
+- name: Payment
+  key: loanId
+  description: A repayment against a loan/drawdown.
+  operations: [PaymentsController_initiatePaymentBNPLV1, PaymentsController_makePaymentBNPLV1, PaymentsController_verifyPaymentBNPL, PaymentsController_getAllPaymentsV1]
+- name: Partner
+  key: partner
+  description: The platform/marketplace partner embedding CrediLinq financing.
+  operations: [ReportController_getPartnerReport, ReportController_getClientDashboardData, ReportController_GetAllCreditHistoryByRefNo]
+relationships:
+- from: Customer
+  to: Application
+  type: has_one
+  via: applicationId
+- from: Application
+  to: KYC
+  type: has_one
+  via: applicationId
+- from: Customer
+  to: Director
+  type: has_many
+  via: customerReferenceNo
+- from: Customer
+  to: CreditLine
+  type: has_one
+  via: customerReferenceNo
+- from: Customer
+  to: Loan
+  type: has_many
+  via: customerReferenceNo
+- from: Loan
+  to: Payment
+  type: has_many
+  via: loanId
+- from: Loan
+  to: Customer
+  type: belongs_to
+  via: customerReferenceNo
+- from: Partner
+  to: Customer
+  type: has_many
+  via: partner
