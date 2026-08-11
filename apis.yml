@@ -168,7 +168,7 @@ common:
 - type: ChangeLog
   url: https://docs.credilinq.ai/docs/change-logs
 - type: OpenAPI
-  url: openapi/credilinqai-openapi.yml
+  url: openapi/_original/credilinqai-openapi.yml
 - type: Overlay
   url: overlays/credilinqai-openapi-overlay.yaml
 - type: Authentication
