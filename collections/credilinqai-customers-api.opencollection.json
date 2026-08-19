@@ -1,0 +1,148 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "CrediLinq Authentication Customers API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Customers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Payment Methods",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://sandbox-api.credilinq.ai/v1/customer/:customerReferenceNo/payment-methods",
+            "headers": [
+              {
+                "name": "accept-language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "customerReferenceNo",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get Payment Methods"
+        },
+        {
+          "info": {
+            "name": "Get Creditline Summary",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://sandbox-api.credilinq.ai/v1/customer/:customerReferenceNo/line-details",
+            "headers": [
+              {
+                "name": "accept-language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "customerReferenceNo",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get Creditline Summary"
+        },
+        {
+          "info": {
+            "name": "Get Active Loans",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://sandbox-api.credilinq.ai/v1/customer/:customerReferenceNo/loans",
+            "headers": [
+              {
+                "name": "accept-language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "customerReferenceNo",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get Active Loans"
+        },
+        {
+          "info": {
+            "name": "Get list of Holidays by customer",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://sandbox-api.credilinq.ai/v1/customer/holidays/:customerReferenceNo",
+            "headers": [
+              {
+                "name": "accept-language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "customerReferenceNo",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "startDate",
+                "value": "2024-04-01",
+                "type": "query",
+                "description": "Start Date"
+              },
+              {
+                "name": "endDate",
+                "value": "2024-04-30",
+                "type": "query",
+                "description": "End Date"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get list of Holidays by customer"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,228 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "CrediLinq Authentication KYC API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "KYC",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Initiate Customer KYC",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://sandbox-api.credilinq.ai/v2/kyc/customer/create",
+            "headers": [
+              {
+                "name": "accept-language",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "multipart-form",
+              "data": []
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Initiate Customer KYC"
+        },
+        {
+          "info": {
+            "name": "Update Customer KYC",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://sandbox-api.credilinq.ai/v2/kyc/customer/update",
+            "headers": [
+              {
+                "name": "accept-language",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "multipart-form",
+              "data": []
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update Customer KYC"
+        },
+        {
+          "info": {
+            "name": "Initiate Director KYC",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://sandbox-api.credilinq.ai/v2/kyc/director/create",
+            "headers": [
+              {
+                "name": "accept-language",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "multipart-form",
+              "data": []
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Initiate Director KYC"
+        },
+        {
+          "info": {
+            "name": "Update Director KYC",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://sandbox-api.credilinq.ai/v2/kyc/director/update",
+            "headers": [
+              {
+                "name": "accept-language",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "multipart-form",
+              "data": []
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update Director KYC"
+        },
+        {
+          "info": {
+            "name": "Send KYC For Review",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://sandbox-api.credilinq.ai/v1/kyc/send-for-review",
+            "headers": [
+              {
+                "name": "accept-language",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "multipart-form",
+              "data": []
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Send KYC For Review"
+        },
+        {
+          "info": {
+            "name": "Get KYC Data",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://sandbox-api.credilinq.ai/v1/kyc/details/:applicationId",
+            "headers": [
+              {
+                "name": "accept-language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "applicationId",
+                "value": "d8eb1219-gg24-4773-97d8-b05264621e60",
+                "type": "path",
+                "description": "Application Id. It's a unique number with a combination of alphabets, numeric and some special characters like dash, hash, ampersand and forward slash."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get KYC Data"
+        },
+        {
+          "info": {
+            "name": "Initiate Individual KYC",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://sandbox-api.credilinq.ai/v1/kyc/individual/create",
+            "headers": [
+              {
+                "name": "accept-language",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "multipart-form",
+              "data": []
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Initiate Individual KYC"
+        },
+        {
+          "info": {
+            "name": "Update Individual KYC",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://sandbox-api.credilinq.ai/v1/kyc/individual/update",
+            "headers": [
+              {
+                "name": "accept-language",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "multipart-form",
+              "data": []
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update Individual KYC"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

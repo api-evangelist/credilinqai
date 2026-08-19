@@ -1,7 +1,8 @@
 generated: '2026-07-18'
 method: derived
 source: openapi/credilinqai-openapi.yml
-note: No official hosted/remote CrediLinq MCP server was found. This is a candidate tool list derived one-per-operation from the OpenAPI, for forging an MCP server.
+note: No official hosted/remote CrediLinq MCP server was found. This is a candidate tool list derived
+  one-per-operation from the OpenAPI, for forging an MCP server.
 server:
   name: credilinq
   transport: stdio
@@ -163,3 +164,9 @@ tools:
   method: GET
   path: /v1/others/kyc/document-types
   source_operation: openapi/credilinqai-openapi.yml#OthersController_getKycDocumentType
+deployment:
+  mode: none
+  verified: derived
+  tools: 31
+  checked: '2026-08-12'
+  source: catalog MCP census

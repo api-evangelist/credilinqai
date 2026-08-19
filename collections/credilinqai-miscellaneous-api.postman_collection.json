@@ -1,0 +1,895 @@
+{
+  "item": [
+    {
+      "id": "006c5738-027f-45dd-97f5-04ee29cc0f36",
+      "name": "Miscellaneous",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "96e3f71f-433e-419b-9ff3-b18acb27245d",
+          "name": "Get Postal Codes",
+          "request": {
+            "name": "Get Postal Codes",
+            "description": {
+              "content": "",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "others",
+                "demographic-info",
+                "postal-codes"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "country",
+                  "value": "",
+                  "description": "(Required) Country Name"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "bb08633f-6563-464c-bd33-8b3f67b6b92a",
+              "name": "Country wise postal codes",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "others",
+                    "demographic-info",
+                    "postal-codes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "country",
+                      "value": "indonesia"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 200,\n  \"data\": {\n    \"postalCodes\": [\n      \"string\",\n      \"string\"\n    ]\n  },\n  \"message\": \"Success\",\n  \"success\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "66876e4e-aef9-449b-9b81-bc2a8ff5d56d",
+              "name": "Forbidden resource",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "others",
+                    "demographic-info",
+                    "postal-codes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "country",
+                      "value": "indonesia"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 403,\n  \"error\": \"string\",\n  \"errorCode\": \"E_FORBIDDEN\",\n  \"message\": \"string\",\n  \"success\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7ca1338e-ec6e-4f2a-a48d-dc41bd77a9bc",
+              "name": "Internal Server Error, Some problem is there, please try after sometime",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "others",
+                    "demographic-info",
+                    "postal-codes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "country",
+                      "value": "indonesia"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 500,\n  \"error\": \"string\",\n  \"errorCode\": \"E_INTERNAL_ERROR\",\n  \"message\": \"string\",\n  \"success\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "68262f52-fc3a-42d8-bc97-7cc9759a885a",
+          "name": "Get Countries",
+          "request": {
+            "name": "Get Countries",
+            "description": {
+              "content": "",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "others",
+                "demographic-info",
+                "countries"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "7c1d2063-b268-4850-9145-eb0b0513f80c",
+              "name": "Available Countries",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "others",
+                    "demographic-info",
+                    "countries"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 200,\n  \"data\": {\n    \"countries\": [\n      {\n        \"country\": \"string\",\n        \"countryCode\": \"string\"\n      },\n      {\n        \"country\": \"string\",\n        \"countryCode\": \"string\"\n      }\n    ]\n  },\n  \"message\": \"Success\",\n  \"success\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "acb5573d-64f5-4154-8418-0dc728165e58",
+              "name": "Forbidden resource",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "others",
+                    "demographic-info",
+                    "countries"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 403,\n  \"error\": \"string\",\n  \"errorCode\": \"E_FORBIDDEN\",\n  \"message\": \"string\",\n  \"success\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a6dd42b0-f131-4dc9-905f-b6cce3d6c53e",
+              "name": "Internal Server Error, Some problem is there, please try after sometime",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "others",
+                    "demographic-info",
+                    "countries"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 500,\n  \"error\": \"string\",\n  \"errorCode\": \"E_INTERNAL_ERROR\",\n  \"message\": \"string\",\n  \"success\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "007e2f92-25fc-47bf-88d4-76257073f0af",
+          "name": "Get Addresses",
+          "request": {
+            "name": "Get Addresses",
+            "description": {
+              "content": "",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "others",
+                "demographic-info",
+                "addresses"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "country",
+                  "value": "",
+                  "description": "(Required) Country Name"
+                },
+                {
+                  "disabled": false,
+                  "key": "postalCode",
+                  "value": "",
+                  "description": "(Required) Postal Code"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9616b528-572d-4475-ab11-329063555ad5",
+              "name": "Address details by country and postal code",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "others",
+                    "demographic-info",
+                    "addresses"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "country",
+                      "value": "indonesia"
+                    },
+                    {
+                      "key": "postalCode",
+                      "value": "95765"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 200,\n  \"data\": {\n    \"country\": \"string\",\n    \"state\": [\n      \"string\",\n      \"string\"\n    ],\n    \"district\": [\n      \"string\",\n      \"string\"\n    ],\n    \"city\": [\n      \"string\",\n      \"string\"\n    ],\n    \"area\": [\n      \"string\",\n      \"string\"\n    ]\n  },\n  \"message\": \"Success\",\n  \"success\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "70aa9da6-b408-46b0-b52a-cb1cd6fb5a05",
+              "name": "Forbidden resource",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "others",
+                    "demographic-info",
+                    "addresses"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "country",
+                      "value": "indonesia"
+                    },
+                    {
+                      "key": "postalCode",
+                      "value": "95765"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 403,\n  \"error\": \"string\",\n  \"errorCode\": \"E_FORBIDDEN\",\n  \"message\": \"string\",\n  \"success\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "62b69193-9795-4f02-bda9-4a95a20854fc",
+              "name": "Internal Server Error, Some problem is there, please try after sometime",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "others",
+                    "demographic-info",
+                    "addresses"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "country",
+                      "value": "indonesia"
+                    },
+                    {
+                      "key": "postalCode",
+                      "value": "95765"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 500,\n  \"error\": \"string\",\n  \"errorCode\": \"E_INTERNAL_ERROR\",\n  \"message\": \"string\",\n  \"success\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3366343b-2344-4f69-99a8-ddce9cc4a4bf",
+          "name": "Get Document Types",
+          "request": {
+            "name": "Get Document Types",
+            "description": {
+              "content": "",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "others",
+                "kyc",
+                "document-types"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "entityType",
+                  "value": "<string>",
+                  "description": "Entity type.\n- Should be one of below values."
+                },
+                {
+                  "disabled": false,
+                  "key": "entityTypeIn",
+                  "value": "<string>",
+                  "description": "Entity type.\n- Should be one of below values."
+                },
+                {
+                  "disabled": false,
+                  "key": "entityTypeIn",
+                  "value": "<string>",
+                  "description": "Entity type.\n- Should be one of below values."
+                },
+                {
+                  "disabled": false,
+                  "key": "country",
+                  "value": "",
+                  "description": "(Required) Country Name"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "93850ccc-c9ec-41d3-8773-4b34a4fddc99",
+              "name": "Get All Document Types of a Country and Entity Type",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "others",
+                    "kyc",
+                    "document-types"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "entityType",
+                      "value": "business"
+                    },
+                    {
+                      "key": "entityTypeIn",
+                      "value": "business"
+                    },
+                    {
+                      "key": "entityTypeIn",
+                      "value": "director"
+                    },
+                    {
+                      "key": "entityTypeIn",
+                      "value": "individual"
+                    },
+                    {
+                      "key": "country",
+                      "value": "indonesia"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 200,\n  \"data\": {\n    \"id\": \"string\",\n    \"localName\": \"string\",\n    \"docType\": \"string\",\n    \"optional\": true\n  },\n  \"message\": \"Success\",\n  \"success\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "96d004a2-ef11-43e0-8f7d-a249a9cc8f89",
+              "name": "Forbidden resource",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "others",
+                    "kyc",
+                    "document-types"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "entityType",
+                      "value": "business"
+                    },
+                    {
+                      "key": "entityTypeIn",
+                      "value": "business"
+                    },
+                    {
+                      "key": "entityTypeIn",
+                      "value": "director"
+                    },
+                    {
+                      "key": "entityTypeIn",
+                      "value": "individual"
+                    },
+                    {
+                      "key": "country",
+                      "value": "indonesia"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 403,\n  \"error\": \"string\",\n  \"errorCode\": \"E_FORBIDDEN\",\n  \"message\": \"string\",\n  \"success\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c203cc3e-35f1-4865-a9d3-8dd345ec5614",
+              "name": "Internal Server Error, Some problem is there, please try after sometime",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "others",
+                    "kyc",
+                    "document-types"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "entityType",
+                      "value": "business"
+                    },
+                    {
+                      "key": "entityTypeIn",
+                      "value": "business"
+                    },
+                    {
+                      "key": "entityTypeIn",
+                      "value": "director"
+                    },
+                    {
+                      "key": "entityTypeIn",
+                      "value": "individual"
+                    },
+                    {
+                      "key": "country",
+                      "value": "indonesia"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 500,\n  \"error\": \"string\",\n  \"errorCode\": \"E_INTERNAL_ERROR\",\n  \"message\": \"string\",\n  \"success\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://sandbox-api.credilinq.ai",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "542aeed2-582f-4f78-8901-3f206ed917c2",
+    "name": "CrediLinq Authentication Miscellaneous API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "CrediLinq embedded finance API: B2B PayLater and GMV Financing for platforms and marketplaces. Covers Auth0 token generation, merchant onboarding and eligibility, customer and director KYC, credit line and loan (drawdown) management, payments and reconciliation, reporting, and demographic reference data.\n\nContact Support:\n Name: CrediLinq Support\n Email: support@credilinq.ai",
+      "type": "text/plain"
+    }
+  }
+}

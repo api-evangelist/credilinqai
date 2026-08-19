@@ -1,0 +1,1690 @@
+{
+  "item": [
+    {
+      "id": "9866b603-8002-4664-80d8-8490c535a1e7",
+      "name": "Loans",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "38bb9d5a-d1af-4769-9a57-79c3aaa5fe7b",
+          "name": "Preview Loan",
+          "request": {
+            "name": "Preview Loan",
+            "description": {
+              "content": "",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "loan",
+                "calculateloanschedule"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Language of the response, supported languages: en-us, in",
+                "key": "accept-language",
+                "value": "en-us"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"customerReferenceNo\": \"\",\n  \"loanAmount\": \"<number>\",\n  \"loanTerm\": 30,\n  \"loanType\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "a87bf03a-c38c-44cf-b910-eaad9afcc0b6",
+              "name": "Preview Your Loan Details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "loan",
+                    "calculateloanschedule"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Language of the response, supported languages: en-us, in",
+                    "key": "accept-language",
+                    "value": "en-us"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"customerReferenceNo\": \"c3eb1619-ff24-4773-97d8-b05264621e60\",\n  \"loanAmount\": 50000,\n  \"loanTerm\": 30,\n  \"loanType\": \"BNPL\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 200,\n  \"data\": {\n    \"customerReferenceNo\": \"\",\n    \"loanTerm\": 30,\n    \"totalDueAmount\": 2000,\n    \"loanDueDate\": \"2025-01-08T05:12:17.406Z\",\n    \"disbursalAmount\": 2000,\n    \"chargesApplied\": 50,\n    \"totalRepaymentExpected\": 2000,\n    \"currency\": \"SGD\"\n  },\n  \"message\": \"Success\",\n  \"success\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a5e4c9ed-a98e-48af-9f3c-ba70a2487a90",
+              "name": "Invalid Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "loan",
+                    "calculateloanschedule"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Language of the response, supported languages: en-us, in",
+                    "key": "accept-language",
+                    "value": "en-us"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"customerReferenceNo\": \"c3eb1619-ff24-4773-97d8-b05264621e60\",\n  \"loanAmount\": 50000,\n  \"loanTerm\": 30,\n  \"loanType\": \"BNPL\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 400,\n  \"error\": \"string\",\n  \"errorCode\": \"string\",\n  \"message\": \"string\",\n  \"success\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8e131b49-268c-4361-b190-9d76dca3cddc",
+              "name": "Invalid credentials",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "loan",
+                    "calculateloanschedule"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Language of the response, supported languages: en-us, in",
+                    "key": "accept-language",
+                    "value": "en-us"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"customerReferenceNo\": \"c3eb1619-ff24-4773-97d8-b05264621e60\",\n  \"loanAmount\": 50000,\n  \"loanTerm\": 30,\n  \"loanType\": \"BNPL\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 401,\n  \"error\": \"string\",\n  \"errorCode\": \"E_UNAUTHORIZED\",\n  \"message\": \"string\",\n  \"success\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "12ef23b0-f532-4d29-9e94-7320781da5ca",
+              "name": "Forbidden resource",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "loan",
+                    "calculateloanschedule"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Language of the response, supported languages: en-us, in",
+                    "key": "accept-language",
+                    "value": "en-us"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"customerReferenceNo\": \"c3eb1619-ff24-4773-97d8-b05264621e60\",\n  \"loanAmount\": 50000,\n  \"loanTerm\": 30,\n  \"loanType\": \"BNPL\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 403,\n  \"error\": \"string\",\n  \"errorCode\": \"E_FORBIDDEN\",\n  \"message\": \"string\",\n  \"success\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cb332c8c-0d1e-45c9-80dd-528ba2d87515",
+              "name": "Requested Data Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "loan",
+                    "calculateloanschedule"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Language of the response, supported languages: en-us, in",
+                    "key": "accept-language",
+                    "value": "en-us"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"customerReferenceNo\": \"c3eb1619-ff24-4773-97d8-b05264621e60\",\n  \"loanAmount\": 50000,\n  \"loanTerm\": 30,\n  \"loanType\": \"BNPL\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 404,\n  \"error\": \"string\",\n  \"errorCode\": \"E_C_CUSTOMER_NOT_FOUND\",\n  \"message\": \"string\",\n  \"success\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bf17c12e-f9af-452e-af23-1ed73c32041e",
+              "name": "Internal Server Error, Some problem is there, please try after sometime",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "loan",
+                    "calculateloanschedule"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Language of the response, supported languages: en-us, in",
+                    "key": "accept-language",
+                    "value": "en-us"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"customerReferenceNo\": \"c3eb1619-ff24-4773-97d8-b05264621e60\",\n  \"loanAmount\": 50000,\n  \"loanTerm\": 30,\n  \"loanType\": \"BNPL\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 500,\n  \"error\": \"string\",\n  \"errorCode\": \"E_INTERNAL_ERROR\",\n  \"message\": \"string\",\n  \"success\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6e8a8840-ce77-4e00-99e2-3cfd9bb990f7",
+          "name": "Create Loan",
+          "request": {
+            "name": "Create Loan",
+            "description": {
+              "content": "",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "loan"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Language of the response, supported languages: en-us, in",
+                "key": "accept-language",
+                "value": "en-us"
+              },
+              {
+                "disabled": false,
+                "description": "Idempotency Key for retries",
+                "key": "idempotency-key",
+                "value": ""
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"customerReferenceNo\": \"\",\n  \"loanAmount\": \"<number>\",\n  \"loanType\": \"<string>\",\n  \"loanTerm\": 30,\n  \"remark\": \"<string>\",\n  \"metadata\": \"<string>\",\n  \"preApproved\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "34e270cc-91a3-4e6d-b69a-7a7a091599e3",
+              "name": "Loan created successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "loan"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Language of the response, supported languages: en-us, in",
+                    "key": "accept-language",
+                    "value": "en-us"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Idempotency Key for retries",
+                    "key": "idempotency-key",
+                    "value": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"customerReferenceNo\": \"c3eb1619-ff24-4773-97d8-b05264621e60\",\n  \"loanAmount\": 50000,\n  \"loanType\": \"BNPL\",\n  \"loanTerm\": 30,\n  \"remark\": \"Loan for xyz ltd, construction purpose\",\n  \"metadata\": \"\",\n  \"preApproved\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 201,\n  \"data\": {\n    \"loanId\": \"string\",\n    \"loanReferenceNo\": \"string\",\n    \"customerReferenceNo\": \"\",\n    \"loanTerm\": 30,\n    \"loanType\": \"BNPL\",\n    \"loanStatus\": \"waiting-for-disbursal\",\n    \"disbursalAmount\": 2000,\n    \"totalDueAmount\": 2000,\n    \"loanDueDate\": \"21 August 2023\",\n    \"loanDueDateUTC\": \"2023-08-20T18:30:00.000Z\",\n    \"dueDatePostGracePeriod\": \"24 August 2023\",\n    \"dueDatePostGracePeriodUTC\": \"2023-08-23T18:30:00.000Z\",\n    \"gracePeriodInDays\": 3,\n    \"charges\": 1,\n    \"chargesApplied\": 50,\n    \"customerApprovedCredit\": 20000,\n    \"customerAvailableCredit\": 17500,\n    \"remark\": \"string\",\n    \"metadata\": \"string\",\n    \"createdAt\": \"2025-01-08T05:12:17.405Z\",\n    \"updatedAt\": \"2025-01-08T05:12:17.405Z\",\n    \"currency\": \"SGD\"\n  },\n  \"message\": \"Success\",\n  \"success\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "646e6001-b084-4c94-86a2-8719b791404f",
+              "name": "Invalid Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "loan"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Language of the response, supported languages: en-us, in",
+                    "key": "accept-language",
+                    "value": "en-us"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Idempotency Key for retries",
+                    "key": "idempotency-key",
+                    "value": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"customerReferenceNo\": \"c3eb1619-ff24-4773-97d8-b05264621e60\",\n  \"loanAmount\": 50000,\n  \"loanType\": \"BNPL\",\n  \"loanTerm\": 30,\n  \"remark\": \"Loan for xyz ltd, construction purpose\",\n  \"metadata\": \"\",\n  \"preApproved\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 400,\n  \"error\": \"string\",\n  \"errorCode\": \"string\",\n  \"message\": \"string\",\n  \"success\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "29c270d5-e577-48b1-bf40-ff15d02b8caf",
+              "name": "Invalid credentials",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "loan"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Language of the response, supported languages: en-us, in",
+                    "key": "accept-language",
+                    "value": "en-us"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Idempotency Key for retries",
+                    "key": "idempotency-key",
+                    "value": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"customerReferenceNo\": \"c3eb1619-ff24-4773-97d8-b05264621e60\",\n  \"loanAmount\": 50000,\n  \"loanType\": \"BNPL\",\n  \"loanTerm\": 30,\n  \"remark\": \"Loan for xyz ltd, construction purpose\",\n  \"metadata\": \"\",\n  \"preApproved\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 401,\n  \"error\": \"string\",\n  \"errorCode\": \"E_UNAUTHORIZED\",\n  \"message\": \"string\",\n  \"success\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5019e951-1565-46a3-a466-5ff56c4a3357",
+              "name": "Forbidden resource",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "loan"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Language of the response, supported languages: en-us, in",
+                    "key": "accept-language",
+                    "value": "en-us"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Idempotency Key for retries",
+                    "key": "idempotency-key",
+                    "value": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"customerReferenceNo\": \"c3eb1619-ff24-4773-97d8-b05264621e60\",\n  \"loanAmount\": 50000,\n  \"loanType\": \"BNPL\",\n  \"loanTerm\": 30,\n  \"remark\": \"Loan for xyz ltd, construction purpose\",\n  \"metadata\": \"\",\n  \"preApproved\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 403,\n  \"error\": \"string\",\n  \"errorCode\": \"E_FORBIDDEN\",\n  \"message\": \"string\",\n  \"success\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "45f46a74-6edd-4c3b-a74e-738ad64060f9",
+              "name": "Requested Data Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "loan"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Language of the response, supported languages: en-us, in",
+                    "key": "accept-language",
+                    "value": "en-us"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Idempotency Key for retries",
+                    "key": "idempotency-key",
+                    "value": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"customerReferenceNo\": \"c3eb1619-ff24-4773-97d8-b05264621e60\",\n  \"loanAmount\": 50000,\n  \"loanType\": \"BNPL\",\n  \"loanTerm\": 30,\n  \"remark\": \"Loan for xyz ltd, construction purpose\",\n  \"metadata\": \"\",\n  \"preApproved\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 404,\n  \"error\": \"string\",\n  \"errorCode\": \"E_C_CUSTOMER_NOT_FOUND\",\n  \"message\": \"string\",\n  \"success\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "637ba918-c189-4f66-9eb4-0aba0f1eb711",
+              "name": "Internal Server Error, Some problem is there, please try after sometime",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "loan"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Language of the response, supported languages: en-us, in",
+                    "key": "accept-language",
+                    "value": "en-us"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Idempotency Key for retries",
+                    "key": "idempotency-key",
+                    "value": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"customerReferenceNo\": \"c3eb1619-ff24-4773-97d8-b05264621e60\",\n  \"loanAmount\": 50000,\n  \"loanType\": \"BNPL\",\n  \"loanTerm\": 30,\n  \"remark\": \"Loan for xyz ltd, construction purpose\",\n  \"metadata\": \"\",\n  \"preApproved\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 500,\n  \"error\": \"string\",\n  \"errorCode\": \"E_INTERNAL_ERROR\",\n  \"message\": \"string\",\n  \"success\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b937abbd-111b-4e35-ac47-a6ac77364f00",
+          "name": "Disburse loan",
+          "request": {
+            "name": "Disburse loan",
+            "description": {
+              "content": "",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "loan",
+                "disburse"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Language of the response, supported languages: en-us, in",
+                "key": "accept-language",
+                "value": "en-us"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"loanId\": \"\",\n  \"metadata\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "93a2e6af-afab-4b87-aa74-de1de86c5d1c",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "loan",
+                    "disburse"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Language of the response, supported languages: en-us, in",
+                    "key": "accept-language",
+                    "value": "en-us"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"loanId\": \"c3eb1619-ff24-4773-97d8-b05264621e60\",\n  \"metadata\": \"\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 200,\n  \"data\": {\n    \"loanId\": \"string\",\n    \"loanReferenceNo\": \"string\",\n    \"customerReferenceNo\": \"\",\n    \"loanTerm\": 30,\n    \"loanType\": \"BNPL\",\n    \"loanStatus\": \"active\",\n    \"disbursalAmount\": 2000,\n    \"totalDueAmount\": 2000,\n    \"loanDueDate\": \"21 August 2023\",\n    \"loanDueDateUTC\": \"2023-08-20T18:30:00.000Z\",\n    \"dueDatePostGracePeriod\": \"24 August 2023\",\n    \"dueDatePostGracePeriodUTC\": \"2023-08-23T18:30:00.000Z\",\n    \"gracePeriodInDays\": 3,\n    \"charges\": 1,\n    \"chargesApplied\": 50,\n    \"customerApprovedCredit\": 20000,\n    \"customerAvailableCredit\": 17500,\n    \"remark\": \"string\",\n    \"metadata\": \"string\",\n    \"createdAt\": \"2025-01-08T05:12:17.405Z\",\n    \"updatedAt\": \"2025-01-08T05:12:17.405Z\",\n    \"currency\": \"SGD\"\n  },\n  \"message\": \"Success\",\n  \"success\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3bacd0d6-c025-4621-b0d2-501e52b9e6e7",
+              "name": "Invalid Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "loan",
+                    "disburse"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Language of the response, supported languages: en-us, in",
+                    "key": "accept-language",
+                    "value": "en-us"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"loanId\": \"c3eb1619-ff24-4773-97d8-b05264621e60\",\n  \"metadata\": \"\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 400,\n  \"error\": \"string\",\n  \"errorCode\": \"string\",\n  \"message\": \"string\",\n  \"success\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "03c57c35-4893-406a-8653-5bc0c26c2449",
+              "name": "Invalid credentials",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "loan",
+                    "disburse"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Language of the response, supported languages: en-us, in",
+                    "key": "accept-language",
+                    "value": "en-us"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"loanId\": \"c3eb1619-ff24-4773-97d8-b05264621e60\",\n  \"metadata\": \"\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 401,\n  \"error\": \"string\",\n  \"errorCode\": \"E_UNAUTHORIZED\",\n  \"message\": \"string\",\n  \"success\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "449d88bd-9ecd-408a-9b03-ad2f46202e91",
+              "name": "Forbidden resource",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "loan",
+                    "disburse"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Language of the response, supported languages: en-us, in",
+                    "key": "accept-language",
+                    "value": "en-us"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"loanId\": \"c3eb1619-ff24-4773-97d8-b05264621e60\",\n  \"metadata\": \"\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 403,\n  \"error\": \"string\",\n  \"errorCode\": \"E_FORBIDDEN\",\n  \"message\": \"string\",\n  \"success\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fdbf869c-f60c-4e58-8da0-7e98a0804ae5",
+              "name": "Requested Data Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "loan",
+                    "disburse"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Language of the response, supported languages: en-us, in",
+                    "key": "accept-language",
+                    "value": "en-us"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"loanId\": \"c3eb1619-ff24-4773-97d8-b05264621e60\",\n  \"metadata\": \"\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 404,\n  \"error\": \"string\",\n  \"errorCode\": \"E_D_NOT_FOUND\",\n  \"message\": \"string\",\n  \"success\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "83867ca4-fc7f-4110-b981-3128f529e8c3",
+              "name": "Internal Server Error, Some problem is there, please try after sometime",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "loan",
+                    "disburse"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Language of the response, supported languages: en-us, in",
+                    "key": "accept-language",
+                    "value": "en-us"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"loanId\": \"c3eb1619-ff24-4773-97d8-b05264621e60\",\n  \"metadata\": \"\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 500,\n  \"error\": \"string\",\n  \"errorCode\": \"E_INTERNAL_ERROR\",\n  \"message\": \"string\",\n  \"success\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7373797e-efbe-4d2c-8d41-6a2db5bcbeb8",
+          "name": "Loan Summary",
+          "request": {
+            "name": "Loan Summary",
+            "description": {
+              "content": "",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "loan",
+                "summary",
+                ":loanId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "loanId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Language of the response, supported languages: en-us, in",
+                "key": "accept-language",
+                "value": "en-us"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "3c030fd5-aa8d-4411-8399-d7f1544bef5e",
+              "name": "Loan summary details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "loan",
+                    "summary",
+                    ":loanId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "loanId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Language of the response, supported languages: en-us, in",
+                    "key": "accept-language",
+                    "value": "en-us"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 200,\n  \"data\": {\n    \"loanId\": \"string\",\n    \"loanStatus\": \"active\",\n    \"loanReferenceNo\": \"BNPL180820235070\",\n    \"loanType\": \"BNPL\",\n    \"customerReferenceNo\": \"\",\n    \"loanTerm\": 30,\n    \"loanAmount\": 3500,\n    \"totalServiceFee\": 99.17,\n    \"totalServiceFeeDue\": 99.17,\n    \"expectedRepaymentAmount\": 3599.17,\n    \"totalDueAmount\": 3599.17,\n    \"loanDueDate\": \"18 September 2023\",\n    \"dueDatePostGracePeriod\": \"21 September 2023\",\n    \"gracePeriodInDays\": 3,\n    \"totalPenaltyDue\": 0,\n    \"currency\": \"SGD\",\n    \"requestedDate\": \"18 Aug 2023\",\n    \"repaymentSchedule\": [\n      {\n        \"dueDate\": \"18 September 2023\",\n        \"totalDueForPeriod\": 3599.17,\n        \"penaltyDueForPeriod\": 0,\n        \"totalServiceFeeForPeriod\": 99.17,\n        \"totalServiceFeeDueForPeriod\": 99.17,\n        \"principalDueForPeriod\": 3500,\n        \"dueDatePostGracePeriod\": \"21 September 2023\",\n        \"paid\": false\n      },\n      {\n        \"dueDate\": \"18 September 2023\",\n        \"totalDueForPeriod\": 3599.17,\n        \"penaltyDueForPeriod\": 0,\n        \"totalServiceFeeForPeriod\": 99.17,\n        \"totalServiceFeeDueForPeriod\": 99.17,\n        \"principalDueForPeriod\": 3500,\n        \"dueDatePostGracePeriod\": \"21 September 2023\",\n        \"paid\": false\n      }\n    ],\n    \"payments\": [\n      {\n        \"paymentId\": \"string\",\n        \"paymentDate\": \"2025-01-08T05:12:17.404Z\",\n        \"paymentAmount\": 1000,\n        \"paymentMethod\": \"Bank Transfer/UEN Payment/QR Code Payment\",\n        \"paymentReferenceNo\": \"string\",\n        \"accountNumber\": \"string\",\n        \"accountName\": \"string\",\n        \"bankName\": \"string\",\n        \"bankSwiftCode\": \"string\",\n        \"paymentStatus\": 2,\n        \"loanId\": \"string\",\n        \"customerReferenceNo\": \"string\",\n        \"metadata\": \"string\",\n        \"createdAt\": \"2025-01-08T05:12:17.405Z\",\n        \"updatedAt\": \"2025-01-08T05:12:17.405Z\",\n        \"currency\": \"SGD\"\n      },\n      {\n        \"paymentId\": \"string\",\n        \"paymentDate\": \"2025-01-08T05:12:17.404Z\",\n        \"paymentAmount\": 1000,\n        \"paymentMethod\": \"Bank Transfer/UEN Payment/QR Code Payment\",\n        \"paymentReferenceNo\": \"string\",\n        \"accountNumber\": \"string\",\n        \"accountName\": \"string\",\n        \"bankName\": \"string\",\n        \"bankSwiftCode\": \"string\",\n        \"paymentStatus\": 2,\n        \"loanId\": \"string\",\n        \"customerReferenceNo\": \"string\",\n        \"metadata\": \"string\",\n        \"createdAt\": \"2025-01-08T05:12:17.405Z\",\n        \"updatedAt\": \"2025-01-08T05:12:17.405Z\",\n        \"currency\": \"SGD\"\n      }\n    ]\n  },\n  \"message\": \"Success\",\n  \"success\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4309d2e9-dc86-43f2-986b-51603d477d39",
+              "name": "Invalid credentials",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "loan",
+                    "summary",
+                    ":loanId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "loanId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Language of the response, supported languages: en-us, in",
+                    "key": "accept-language",
+                    "value": "en-us"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 401,\n  \"error\": \"string\",\n  \"errorCode\": \"E_UNAUTHORIZED\",\n  \"message\": \"string\",\n  \"success\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1436cb24-f548-4869-b81f-ee9d060fa146",
+              "name": "Forbidden resource",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "loan",
+                    "summary",
+                    ":loanId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "loanId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Language of the response, supported languages: en-us, in",
+                    "key": "accept-language",
+                    "value": "en-us"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 403,\n  \"error\": \"string\",\n  \"errorCode\": \"E_FORBIDDEN\",\n  \"message\": \"string\",\n  \"success\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e6c0b4ce-c59c-486a-8eda-1ba6c60acef3",
+              "name": "Requested Data Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "loan",
+                    "summary",
+                    ":loanId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "loanId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Language of the response, supported languages: en-us, in",
+                    "key": "accept-language",
+                    "value": "en-us"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 404,\n  \"error\": \"string\",\n  \"errorCode\": \"E_D_NOT_FOUND\",\n  \"message\": \"string\",\n  \"success\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9c7799f7-d8b3-4947-b7ac-d9bc5d0129e9",
+              "name": "Internal Server Error, Some problem is there, please try after sometime",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "loan",
+                    "summary",
+                    ":loanId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "loanId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Language of the response, supported languages: en-us, in",
+                    "key": "accept-language",
+                    "value": "en-us"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 500,\n  \"error\": \"string\",\n  \"errorCode\": \"E_INTERNAL_ERROR\",\n  \"message\": \"string\",\n  \"success\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://sandbox-api.credilinq.ai",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "47312d5e-ec01-43e3-8e57-7054afeb4d9a",
+    "name": "CrediLinq Authentication Loans API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "CrediLinq embedded finance API: B2B PayLater and GMV Financing for platforms and marketplaces. Covers Auth0 token generation, merchant onboarding and eligibility, customer and director KYC, credit line and loan (drawdown) management, payments and reconciliation, reporting, and demographic reference data.\n\nContact Support:\n Name: CrediLinq Support\n Email: support@credilinq.ai",
+      "type": "text/plain"
+    }
+  }
+}

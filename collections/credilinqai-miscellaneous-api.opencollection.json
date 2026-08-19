@@ -1,0 +1,110 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "CrediLinq Authentication Miscellaneous API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Miscellaneous",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Postal Codes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://sandbox-api.credilinq.ai/v1/others/demographic-info/postal-codes",
+            "params": [
+              {
+                "name": "country",
+                "value": "indonesia",
+                "type": "query",
+                "description": "Country Name"
+              }
+            ]
+          },
+          "docs": "Get Postal Codes"
+        },
+        {
+          "info": {
+            "name": "Get Countries",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://sandbox-api.credilinq.ai/v1/others/demographic-info/countries"
+          },
+          "docs": "Get Countries"
+        },
+        {
+          "info": {
+            "name": "Get Addresses",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://sandbox-api.credilinq.ai/v1/others/demographic-info/addresses",
+            "params": [
+              {
+                "name": "country",
+                "value": "indonesia",
+                "type": "query",
+                "description": "Country Name"
+              },
+              {
+                "name": "postalCode",
+                "value": "95765",
+                "type": "query",
+                "description": "Postal Code"
+              }
+            ]
+          },
+          "docs": "Get Addresses"
+        },
+        {
+          "info": {
+            "name": "Get Document Types",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://sandbox-api.credilinq.ai/v1/others/kyc/document-types",
+            "params": [
+              {
+                "name": "entityType",
+                "value": "business",
+                "type": "query",
+                "description": "Entity type.\n- Should be one of below values."
+              },
+              {
+                "name": "entityTypeIn",
+                "value": "business,director,individual",
+                "type": "query",
+                "description": "Entity type.\n- Should be one of below values."
+              },
+              {
+                "name": "country",
+                "value": "indonesia",
+                "type": "query",
+                "description": "Country Name"
+              }
+            ]
+          },
+          "docs": "Get Document Types"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,1788 @@
+{
+  "item": [
+    {
+      "id": "7b85099b-149e-44f0-82ef-dd24a4b8c617",
+      "name": "Customers",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "68445fc0-0bde-4bea-9171-22c2ca70943a",
+          "name": "Get Payment Methods",
+          "request": {
+            "name": "Get Payment Methods",
+            "description": {
+              "content": "",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "customer",
+                ":customerReferenceNo",
+                "payment-methods"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "customerReferenceNo",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Language of the response, supported languages: en-us, in",
+                "key": "accept-language",
+                "value": "en-us"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "07e086da-5b25-4371-9e14-5aa59d717d5d",
+              "name": "Get Payment Methods",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "customer",
+                    ":customerReferenceNo",
+                    "payment-methods"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "customerReferenceNo",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Language of the response, supported languages: en-us, in",
+                    "key": "accept-language",
+                    "value": "en-us"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 200,\n  \"data\": [\n    {\n      \"bankTransfer\": {\n        \"bankName\": \"\",\n        \"accountNumber\": 0,\n        \"bankSwiftCode\": \"\",\n        \"accountName\": \"\"\n      },\n      \"uenPayment\": {\n        \"bankName\": \"\",\n        \"accountNumber\": 0,\n        \"bankSwiftCode\": \"\",\n        \"accountName\": \"\"\n      },\n      \"qrPayment\": \"string\"\n    },\n    {\n      \"bankTransfer\": {\n        \"bankName\": \"\",\n        \"accountNumber\": 0,\n        \"bankSwiftCode\": \"\",\n        \"accountName\": \"\"\n      },\n      \"uenPayment\": {\n        \"bankName\": \"\",\n        \"accountNumber\": 0,\n        \"bankSwiftCode\": \"\",\n        \"accountName\": \"\"\n      },\n      \"qrPayment\": \"string\"\n    }\n  ],\n  \"message\": \"Success\",\n  \"success\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "83c34222-a098-4328-9514-07e156e36aaa",
+              "name": "Invalid Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "customer",
+                    ":customerReferenceNo",
+                    "payment-methods"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "customerReferenceNo",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Language of the response, supported languages: en-us, in",
+                    "key": "accept-language",
+                    "value": "en-us"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 400,\n  \"error\": \"string\",\n  \"errorCode\": \"E_BAD_REQUEST\",\n  \"message\": \"string\",\n  \"success\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fa0d1d8d-f5a8-4da2-a13d-0a1a6f2b6412",
+              "name": "Invalid credentials",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "customer",
+                    ":customerReferenceNo",
+                    "payment-methods"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "customerReferenceNo",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Language of the response, supported languages: en-us, in",
+                    "key": "accept-language",
+                    "value": "en-us"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 401,\n  \"error\": \"string\",\n  \"errorCode\": \"E_UNAUTHORIZED\",\n  \"message\": \"string\",\n  \"success\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "aded1354-3bae-40c5-8656-545d6763cb96",
+              "name": "Forbidden resource",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "customer",
+                    ":customerReferenceNo",
+                    "payment-methods"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "customerReferenceNo",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Language of the response, supported languages: en-us, in",
+                    "key": "accept-language",
+                    "value": "en-us"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 403,\n  \"error\": \"string\",\n  \"errorCode\": \"E_FORBIDDEN\",\n  \"message\": \"string\",\n  \"success\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4627bf98-1ed5-4c68-b8b5-161dd4b0eb6e",
+              "name": "Requested Data Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "customer",
+                    ":customerReferenceNo",
+                    "payment-methods"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "customerReferenceNo",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Language of the response, supported languages: en-us, in",
+                    "key": "accept-language",
+                    "value": "en-us"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 404,\n  \"error\": \"string\",\n  \"errorCode\": \"E_C_CUSTOMER_NOT_FOUND\",\n  \"message\": \"string\",\n  \"success\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "774ae0e6-3fd1-4765-be69-02d2b9339b42",
+              "name": "Internal Server Error, Some problem is there, please try after sometime",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "customer",
+                    ":customerReferenceNo",
+                    "payment-methods"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "customerReferenceNo",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Language of the response, supported languages: en-us, in",
+                    "key": "accept-language",
+                    "value": "en-us"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 500,\n  \"error\": \"string\",\n  \"errorCode\": \"E_INTERNAL_ERROR\",\n  \"message\": \"string\",\n  \"success\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e88df7fe-2e85-4384-bd16-00b15365b1c1",
+          "name": "Get Creditline Summary",
+          "request": {
+            "name": "Get Creditline Summary",
+            "description": {
+              "content": "",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "customer",
+                ":customerReferenceNo",
+                "line-details"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "customerReferenceNo",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Language of the response, supported languages: en-us, in",
+                "key": "accept-language",
+                "value": "en-us"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "81cf084a-acc6-4870-b36e-4460436fd394",
+              "name": "Customer's credit line summary details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "customer",
+                    ":customerReferenceNo",
+                    "line-details"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "customerReferenceNo",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Language of the response, supported languages: en-us, in",
+                    "key": "accept-language",
+                    "value": "en-us"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 200,\n  \"data\": {\n    \"customerReferenceNo\": \"string\",\n    \"availableCredit\": 10000,\n    \"approvedCredit\": 15000,\n    \"totalOutstandingAmount\": 1500000,\n    \"totalUtilised\": 10000,\n    \"totalChargesApplied\": 500,\n    \"totalLoanAmount\": 500,\n    \"currency\": \"SGD\"\n  },\n  \"message\": \"Success\",\n  \"success\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e722325d-9263-443d-851c-fa7acadd212b",
+              "name": "Invalid Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "customer",
+                    ":customerReferenceNo",
+                    "line-details"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "customerReferenceNo",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Language of the response, supported languages: en-us, in",
+                    "key": "accept-language",
+                    "value": "en-us"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 400,\n  \"error\": \"string\",\n  \"errorCode\": \"E_BAD_REQUEST\",\n  \"message\": \"string\",\n  \"success\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5dc9229c-89d5-4245-be46-8b4b98e8a0ee",
+              "name": "Invalid credentials",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "customer",
+                    ":customerReferenceNo",
+                    "line-details"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "customerReferenceNo",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Language of the response, supported languages: en-us, in",
+                    "key": "accept-language",
+                    "value": "en-us"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 401,\n  \"error\": \"string\",\n  \"errorCode\": \"E_UNAUTHORIZED\",\n  \"message\": \"string\",\n  \"success\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "33cd055d-6611-41e0-a753-21999c51f0c2",
+              "name": "Forbidden resource",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "customer",
+                    ":customerReferenceNo",
+                    "line-details"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "customerReferenceNo",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Language of the response, supported languages: en-us, in",
+                    "key": "accept-language",
+                    "value": "en-us"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 403,\n  \"error\": \"string\",\n  \"errorCode\": \"E_FORBIDDEN\",\n  \"message\": \"string\",\n  \"success\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "22f6dab2-2e9d-4160-adaa-8c83d21f7bbe",
+              "name": "Requested Data Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "customer",
+                    ":customerReferenceNo",
+                    "line-details"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "customerReferenceNo",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Language of the response, supported languages: en-us, in",
+                    "key": "accept-language",
+                    "value": "en-us"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 404,\n  \"error\": \"string\",\n  \"errorCode\": \"E_C_CUSTOMER_NOT_FOUND\",\n  \"message\": \"string\",\n  \"success\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1e1f838b-aeab-4073-a407-5486da6732f2",
+              "name": "Internal Server Error, Some problem is there, please try after sometime",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "customer",
+                    ":customerReferenceNo",
+                    "line-details"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "customerReferenceNo",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Language of the response, supported languages: en-us, in",
+                    "key": "accept-language",
+                    "value": "en-us"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 500,\n  \"error\": \"string\",\n  \"errorCode\": \"E_INTERNAL_ERROR\",\n  \"message\": \"string\",\n  \"success\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a7224214-4877-422a-8ce7-d7787b938e4f",
+          "name": "Get Active Loans",
+          "request": {
+            "name": "Get Active Loans",
+            "description": {
+              "content": "",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "customer",
+                ":customerReferenceNo",
+                "loans"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "customerReferenceNo",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Language of the response, supported languages: en-us, in",
+                "key": "accept-language",
+                "value": "en-us"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "80069290-7eb5-40fa-8799-1b0e57c73b46",
+              "name": "Get customer's active loans",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "customer",
+                    ":customerReferenceNo",
+                    "loans"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "customerReferenceNo",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Language of the response, supported languages: en-us, in",
+                    "key": "accept-language",
+                    "value": "en-us"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 200,\n  \"data\": [\n    {\n      \"loanId\": \"string\",\n      \"loanStatus\": \"active\",\n      \"loanReferenceNo\": \"BNPL180820235070\",\n      \"loanType\": \"BNPL\",\n      \"customerReferenceNo\": \"\",\n      \"loanTerm\": 30,\n      \"loanAmount\": 3500,\n      \"totalServiceFee\": 99.17,\n      \"totalServiceFeeDue\": 99.17,\n      \"expectedRepaymentAmount\": 3599.17,\n      \"totalDueAmount\": 3599.17,\n      \"loanDueDate\": \"18 September 2023\",\n      \"dueDatePostGracePeriod\": \"21 September 2023\",\n      \"gracePeriodInDays\": 3,\n      \"totalPenaltyDue\": 0,\n      \"currency\": \"SGD\",\n      \"requestedDate\": \"18 Aug 2023\",\n      \"repaymentSchedule\": [\n        {\n          \"dueDate\": \"18 September 2023\",\n          \"totalDueForPeriod\": 3599.17,\n          \"penaltyDueForPeriod\": 0,\n          \"totalServiceFeeForPeriod\": 99.17,\n          \"totalServiceFeeDueForPeriod\": 99.17,\n          \"principalDueForPeriod\": 3500,\n          \"dueDatePostGracePeriod\": \"21 September 2023\",\n          \"paid\": false\n        },\n        {\n          \"dueDate\": \"18 September 2023\",\n          \"totalDueForPeriod\": 3599.17,\n          \"penaltyDueForPeriod\": 0,\n          \"totalServiceFeeForPeriod\": 99.17,\n          \"totalServiceFeeDueForPeriod\": 99.17,\n          \"principalDueForPeriod\": 3500,\n          \"dueDatePostGracePeriod\": \"21 September 2023\",\n          \"paid\": false\n        }\n      ],\n      \"payments\": [\n        {\n          \"paymentId\": \"string\",\n          \"paymentDate\": \"2025-01-08T05:12:17.404Z\",\n          \"paymentAmount\": 1000,\n          \"paymentMethod\": \"Bank Transfer/UEN Payment/QR Code Payment\",\n          \"paymentReferenceNo\": \"string\",\n          \"accountNumber\": \"string\",\n          \"accountName\": \"string\",\n          \"bankName\": \"string\",\n          \"bankSwiftCode\": \"string\",\n          \"paymentStatus\": 2,\n          \"loanId\": \"string\",\n          \"customerReferenceNo\": \"string\",\n          \"metadata\": \"string\",\n          \"createdAt\": \"2025-01-08T05:12:17.405Z\",\n          \"updatedAt\": \"2025-01-08T05:12:17.405Z\",\n          \"currency\": \"SGD\"\n        },\n        {\n          \"paymentId\": \"string\",\n          \"paymentDate\": \"2025-01-08T05:12:17.404Z\",\n          \"paymentAmount\": 1000,\n          \"paymentMethod\": \"Bank Transfer/UEN Payment/QR Code Payment\",\n          \"paymentReferenceNo\": \"string\",\n          \"accountNumber\": \"string\",\n          \"accountName\": \"string\",\n          \"bankName\": \"string\",\n          \"bankSwiftCode\": \"string\",\n          \"paymentStatus\": 2,\n          \"loanId\": \"string\",\n          \"customerReferenceNo\": \"string\",\n          \"metadata\": \"string\",\n          \"createdAt\": \"2025-01-08T05:12:17.405Z\",\n          \"updatedAt\": \"2025-01-08T05:12:17.405Z\",\n          \"currency\": \"SGD\"\n        }\n      ]\n    },\n    {\n      \"loanId\": \"string\",\n      \"loanStatus\": \"active\",\n      \"loanReferenceNo\": \"BNPL180820235070\",\n      \"loanType\": \"BNPL\",\n      \"customerReferenceNo\": \"\",\n      \"loanTerm\": 30,\n      \"loanAmount\": 3500,\n      \"totalServiceFee\": 99.17,\n      \"totalServiceFeeDue\": 99.17,\n      \"expectedRepaymentAmount\": 3599.17,\n      \"totalDueAmount\": 3599.17,\n      \"loanDueDate\": \"18 September 2023\",\n      \"dueDatePostGracePeriod\": \"21 September 2023\",\n      \"gracePeriodInDays\": 3,\n      \"totalPenaltyDue\": 0,\n      \"currency\": \"SGD\",\n      \"requestedDate\": \"18 Aug 2023\",\n      \"repaymentSchedule\": [\n        {\n          \"dueDate\": \"18 September 2023\",\n          \"totalDueForPeriod\": 3599.17,\n          \"penaltyDueForPeriod\": 0,\n          \"totalServiceFeeForPeriod\": 99.17,\n          \"totalServiceFeeDueForPeriod\": 99.17,\n          \"principalDueForPeriod\": 3500,\n          \"dueDatePostGracePeriod\": \"21 September 2023\",\n          \"paid\": false\n        },\n        {\n          \"dueDate\": \"18 September 2023\",\n          \"totalDueForPeriod\": 3599.17,\n          \"penaltyDueForPeriod\": 0,\n          \"totalServiceFeeForPeriod\": 99.17,\n          \"totalServiceFeeDueForPeriod\": 99.17,\n          \"principalDueForPeriod\": 3500,\n          \"dueDatePostGracePeriod\": \"21 September 2023\",\n          \"paid\": false\n        }\n      ],\n      \"payments\": [\n        {\n          \"paymentId\": \"string\",\n          \"paymentDate\": \"2025-01-08T05:12:17.404Z\",\n          \"paymentAmount\": 1000,\n          \"paymentMethod\": \"Bank Transfer/UEN Payment/QR Code Payment\",\n          \"paymentReferenceNo\": \"string\",\n          \"accountNumber\": \"string\",\n          \"accountName\": \"string\",\n          \"bankName\": \"string\",\n          \"bankSwiftCode\": \"string\",\n          \"paymentStatus\": 2,\n          \"loanId\": \"string\",\n          \"customerReferenceNo\": \"string\",\n          \"metadata\": \"string\",\n          \"createdAt\": \"2025-01-08T05:12:17.405Z\",\n          \"updatedAt\": \"2025-01-08T05:12:17.405Z\",\n          \"currency\": \"SGD\"\n        },\n        {\n          \"paymentId\": \"string\",\n          \"paymentDate\": \"2025-01-08T05:12:17.404Z\",\n          \"paymentAmount\": 1000,\n          \"paymentMethod\": \"Bank Transfer/UEN Payment/QR Code Payment\",\n          \"paymentReferenceNo\": \"string\",\n          \"accountNumber\": \"string\",\n          \"accountName\": \"string\",\n          \"bankName\": \"string\",\n          \"bankSwiftCode\": \"string\",\n          \"paymentStatus\": 2,\n          \"loanId\": \"string\",\n          \"customerReferenceNo\": \"string\",\n          \"metadata\": \"string\",\n          \"createdAt\": \"2025-01-08T05:12:17.405Z\",\n          \"updatedAt\": \"2025-01-08T05:12:17.405Z\",\n          \"currency\": \"SGD\"\n        }\n      ]\n    }\n  ],\n  \"message\": \"Success\",\n  \"success\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "240736b4-82a2-468f-b453-32f1a2eb8611",
+              "name": "Invalid Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "customer",
+                    ":customerReferenceNo",
+                    "loans"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "customerReferenceNo",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Language of the response, supported languages: en-us, in",
+                    "key": "accept-language",
+                    "value": "en-us"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 400,\n  \"error\": \"string\",\n  \"errorCode\": \"E_BAD_REQUEST\",\n  \"message\": \"string\",\n  \"success\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "793f393a-dd7a-486e-b649-4a0d55d52547",
+              "name": "Invalid credentials",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "customer",
+                    ":customerReferenceNo",
+                    "loans"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "customerReferenceNo",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Language of the response, supported languages: en-us, in",
+                    "key": "accept-language",
+                    "value": "en-us"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 401,\n  \"error\": \"string\",\n  \"errorCode\": \"E_UNAUTHORIZED\",\n  \"message\": \"string\",\n  \"success\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f032aa87-17c8-4f71-be49-cb74d615d36a",
+              "name": "Forbidden resource",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "customer",
+                    ":customerReferenceNo",
+                    "loans"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "customerReferenceNo",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Language of the response, supported languages: en-us, in",
+                    "key": "accept-language",
+                    "value": "en-us"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 403,\n  \"error\": \"string\",\n  \"errorCode\": \"E_FORBIDDEN\",\n  \"message\": \"string\",\n  \"success\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e70e7668-430f-49e1-a68a-7df791051770",
+              "name": "Requested Data Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "customer",
+                    ":customerReferenceNo",
+                    "loans"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "customerReferenceNo",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Language of the response, supported languages: en-us, in",
+                    "key": "accept-language",
+                    "value": "en-us"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 404,\n  \"error\": \"string\",\n  \"errorCode\": \"E_C_CUSTOMER_NOT_FOUND\",\n  \"message\": \"string\",\n  \"success\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b6d3a7b2-f09e-4a5d-ab80-ce10ac05e32a",
+              "name": "Internal Server Error, Some problem is there, please try after sometime",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "customer",
+                    ":customerReferenceNo",
+                    "loans"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "customerReferenceNo",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Language of the response, supported languages: en-us, in",
+                    "key": "accept-language",
+                    "value": "en-us"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 500,\n  \"error\": \"string\",\n  \"errorCode\": \"E_INTERNAL_ERROR\",\n  \"message\": \"string\",\n  \"success\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "07db2869-527c-4f3e-a08c-63af99d5258a",
+          "name": "Get list of Holidays by customer",
+          "request": {
+            "name": "Get list of Holidays by customer",
+            "description": {
+              "content": "",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "customer",
+                "holidays",
+                ":customerReferenceNo"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "startDate",
+                  "value": "<string>",
+                  "description": "Start Date"
+                },
+                {
+                  "disabled": false,
+                  "key": "endDate",
+                  "value": "<string>",
+                  "description": "End Date"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "customerReferenceNo",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Language of the response, supported languages: en-us, in",
+                "key": "accept-language",
+                "value": "en-us"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "b96c8c09-c253-4f4e-a65e-394491feba14",
+              "name": "Get list of holidays",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "customer",
+                    "holidays",
+                    ":customerReferenceNo"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "startDate",
+                      "value": "2024-04-01"
+                    },
+                    {
+                      "key": "endDate",
+                      "value": "2024-04-30"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "customerReferenceNo",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Language of the response, supported languages: en-us, in",
+                    "key": "accept-language",
+                    "value": "en-us"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 200,\n  \"data\": [\n    {\n      \"date\": \"01 Jan 2024\",\n      \"dateUTC\": \"2023-12-31T18:30:00.000Z\",\n      \"isHoliday\": true\n    },\n    {\n      \"date\": \"01 Jan 2024\",\n      \"dateUTC\": \"2023-12-31T18:30:00.000Z\",\n      \"isHoliday\": true\n    }\n  ],\n  \"message\": \"Success\",\n  \"success\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4a125eae-739d-4a35-b868-804ee7f600ea",
+              "name": "Invalid Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "customer",
+                    "holidays",
+                    ":customerReferenceNo"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "startDate",
+                      "value": "2024-04-01"
+                    },
+                    {
+                      "key": "endDate",
+                      "value": "2024-04-30"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "customerReferenceNo",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Language of the response, supported languages: en-us, in",
+                    "key": "accept-language",
+                    "value": "en-us"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 400,\n  \"error\": \"string\",\n  \"errorCode\": \"E_BAD_REQUEST\",\n  \"message\": \"string\",\n  \"success\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "048b3e41-40b2-47a1-b9a3-f5e15f8ab023",
+              "name": "Invalid credentials",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "customer",
+                    "holidays",
+                    ":customerReferenceNo"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "startDate",
+                      "value": "2024-04-01"
+                    },
+                    {
+                      "key": "endDate",
+                      "value": "2024-04-30"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "customerReferenceNo",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Language of the response, supported languages: en-us, in",
+                    "key": "accept-language",
+                    "value": "en-us"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 401,\n  \"error\": \"string\",\n  \"errorCode\": \"E_UNAUTHORIZED\",\n  \"message\": \"string\",\n  \"success\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9d446a66-b0d1-472b-80a1-55fa920c567f",
+              "name": "Forbidden resource",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "customer",
+                    "holidays",
+                    ":customerReferenceNo"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "startDate",
+                      "value": "2024-04-01"
+                    },
+                    {
+                      "key": "endDate",
+                      "value": "2024-04-30"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "customerReferenceNo",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Language of the response, supported languages: en-us, in",
+                    "key": "accept-language",
+                    "value": "en-us"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 403,\n  \"error\": \"string\",\n  \"errorCode\": \"E_FORBIDDEN\",\n  \"message\": \"string\",\n  \"success\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "69217145-1f92-4b8a-90c0-e30d260de98f",
+              "name": "Requested Data Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "customer",
+                    "holidays",
+                    ":customerReferenceNo"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "startDate",
+                      "value": "2024-04-01"
+                    },
+                    {
+                      "key": "endDate",
+                      "value": "2024-04-30"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "customerReferenceNo",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Language of the response, supported languages: en-us, in",
+                    "key": "accept-language",
+                    "value": "en-us"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 404,\n  \"error\": \"string\",\n  \"errorCode\": \"E_C_CUSTOMER_NOT_FOUND\",\n  \"message\": \"string\",\n  \"success\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "771296c6-87e9-4912-9dd7-05d8ddd03be5",
+              "name": "Internal Server Error, Some problem is there, please try after sometime",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "customer",
+                    "holidays",
+                    ":customerReferenceNo"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "startDate",
+                      "value": "2024-04-01"
+                    },
+                    {
+                      "key": "endDate",
+                      "value": "2024-04-30"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "customerReferenceNo",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Language of the response, supported languages: en-us, in",
+                    "key": "accept-language",
+                    "value": "en-us"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 500,\n  \"error\": \"string\",\n  \"errorCode\": \"E_INTERNAL_ERROR\",\n  \"message\": \"string\",\n  \"success\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://sandbox-api.credilinq.ai",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "fb8a21d9-39ac-455e-a4b6-6d0dfffaf1b8",
+    "name": "CrediLinq Authentication Customers API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "CrediLinq embedded finance API: B2B PayLater and GMV Financing for platforms and marketplaces. Covers Auth0 token generation, merchant onboarding and eligibility, customer and director KYC, credit line and loan (drawdown) management, payments and reconciliation, reporting, and demographic reference data.\n\nContact Support:\n Name: CrediLinq Support\n Email: support@credilinq.ai",
+      "type": "text/plain"
+    }
+  }
+}
