@@ -96,7 +96,8 @@ apis:
   description: The Miscellaneous API from Credilinq.ai — 4 operation(s) for miscellaneous.
   humanURL: https://docs.credilinq.ai/
   baseURL: https://api.credilinq.ai
-  tags:
+  tags: []
+  tags_raw:
   - Miscellaneous
   properties:
   - type: OpenAPI
