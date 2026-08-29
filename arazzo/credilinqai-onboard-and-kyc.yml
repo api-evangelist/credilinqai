@@ -6,6 +6,22 @@ info:
   title: CrediLinq — Onboard a customer and complete KYC
   version: 1.0.0
   description: Authenticate, check eligibility, run data processing, capture customer KYC, and send it for review.
+  x-realizes-capability-ids:
+  - BC-1300.20
+  - BC-1320.10
+  x-capability-derivation:
+    method: 'deterministic join: sourceDescriptions -> per-tag OpenAPI -> tag/capability edge. No classification at this step.'
+    min_confidence: 0.7
+    sources:
+    - capability_id: BC-1300.20
+      capability_name: KYC & Customer Due Diligence Management
+      spec: credilinqai-kyc-api-openapi.yml
+      confidence: 0.9
+    - capability_id: BC-1320.10
+      capability_name: Credit Origination Management
+      spec: credilinqai-onboarding-api-openapi.yml
+      confidence: 0.8
+    model: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities, CC BY 4.0
 sourceDescriptions:
 - name: authenticationApi
   url: ../openapi/credilinqai-authentication-api-openapi.yml
