@@ -7,8 +7,14 @@ info:
   version: 1.0.0
   description: Authenticate, confirm the credit line, preview the schedule, create a drawdown, and disburse it.
 sourceDescriptions:
-- name: credilinq
-  url: ../openapi/credilinqai-openapi.yml
+- name: authenticationApi
+  url: ../openapi/credilinqai-authentication-api-openapi.yml
+  type: openapi
+- name: customersApi
+  url: ../openapi/credilinqai-customers-api-openapi.yml
+  type: openapi
+- name: loansApi
+  url: ../openapi/credilinqai-loans-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: createAndDisburseLoan
@@ -16,9 +22,9 @@ workflows:
   inputs:
     type: object
     properties:
-      client_id: { type: string }
-      client_secret: { type: string }
-      customerReferenceNo: { type: string }
+      client_id: {type: string}
+      client_secret: {type: string}
+      customerReferenceNo: {type: string}
   steps:
   - stepId: authenticate
     operationId: AuthenticationController_generateToken

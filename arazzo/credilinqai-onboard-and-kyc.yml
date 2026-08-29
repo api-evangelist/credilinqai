@@ -7,8 +7,14 @@ info:
   version: 1.0.0
   description: Authenticate, check eligibility, run data processing, capture customer KYC, and send it for review.
 sourceDescriptions:
-- name: credilinq
-  url: ../openapi/credilinqai-openapi.yml
+- name: authenticationApi
+  url: ../openapi/credilinqai-authentication-api-openapi.yml
+  type: openapi
+- name: kycApi
+  url: ../openapi/credilinqai-kyc-api-openapi.yml
+  type: openapi
+- name: onboardingApi
+  url: ../openapi/credilinqai-onboarding-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: onboardAndKyc
@@ -16,8 +22,8 @@ workflows:
   inputs:
     type: object
     properties:
-      client_id: { type: string }
-      client_secret: { type: string }
+      client_id: {type: string}
+      client_secret: {type: string}
   steps:
   - stepId: authenticate
     operationId: AuthenticationController_generateToken
