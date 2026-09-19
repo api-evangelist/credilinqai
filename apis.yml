@@ -146,6 +146,8 @@ apis:
   humanURL: https://docs.credilinq.ai/
   baseURL: https://api.credilinq.ai
   tags:
+  - Payments
+  tags_raw:
   - Payment
   properties:
   - type: OpenAPI
