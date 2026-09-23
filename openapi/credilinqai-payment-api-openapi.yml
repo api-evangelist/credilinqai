@@ -1,6 +1,6 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
-  title: CrediLinq Authentication Payment API
+  title: CrediLinq Payment API
   description: 'CrediLinq embedded finance API: B2B PayLater and GMV Financing for platforms and marketplaces. Covers Auth0 token generation, merchant onboarding and eligibility, customer and director KYC, credit line and loan (drawdown) management, payments and reconciliation, reporting, and demographic reference data.'
   version: '1.0'
   contact:
@@ -256,6 +256,30 @@ paths:
       - access-token: []
 components:
   schemas:
+    MakeLoanPaymentResponse:
+      type: object
+      properties:
+        statusCode:
+          type: number
+          default: 200
+          description: The HTTP status code of the error
+        data:
+          description: Response Data from the operation
+          allOf:
+          - $ref: '#/components/schemas/LoanPayment'
+        message:
+          type: string
+          default: Success
+          description: Human-readable message containing all available details about the operation
+        success:
+          type: boolean
+          default: true
+          description: A boolean indicating whether this was a success response or an error response
+      required:
+      - statusCode
+      - data
+      - message
+      - success
     ForbiddenResponse:
       type: object
       properties:
@@ -285,147 +309,42 @@ components:
       - errorCode
       - message
       - success
-    InternalErrorResponse:
-      type: object
-      properties:
-        statusCode:
-          type: number
-          default: 500
-          description: The HTTP status code of the error
-        error:
-          type: string
-          default: string
-          description: Human-readable generic error message
-        errorCode:
-          type: string
-          default: E_INTERNAL_ERROR
-          description: Computer-readable code for error handling
-        message:
-          type: string
-          default: string
-          description: Human-readable error message containing all available details about how the error occurred
-        success:
-          type: boolean
-          default: false
-          description: A boolean indicating whether this was a success response or an error response
-      required:
-      - statusCode
-      - error
-      - errorCode
-      - message
-      - success
-    LoanPayment:
+    VerifyPaymentV1Dto:
       type: object
       properties:
         paymentId:
           type: string
-          default: string
-          description: Id of the payment
-        paymentDate:
+          description: Payment Id.
+        remark:
           type: string
-          default: '2025-01-08T05:12:17.404Z'
-          description: Date of the payment in UTC Format eg. 2023-03-30T11:46:42.195Z
-        paymentAmount:
-          type: number
-          default: 1000
-          description: Payment Amount
-        paymentMethod:
-          type: string
-          default: 1000
-          description: Payment Amount
-          example: Bank Transfer/UEN Payment/QR Code Payment
-        paymentReferenceNo:
-          type: string
-          default: string
-          description: Payment reference number provided while making payment
-        accountNumber:
-          type: string
-          default: string
-          description: "Account Number varies based on payment types.\n      \n\nSo for bank transfer payment( this field will contain ```bank account number``` & for UEN number payment this will contain ```UEN Number```"
-        accountName:
-          type: string
-          default: string
-          description: Account Name to which payment has been made.
-        bankName:
-          type: string
-          default: string
-          description: "Bank Name varies based on payment types.\n      \n\nSo for bank transfer payment this field will be present, for rest of the types it will be empty"
-        bankSwiftCode:
-          type: string
-          default: string
-          description: "Bank Swift Code varies based on payment types.\n      \n\nSo for bank transfer payment this field will be present, for rest of the types it will be empty"
-        paymentStatus:
-          type: number
-          default: 2
-          description: "We have 3 types of payment status codes. \n    \n For payment rejected: ```0``` \n    \n For payment done, but verification pending: ```1```\n    \n For payment done & verified: ```2```"
-        loanId:
-          type: string
-          default: string
-          description: Loan Id, for which payment has been made.
-        customerReferenceNo:
-          type: string
-          default: string
-          description: Customer Reference Number, for which payment has been made.
-        metadata:
-          type: string
-          default: string
-          description: Metadata for payments. It can be used for reporting, reconciliation purpose.
-        createdAt:
-          type: string
-          default: '2025-01-08T05:12:17.405Z'
-          description: Created Timestamp of the payment in UTC Format eg. 2023-03-30T11:46:42.195Z
-        updatedAt:
-          type: string
-          default: '2025-01-08T05:12:17.405Z'
-          description: Updated Timestamp of the payment in UTC Format eg. 2023-03-30T11:46:42.195Z
-        currency:
-          type: string
-          default: SGD
-          description: Currency Code
+          description: Comments if any.
+          default: Received
       required:
       - paymentId
-      - paymentDate
-      - paymentAmount
-      - paymentMethod
-      - paymentReferenceNo
-      - accountNumber
-      - accountName
-      - bankName
-      - bankSwiftCode
-      - paymentStatus
-      - loanId
-      - customerReferenceNo
-      - metadata
-      - createdAt
-      - updatedAt
-      - currency
-    DrawdownNotFoundResponse:
+      - remark
+    GetLoanPaymentsResponse:
       type: object
       properties:
         statusCode:
           type: number
-          default: 404
+          default: 200
           description: The HTTP status code of the error
-        error:
-          type: string
-          default: string
-          description: Human-readable generic error message
-        errorCode:
-          type: string
-          default: E_D_NOT_FOUND
-          description: Computer-readable code for error handling
+        data:
+          description: Response Data from the operation
+          type: array
+          items:
+            $ref: '#/components/schemas/LoanPayment'
         message:
           type: string
-          default: string
-          description: Human-readable error message containing all available details about how the error occurred
+          default: Success
+          description: Human-readable message containing all available details about the operation
         success:
           type: boolean
-          default: false
+          default: true
           description: A boolean indicating whether this was a success response or an error response
       required:
       - statusCode
-      - error
-      - errorCode
+      - data
       - message
       - success
     VerifyLoanPaymentsResponse:
@@ -542,43 +461,35 @@ components:
       - updatedAt
       - currency
       - remark
-    MakeLoanPaymentResponse:
+    UnauthorizedResponse:
       type: object
       properties:
         statusCode:
           type: number
-          default: 200
+          default: 401
           description: The HTTP status code of the error
-        data:
-          description: Response Data from the operation
-          allOf:
-          - $ref: '#/components/schemas/LoanPayment'
+        error:
+          type: string
+          default: string
+          description: Human-readable generic error message
+        errorCode:
+          type: string
+          default: E_UNAUTHORIZED
+          description: Computer-readable code for error handling
         message:
           type: string
-          default: Success
-          description: Human-readable message containing all available details about the operation
+          default: string
+          description: Human-readable error message containing all available details about how the error occurred
         success:
           type: boolean
-          default: true
+          default: false
           description: A boolean indicating whether this was a success response or an error response
       required:
       - statusCode
-      - data
+      - error
+      - errorCode
       - message
       - success
-    VerifyPaymentV1Dto:
-      type: object
-      properties:
-        paymentId:
-          type: string
-          description: Payment Id.
-        remark:
-          type: string
-          description: Comments if any.
-          default: Received
-      required:
-      - paymentId
-      - remark
     BadRequestDrawdownResponse:
       type: object
       properties:
@@ -615,37 +526,12 @@ components:
       - errorCode
       - message
       - success
-    GetLoanPaymentsResponse:
+    DrawdownNotFoundResponse:
       type: object
       properties:
         statusCode:
           type: number
-          default: 200
-          description: The HTTP status code of the error
-        data:
-          description: Response Data from the operation
-          type: array
-          items:
-            $ref: '#/components/schemas/LoanPayment'
-        message:
-          type: string
-          default: Success
-          description: Human-readable message containing all available details about the operation
-        success:
-          type: boolean
-          default: true
-          description: A boolean indicating whether this was a success response or an error response
-      required:
-      - statusCode
-      - data
-      - message
-      - success
-    UnauthorizedResponse:
-      type: object
-      properties:
-        statusCode:
-          type: number
-          default: 401
+          default: 404
           description: The HTTP status code of the error
         error:
           type: string
@@ -653,7 +539,7 @@ components:
           description: Human-readable generic error message
         errorCode:
           type: string
-          default: E_UNAUTHORIZED
+          default: E_D_NOT_FOUND
           description: Computer-readable code for error handling
         message:
           type: string
@@ -693,6 +579,120 @@ components:
       - loanId
       - paymentAmount
       - paymentTypeId
+    InternalErrorResponse:
+      type: object
+      properties:
+        statusCode:
+          type: number
+          default: 500
+          description: The HTTP status code of the error
+        error:
+          type: string
+          default: string
+          description: Human-readable generic error message
+        errorCode:
+          type: string
+          default: E_INTERNAL_ERROR
+          description: Computer-readable code for error handling
+        message:
+          type: string
+          default: string
+          description: Human-readable error message containing all available details about how the error occurred
+        success:
+          type: boolean
+          default: false
+          description: A boolean indicating whether this was a success response or an error response
+      required:
+      - statusCode
+      - error
+      - errorCode
+      - message
+      - success
+    LoanPayment:
+      type: object
+      properties:
+        paymentId:
+          type: string
+          default: string
+          description: Id of the payment
+        paymentDate:
+          type: string
+          default: '2025-01-08T05:12:17.404Z'
+          description: Date of the payment in UTC Format eg. 2023-03-30T11:46:42.195Z
+        paymentAmount:
+          type: number
+          default: 1000
+          description: Payment Amount
+        paymentMethod:
+          type: string
+          default: 1000
+          description: Payment Amount
+          example: Bank Transfer/UEN Payment/QR Code Payment
+        paymentReferenceNo:
+          type: string
+          default: string
+          description: Payment reference number provided while making payment
+        accountNumber:
+          type: string
+          default: string
+          description: "Account Number varies based on payment types.\n      \n\nSo for bank transfer payment( this field will contain ```bank account number``` & for UEN number payment this will contain ```UEN Number```"
+        accountName:
+          type: string
+          default: string
+          description: Account Name to which payment has been made.
+        bankName:
+          type: string
+          default: string
+          description: "Bank Name varies based on payment types.\n      \n\nSo for bank transfer payment this field will be present, for rest of the types it will be empty"
+        bankSwiftCode:
+          type: string
+          default: string
+          description: "Bank Swift Code varies based on payment types.\n      \n\nSo for bank transfer payment this field will be present, for rest of the types it will be empty"
+        paymentStatus:
+          type: number
+          default: 2
+          description: "We have 3 types of payment status codes. \n    \n For payment rejected: ```0``` \n    \n For payment done, but verification pending: ```1```\n    \n For payment done & verified: ```2```"
+        loanId:
+          type: string
+          default: string
+          description: Loan Id, for which payment has been made.
+        customerReferenceNo:
+          type: string
+          default: string
+          description: Customer Reference Number, for which payment has been made.
+        metadata:
+          type: string
+          default: string
+          description: Metadata for payments. It can be used for reporting, reconciliation purpose.
+        createdAt:
+          type: string
+          default: '2025-01-08T05:12:17.405Z'
+          description: Created Timestamp of the payment in UTC Format eg. 2023-03-30T11:46:42.195Z
+        updatedAt:
+          type: string
+          default: '2025-01-08T05:12:17.405Z'
+          description: Updated Timestamp of the payment in UTC Format eg. 2023-03-30T11:46:42.195Z
+        currency:
+          type: string
+          default: SGD
+          description: Currency Code
+      required:
+      - paymentId
+      - paymentDate
+      - paymentAmount
+      - paymentMethod
+      - paymentReferenceNo
+      - accountNumber
+      - accountName
+      - bankName
+      - bankSwiftCode
+      - paymentStatus
+      - loanId
+      - customerReferenceNo
+      - metadata
+      - createdAt
+      - updatedAt
+      - currency
   securitySchemes:
     access-token:
       scheme: bearer

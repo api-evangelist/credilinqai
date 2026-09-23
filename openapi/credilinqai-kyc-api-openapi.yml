@@ -1,6 +1,6 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
-  title: CrediLinq Authentication KYC API
+  title: CrediLinq KYC API
   description: 'CrediLinq embedded finance API: B2B PayLater and GMV Financing for platforms and marketplaces. Covers Auth0 token generation, merchant onboarding and eligibility, customer and director KYC, credit line and loan (drawdown) management, payments and reconciliation, reporting, and demographic reference data.'
   version: '1.0'
   contact:
@@ -399,6 +399,379 @@ paths:
       - access-token: []
 components:
   schemas:
+    KYCDetailsResponse:
+      type: object
+      properties:
+        statusCode:
+          type: number
+          default: 200
+          description: The HTTP status code of the error
+        data:
+          description: Response Data from the operation
+          allOf:
+          - $ref: '#/components/schemas/KycDetailsAggResponse'
+        message:
+          type: string
+          default: Success
+          description: Human-readable message containing all available details about the operation
+        success:
+          type: boolean
+          default: true
+          description: A boolean indicating whether this was a success response or an error response
+      required:
+      - statusCode
+      - data
+      - message
+      - success
+    KycDetailsDirectorResponse:
+      type: object
+      properties:
+        directorId:
+          type: string
+          default: string
+          description: Id of the director
+        status:
+          type: string
+          description: Director Status
+          example: active
+          enum:
+          - active
+          - inactive
+        directorName:
+          type: string
+          default: string
+          description: Name of the director.
+        email:
+          type: string
+          default: string
+          description: Email address of director.
+        mobileNo:
+          type: string
+          default: string
+          description: Contact phone number of director.
+        shareholding:
+          type: string
+          default: string
+          description: The amount of shares that director owns in a company or business
+        personalIdentificationNumber:
+          type: string
+          default: string
+          description: Personal identification number.
+        address:
+          type: string
+          default: string
+          description: Address of director.
+        country:
+          type: string
+          default: string
+          description: Country of director.
+        zipCode:
+          type: string
+          default: string
+          description: ZipCode/PinCode for address.
+        state:
+          type: string
+          default: string
+          description: State of the director
+        district:
+          type: string
+          default: string
+          description: District of the director
+        city:
+          type: string
+          default: string
+          description: City of the director
+        area:
+          type: string
+          default: string
+          description: Area of the director
+        street:
+          type: string
+          default: string
+          description: Street of the director
+        documents:
+          $ref: '#/components/schemas/KycDetailsDocumentsResponse'
+      required:
+      - directorId
+      - directorName
+      - email
+      - mobileNo
+      - shareholding
+      - personalIdentificationNumber
+      - address
+      - country
+      - zipCode
+      - state
+      - district
+      - city
+      - area
+      - street
+      - documents
+    DirectorKYC:
+      type: object
+      properties:
+        applicationId:
+          type: string
+          default: string
+          description: Id of the application
+        businessId:
+          type: string
+          default: string
+          description: Id of the business
+        directorId:
+          type: string
+          default: string
+          description: Id of the director
+      required:
+      - applicationId
+      - businessId
+      - directorId
+    ForbiddenResponse:
+      type: object
+      properties:
+        statusCode:
+          type: number
+          default: 403
+          description: The HTTP status code of the error
+        error:
+          type: string
+          default: string
+          description: Human-readable generic error message
+        errorCode:
+          type: string
+          default: E_FORBIDDEN
+          description: Computer-readable code for error handling
+        message:
+          type: string
+          default: string
+          description: Human-readable error message containing all available details about how the error occurred
+        success:
+          type: boolean
+          default: false
+          description: A boolean indicating whether this was a success response or an error response
+      required:
+      - statusCode
+      - error
+      - errorCode
+      - message
+      - success
+    AddBusinessKycDTO:
+      type: object
+      properties:
+        customerReferenceNo:
+          type: string
+          default: ''
+          example: c3eb1619-ff24-4773-97d8-b05264621e60
+          description: Customer reference number
+        customerName:
+          type: string
+          description: "Customer or a Company's Full Name.\n - ``` /^(?:(?=^.*([0-9]|[a-z]|[A-Z]))(([0-9]|[a-z]|[A-Z]))|([0-9]|[a-z]|[A-Z]))/g ```\n \n Shouldn't match:\n - ```/^\\d+$/```\n\n - ```/^[\\W_]+$/```"
+          default: ''
+          example: John Doe
+        customerEmail:
+          type: string
+          description: "Email address of Customer/company which is used for login to B2B PayLater portal.\n    \n - Email address which was used to check eligibility and initiate application. \n    \n - Should be valid email."
+          example: johndoe2@gmail.com
+          default: ''
+        companyRegistrationNo:
+          type: string
+          default: ''
+          example: 1111111ET
+          description: "Registration number with which company is registered.\n - ``` /^[A-Za-z0-9/-]+$/ ```"
+        companyRegistrationDate:
+          type: string
+          description: Company Registration Date is a date at which company is registered. Supported Date Formats (DD-MM-YYYY/DD MMM YYYY)
+          example: 13-07-2023
+          default: ''
+        incorporationCountry:
+          type: string
+          default: ''
+          example: Singapore
+          description: "Country of incorporation for company.\n \n Shouldn't match:\n - ```/^\\d+$/```\n\n - ```/^[\\W_]+$/```"
+        industry:
+          type: string
+          default: ''
+          enum:
+          - Agriculture / Fishing / Food Production
+          - Building and Construction - Private Sector
+          - Building and Construction - Public Sector
+          - Education
+          - Energy - generation and distribution
+          - Health & Human Services
+          - IT services
+          - Manufacturing
+          - Manufacturing - computer & electronics
+          - Manufacturing - consumer related
+          - Media
+          - Other
+          - Renewable
+          - Retail Trading
+          - Service Sector - F&B
+          - Service Sector - non-F&B
+          - Transport & Logistics
+          - Wholesale Trader
+          description: Industry indicates the type of activity in which company is involved. For eg. Travel, Media, Manufacuring etc
+          example: IT services
+        address:
+          type: string
+          default: ''
+          example: 100 North St, Singapore
+          description: "Address of company.\n - ``` /^(?:(?=^.*([0-9]|[a-z]|[A-Z]))(([0-9]|[a-z]|[A-Z]))|([0-9]|[a-z]|[A-Z]))/g ```\n \n Shouldn't match:\n - ```/^\\d+$/```\n\n - ```/^[\\W_]+$/```"
+        zipCode:
+          type: string
+          default: ''
+          example: '155010'
+          description: "ZipCode/PinCode for address.\n - ``` /^[A-Za-z0-9]+$/ ```\n \n Shouldn't match:\n - ```/^[\\W_]+$/```"
+        state:
+          type: string
+          example: Central Region
+          default: ''
+          description: "State in which company is located.\n \n Shouldn't match:\n - ```/^\\d+$/```\n\n - ```/^[\\W_]+$/```"
+        district:
+          type: string
+          example: Bedok
+          default: ''
+          description: "District in which company is located.\n \n Shouldn't match:\n - ```/^\\d+$/```\n\n - ```/^[\\W_]+$/```"
+        city:
+          type: string
+          example: Downtown
+          default: ''
+          description: "City in which company is located.\n \n Shouldn't match:\n - ```/^\\d+$/```\n\n - ```/^[\\W_]+$/```"
+        area:
+          type: string
+          example: PC garden
+          default: ''
+          description: "Area in which company is located.\n \n Shouldn't match:\n - ```/^\\d+$/```\n\n - ```/^[\\W_]+$/```"
+        street:
+          type: string
+          example: SD School St
+          default: ''
+          description: "Street in which company is located.\n \n Shouldn't match:\n - ```/^\\d+$/```\n\n - ```/^[\\W_]+$/```"
+        country:
+          type: string
+          default: ''
+          example: Singapore
+          description: "Country in which company is located.\n \n Shouldn't match:\n - ```/^\\d+$/```\n\n - ```/^[\\W_]+$/```"
+        mobileNo:
+          type: string
+          default: ''
+          example: '+6578787141'
+          description: "Company/Customer's Mobile number along with country code.\n - ```<= 15 characters```\n - ``` /^(\\+\\d{1,4}[-. ]?)?(\\()?\\d{3}(\\))?[-. ]?\\d{3}[-. ]?\\d{3,4}$/```"
+        companyDescription:
+          type: string
+          default: ''
+          example: An Insurance company...
+          description: "Some description of company\n \n Shouldn't match:\n - ```/^\\d+$/```\n\n - ```/^[\\W_]+$/```"
+        taxIdNumber:
+          type: string
+          default: ''
+          example: '12155154'
+          description: "Registered tax identifixation number for company\n - ``` /^[A-Za-z0-9+-]+$/ ```\n \n Shouldn't match:\n - ```/^[a-z]+$/i```\n\n - ```/^[\\W_]+$/```"
+        bankName:
+          type: string
+          default: ''
+          example: DBS Bank
+          description: "Bank name where company account is.\n \n Shouldn't match:\n - ```/^\\d+$/```\n\n - ```/^[\\W_]+$/```"
+        bankAccountNumber:
+          type: number
+          default: ''
+          example: 7818154515215451
+          description: Account number of company account.
+        bankSwiftCode:
+          type: string
+          example: '78948142'
+          default: ''
+          description: "Bank Swift code.\n - ``` /^[A-Za-z0-9]+$/ ```\n \n Shouldn't match:\n - ```/^[\\W_]+$/```"
+        bankAccountName:
+          type: string
+          default: ''
+          example: HEALTHIFY INC.
+          description: "Bank Account Name.\n \n Shouldn't match:\n - ```/^\\d+$/```\n\n - ```/^[\\W_]+$/```"
+        bankAddress:
+          type: string
+          example: 78 South Region, Singapore
+          default: ''
+          description: "Bank Address.\n \n Shouldn't match:\n - ```/^\\d+$/```\n\n - ```/^[\\W_]+$/```"
+        intermediaryBankName:
+          type: string
+          default: ''
+          example: DBS Bank
+          description: "Intermediary Bank Name where company account is.\n \n Shouldn't match:\n - ```/^\\d+$/```\n\n - ```/^[\\W_]+$/```"
+        intermediaryBankSWIFTCode:
+          type: string
+          default: ''
+          example: '78948142'
+          description: "Intermediary Bank Swift code.\n - ``` /^[A-Za-z0-9]+$/ ```\n \n Shouldn't match:\n - ```/^[\\W_]+$/```"
+        wireRemittanceRouteNumber:
+          type: string
+          default: ''
+          example: 074000078
+          description: "Wire Remittance Route Number.\n - ```<= 20 characters```\n - ``` /^\\d+$/```"
+        achRoutingNumber:
+          type: string
+          default: ''
+          example: 074000078
+          description: "ACH Routing Number.\n - ```<= 20 characters```\n - ``` /^\\d+$/```"
+        files:
+          description: Customer KYC Documents
+          type: array
+          items:
+            type: string
+            format: binary
+        applicationId:
+          type: string
+          default: ''
+          example: d8eb1219-gg24-4773-97d8-b05264621e60
+          description: Application Id
+      required:
+      - customerReferenceNo
+      - customerName
+      - customerEmail
+      - companyRegistrationNo
+      - companyRegistrationDate
+      - incorporationCountry
+      - industry
+      - address
+      - zipCode
+      - state
+      - district
+      - city
+      - area
+      - country
+      - mobileNo
+      - companyDescription
+      - taxIdNumber
+      - files
+      - applicationId
+    UnauthorizedResponse:
+      type: object
+      properties:
+        statusCode:
+          type: number
+          default: 401
+          description: The HTTP status code of the error
+        error:
+          type: string
+          default: string
+          description: Human-readable generic error message
+        errorCode:
+          type: string
+          default: E_UNAUTHORIZED
+          description: Computer-readable code for error handling
+        message:
+          type: string
+          default: string
+          description: Human-readable error message containing all available details about how the error occurred
+        success:
+          type: boolean
+          default: false
+          description: A boolean indicating whether this was a success response or an error response
+      required:
+      - statusCode
+      - error
+      - errorCode
+      - message
+      - success
     UpdateBusinessKycDTO:
       type: object
       properties:
@@ -584,378 +957,49 @@ components:
       - applicationId
       - dataConsent
       - business
-    CustomerKYCResponse:
-      type: object
-      properties:
-        statusCode:
-          type: number
-          default: 200
-          description: The HTTP status code of the error
-        data:
-          description: Response Data from the operation
-          allOf:
-          - $ref: '#/components/schemas/CustomerKYC'
-        message:
-          type: string
-          default: Success
-          description: Human-readable message containing all available details about the operation
-        success:
-          type: boolean
-          default: true
-          description: A boolean indicating whether this was a success response or an error response
-      required:
-      - statusCode
-      - data
-      - message
-      - success
-    KycDetailsDirectorResponse:
-      type: object
-      properties:
-        directorId:
-          type: string
-          default: string
-          description: Id of the director
-        status:
-          type: string
-          description: Director Status
-          example: active
-          enum:
-          - active
-          - inactive
-        directorName:
-          type: string
-          default: string
-          description: Name of the director.
-        email:
-          type: string
-          default: string
-          description: Email address of director.
-        mobileNo:
-          type: string
-          default: string
-          description: Contact phone number of director.
-        shareholding:
-          type: string
-          default: string
-          description: The amount of shares that director owns in a company or business
-        personalIdentificationNumber:
-          type: string
-          default: string
-          description: Personal identification number.
-        address:
-          type: string
-          default: string
-          description: Address of director.
-        country:
-          type: string
-          default: string
-          description: Country of director.
-        zipCode:
-          type: string
-          default: string
-          description: ZipCode/PinCode for address.
-        state:
-          type: string
-          default: string
-          description: State of the director
-        district:
-          type: string
-          default: string
-          description: District of the director
-        city:
-          type: string
-          default: string
-          description: City of the director
-        area:
-          type: string
-          default: string
-          description: Area of the director
-        street:
-          type: string
-          default: string
-          description: Street of the director
-        documents:
-          $ref: '#/components/schemas/KycDetailsDocumentsResponse'
-      required:
-      - directorId
-      - directorName
-      - email
-      - mobileNo
-      - shareholding
-      - personalIdentificationNumber
-      - address
-      - country
-      - zipCode
-      - state
-      - district
-      - city
-      - area
-      - street
-      - documents
-    KYCDetailsResponse:
-      type: object
-      properties:
-        statusCode:
-          type: number
-          default: 200
-          description: The HTTP status code of the error
-        data:
-          description: Response Data from the operation
-          allOf:
-          - $ref: '#/components/schemas/KycDetailsAggResponse'
-        message:
-          type: string
-          default: Success
-          description: Human-readable message containing all available details about the operation
-        success:
-          type: boolean
-          default: true
-          description: A boolean indicating whether this was a success response or an error response
-      required:
-      - statusCode
-      - data
-      - message
-      - success
-    KycDetails:
+    IndividualKYC:
       type: object
       properties:
         applicationId:
           type: string
           default: string
           description: Id of the application
-      required:
-      - applicationId
-    SendForKycReviewDto:
-      type: object
-      properties:
-        applicationId:
-          type: string
-          default: ''
-          example: d8eb1219-gg24-4773-97d8-b05264621e60
-          description: Application Id
-        kycType:
-          type: string
-          default: business
-          example: individual
-          description: individual | business
-      required:
-      - applicationId
-    UpdateIndividualKycDTO:
-      type: object
-      properties:
-        customerReferenceNo:
-          type: string
-          default: ''
-          example: c3eb1619-ff24-4773-97d8-b05264621e60
-          description: Customer reference number
-        businessName:
-          type: string
-          description: "Business Name\n \n Shouldn't match:\n - ```/^\\d+$/```\n\n - ```/^[\\W_]+$/```"
-          default: ''
-        industry:
-          type: string
-          default: ''
-          enum:
-          - Agriculture / Fishing / Food Production
-          - Building and Construction - Private Sector
-          - Building and Construction - Public Sector
-          - Education
-          - Energy - generation and distribution
-          - Health & Human Services
-          - IT services
-          - Manufacturing
-          - Manufacturing - computer & electronics
-          - Manufacturing - consumer related
-          - Media
-          - Other
-          - Renewable
-          - Retail Trading
-          - Service Sector - F&B
-          - Service Sector - non-F&B
-          - Transport & Logistics
-          - Wholesale Trader
-          description: Industry indicates the type of activity in which company is involved. For eg. Travel, Media, Manufacuring etc
-          example: IT services
-        businessAddress:
-          type: string
-          default: ''
-          example: 45 West Region, Singpoare
-          description: "Address of business. This could be same address as owner address\n \n Shouldn't match:\n - ```/^\\d+$/```\n\n - ```/^[\\W_]+$/```"
-        businessArea:
-          type: string
-          example: PC garden
-          default: ''
-          description: "Area of the business\n \n Shouldn't match:\n - ```/^\\d+$/```\n\n - ```/^[\\W_]+$/```"
-        businessStreet:
-          type: string
-          example: SD School St
-          default: ''
-          description: "Street in which company is located.\n \n Shouldn't match:\n - ```/^\\d+$/```\n\n - ```/^[\\W_]+$/```"
-        businessZipCode:
-          type: string
-          default: ''
-          example: '79581'
-          description: "ZipCode/PinCode for address.\n \n Shouldn't match:\n - ```/^[\\W_]+$/```"
-        businessState:
-          type: string
-          example: Central Region
-          default: ''
-          description: "State of the business\n \n Shouldn't match:\n - ```/^\\d+$/```\n\n - ```/^[\\W_]+$/```"
-        businessDistrict:
-          type: string
-          example: Bedok
-          default: ''
-          description: "District of the business\n \n Shouldn't match:\n - ```/^\\d+$/```\n\n - ```/^[\\W_]+$/```"
-        businessCity:
-          type: string
-          example: Downtown
-          default: ''
-          description: "City of the business\n \n Shouldn't match:\n - ```/^\\d+$/```\n\n - ```/^[\\W_]+$/```"
-        businessDescription:
-          type: string
-          default: ''
-          example: An Insurance company...
-          description: "Some description of company\n \n Shouldn't match:\n - ```/^\\d+$/```\n\n - ```/^[\\W_]+$/```"
-        businessMobileNumber:
-          type: string
-          default: ''
-          example: '+6578787141'
-          description: "Company/Customer's Mobile number along with country code.\n - ```<= 15 characters```\n - ``` /^(\\+\\d{1,4}[-. ]?)?(\\()?\\d{3}(\\))?[-. ]?\\d{3}[-. ]?\\d{3,4}$/```"
-        bankName:
-          type: string
-          default: ''
-          example: DBS Bank
-          description: "Bank name where company account is.\n \n Shouldn't match:\n - ```/^\\d+$/```\n\n - ```/^[\\W_]+$/```"
-        bankAccountNumber:
-          type: number
-          default: ''
-          example: 7818154515215451
-          description: Account number of company account.
-        bankSwiftCode:
-          type: string
-          example: '78948142'
-          default: ''
-          description: "Bank Swift code.\n - ``` /^[A-Za-z0-9]+$/ ```\n \n Shouldn't match:\n - ```/^[\\W_]+$/```"
-        bankAccountName:
-          type: string
-          default: ''
-          example: HEALTHIFY INC.
-          description: "Bank Account Name.\n \n Shouldn't match:\n - ```/^\\d+$/```\n\n - ```/^[\\W_]+$/```"
-        bankAddress:
-          type: string
-          example: 78 South Region, Singapore
-          default: ''
-          description: "Bank Address.\n \n Shouldn't match:\n - ```/^\\d+$/```\n\n - ```/^[\\W_]+$/```"
-        intermediaryBankName:
-          type: string
-          default: ''
-          example: DBS Bank
-          description: "Intermediary Bank Name where company account is.\n \n Shouldn't match:\n - ```/^\\d+$/```\n\n - ```/^[\\W_]+$/```"
-        intermediaryBankSWIFTCode:
-          type: string
-          default: ''
-          example: '78948142'
-          description: "Intermediary Bank Swift code.\n - ``` /^[A-Za-z0-9]+$/ ```\n \n Shouldn't match:\n - ```/^[\\W_]+$/```"
-        wireRemittanceRouteNumber:
-          type: number
-          default: ''
-          example: 074000078
-          description: "Wire Remittance Route Number.\n - ```<= 20 characters```\n - ``` /^\\d+$/```"
-        achRoutingNumber:
-          type: number
-          default: ''
-          example: 074000078
-          description: "ACH Routing Number.\n - ```<= 20 characters```\n - ``` /^\\d+$/```"
-        fullName:
-          type: string
-          default: ''
-          example: Marques Brownlee
-          description: "Name of the owner.\n \n Shouldn't match:\n - ```/^\\d+$/```\n\n - ```/^[\\W_]+$/```"
-        email:
-          type: string
-          example: m.brownlee@healthify.com
-          default: ''
-          description: Email address of owner.
-        numberOfShareholding:
-          type: string
-          description: The amount of shares that owner owns in a company or business
-          example: '10'
-        ownerStatus:
-          type: string
-          description: Owner Status
-          example: active
-          enum:
-          - active
-          - inactive
-        personalIdentificationNumber:
-          type: string
-          example: B88964115515A
-          description: "Personal identification number.\n - ``` /^[A-Za-z0-9+-]+$/ ```\n \n Shouldn't match:\n - ```/^[\\W_]+$/```"
-        ownersResidentialAddress:
-          type: string
-          default: ''
-          example: 45 West Region, Singpoare
-          description: "Address of owner.\n \n Shouldn't match:\n - ```/^\\d+$/```\n\n - ```/^[\\W_]+$/```"
-        ownerArea:
-          type: string
-          example: PC garden
-          default: ''
-          description: "Area of the owner\n \n Shouldn't match:\n - ```/^\\d+$/```\n\n - ```/^[\\W_]+$/```"
-        ownerStreet:
-          type: string
-          example: SD School St
-          default: ''
-          description: "Street in which owner is located.\n \n Shouldn't match:\n - ```/^\\d+$/```\n\n - ```/^[\\W_]+$/```"
-        ownerZipCode:
-          type: string
-          default: ''
-          example: '79581'
-          description: "ZipCode/PinCode for address.\n \n Shouldn't match:\n - ```/^[\\W_]+$/```"
-        ownerState:
-          type: string
-          example: Central Region
-          default: ''
-          description: "State of the owner\n \n Shouldn't match:\n - ```/^\\d+$/```\n\n - ```/^[\\W_]+$/```"
-        ownerDistrict:
-          type: string
-          example: Bedok
-          default: ''
-          description: "District of the owner\n \n Shouldn't match:\n - ```/^\\d+$/```\n\n - ```/^[\\W_]+$/```"
-        ownerCity:
-          type: string
-          example: Downtown
-          default: ''
-          description: "City of the owner\n \n Shouldn't match:\n - ```/^\\d+$/```\n\n - ```/^[\\W_]+$/```"
-        ownerMobileNumber:
-          type: string
-          default: ''
-          example: '+6578787141'
-          description: "Owner's Mobile number along with country code.\n - ```<= 15 characters```\n - ``` /^(\\+\\d{1,4}[-. ]?)?(\\()?\\d{3}(\\))?[-. ]?\\d{3}[-. ]?\\d{3,4}$/```"
-        files:
-          description: KYC Documents
-          type: array
-          items:
-            type: string
-            format: binary
-        applicationId:
-          type: string
-          default: ''
-          example: d8eb1219-gg24-4773-97d8-b05264621e60
-          description: Application Id
         businessId:
           type: string
-          default: ''
-          example: d8eb1219-gg24-4773-97d8-b05264621e60
-          description: Business Id
+          default: string
+          description: Id of the business
         directorId:
           type: string
-          default: ''
-          example: d8eb1219-gg24-4773-97d8-b05264621e60
-          description: Director Id
+          default: string
+          description: Id of the director
       required:
       - applicationId
       - businessId
       - directorId
+    IndividualCustomerKYCResponse:
+      type: object
+      properties:
+        statusCode:
+          type: number
+          default: 200
+          description: The HTTP status code of the error
+        data:
+          description: Response Data from the operation
+          allOf:
+          - $ref: '#/components/schemas/IndividualKYC'
+        message:
+          type: string
+          default: Success
+          description: Human-readable message containing all available details about the operation
+        success:
+          type: boolean
+          default: true
+          description: A boolean indicating whether this was a success response or an error response
+      required:
+      - statusCode
+      - data
+      - message
+      - success
     KycApprovalSubmitResponse:
       type: object
       properties:
@@ -980,157 +1024,35 @@ components:
       - data
       - message
       - success
-    IndividualKYC:
+    KycDetailsDocumentsResponse:
       type: object
       properties:
-        applicationId:
+        createdAt:
+          type: string
+          default: '2025-01-08T05:12:18.005Z'
+          description: Created Timestamp of the payment in UTC Format eg. 2023-03-30T11:46:42.195Z
+        updatedAt:
+          type: string
+          default: '2025-01-08T05:12:18.005Z'
+          description: Updated Timestamp of the payment in UTC Format eg. 2023-03-30T11:46:42.195Z
+        documentId:
           type: string
           default: string
-          description: Id of the application
-        businessId:
+          description: Id of the document
+        fileName:
           type: string
           default: string
-          description: Id of the business
-        directorId:
+          description: Name of the document.
+        type:
           type: string
           default: string
-          description: Id of the director
+          description: Type of document Eg:(Passport or Utility Bill etc.)
       required:
-      - applicationId
-      - businessId
-      - directorId
-    AddDirectorKycDTO:
-      type: object
-      properties:
-        directorName:
-          type: string
-          default: ''
-          example: Marques Brownlee
-          description: "Name of the director.\n \n Shouldn't match:\n - ```/^\\d+$/```\n\n - ```/^[\\W_]+$/```"
-        personalIdentificationNumber:
-          type: string
-          default: ''
-          example: B88964115515A
-          description: "Personal identification number.\n - ``` /^[A-Za-z0-9+-]+$/ ```\n \n Shouldn't match:\n - ```/^[\\W_]+$/```"
-        shareholding:
-          type: string
-          description: The amount of shares that director owns in a company or business
-          example: '10'
-        email:
-          type: string
-          example: m.brownlee@healthify.com
-          default: ''
-          description: Email address of director.
-        address:
-          type: string
-          default: ''
-          example: 45 West Region, Singpoare
-          description: "Address of director.\n \n Shouldn't match:\n - ```/^\\d+$/```\n\n - ```/^[\\W_]+$/```"
-        zipCode:
-          type: string
-          default: ''
-          example: '79581'
-          description: "ZipCode/PinCode for address.\n \n Shouldn't match:\n - ```/^[\\W_]+$/```"
-        state:
-          type: string
-          example: Central Region
-          default: ''
-          description: "State of the director\n \n Shouldn't match:\n - ```/^\\d+$/```\n\n - ```/^[\\W_]+$/```"
-        district:
-          type: string
-          example: Bedok
-          default: ''
-          description: "District of the director\n \n Shouldn't match:\n - ```/^\\d+$/```\n\n - ```/^[\\W_]+$/```"
-        city:
-          type: string
-          example: Downtown
-          default: ''
-          description: "City of the director\n \n Shouldn't match:\n - ```/^\\d+$/```\n\n - ```/^[\\W_]+$/```"
-        area:
-          type: string
-          example: PC garden
-          default: ''
-          description: "Area of the director\n \n Shouldn't match:\n - ```/^\\d+$/```\n\n - ```/^[\\W_]+$/```"
-        street:
-          type: string
-          example: SD School St
-          default: ''
-          description: "Street in which director is located.\n \n Shouldn't match:\n - ```/^\\d+$/```\n\n - ```/^[\\W_]+$/```"
-        phone:
-          type: string
-          default: ''
-          example: '+6545457414'
-          description: "Contact phone number of director.\n \n Shouldn't match:\n - ```/^[\\W_]+$/```"
-        country:
-          type: string
-          default: ''
-          example: Singapore
-          description: "Country of director.\n \n Shouldn't match:\n - ```/^\\d+$/```\n\n - ```/^[\\W_]+$/```"
-        files:
-          description: Director KYC Documents
-          type: array
-          items:
-            type: string
-            format: binary
-        status:
-          type: string
-          description: Director Status
-          example: active
-          enum:
-          - active
-          - inactive
-        applicationId:
-          type: string
-          default: ''
-          example: d8eb1219-gg24-4773-97d8-b05264621e60
-          description: Application Id
-        businessId:
-          type: string
-          default: ''
-          example: d8eb1219-gg24-4773-97d8-b05264621e60
-          description: Business Id
-      required:
-      - directorName
-      - personalIdentificationNumber
-      - shareholding
-      - email
-      - address
-      - zipCode
-      - state
-      - phone
-      - country
-      - status
-      - applicationId
-      - businessId
-    UnauthorizedResponse:
-      type: object
-      properties:
-        statusCode:
-          type: number
-          default: 401
-          description: The HTTP status code of the error
-        error:
-          type: string
-          default: string
-          description: Human-readable generic error message
-        errorCode:
-          type: string
-          default: E_UNAUTHORIZED
-          description: Computer-readable code for error handling
-        message:
-          type: string
-          default: string
-          description: Human-readable error message containing all available details about how the error occurred
-        success:
-          type: boolean
-          default: false
-          description: A boolean indicating whether this was a success response or an error response
-      required:
-      - statusCode
-      - error
-      - errorCode
-      - message
-      - success
+      - createdAt
+      - updatedAt
+      - documentId
+      - fileName
+      - type
     UpdateDirectorKycDTO:
       type: object
       properties:
@@ -1229,6 +1151,35 @@ components:
       - applicationId
       - businessId
       - directorId
+    CustomerKYC:
+      type: object
+      properties:
+        applicationId:
+          type: string
+          default: string
+          description: Id of the application
+        businessId:
+          type: string
+          default: string
+          description: Id of the business
+      required:
+      - applicationId
+      - businessId
+    SendForKycReviewDto:
+      type: object
+      properties:
+        applicationId:
+          type: string
+          default: ''
+          example: d8eb1219-gg24-4773-97d8-b05264621e60
+          description: Application Id
+        kycType:
+          type: string
+          default: business
+          example: individual
+          description: individual | business
+      required:
+      - applicationId
     AddIndividualKycDTO:
       type: object
       properties:
@@ -1458,33 +1409,131 @@ components:
       - ownerMobileNumber
       - files
       - applicationId
-    ForbiddenResponse:
+    AddDirectorKycDTO:
+      type: object
+      properties:
+        directorName:
+          type: string
+          default: ''
+          example: Marques Brownlee
+          description: "Name of the director.\n \n Shouldn't match:\n - ```/^\\d+$/```\n\n - ```/^[\\W_]+$/```"
+        personalIdentificationNumber:
+          type: string
+          default: ''
+          example: B88964115515A
+          description: "Personal identification number.\n - ``` /^[A-Za-z0-9+-]+$/ ```\n \n Shouldn't match:\n - ```/^[\\W_]+$/```"
+        shareholding:
+          type: string
+          description: The amount of shares that director owns in a company or business
+          example: '10'
+        email:
+          type: string
+          example: m.brownlee@healthify.com
+          default: ''
+          description: Email address of director.
+        address:
+          type: string
+          default: ''
+          example: 45 West Region, Singpoare
+          description: "Address of director.\n \n Shouldn't match:\n - ```/^\\d+$/```\n\n - ```/^[\\W_]+$/```"
+        zipCode:
+          type: string
+          default: ''
+          example: '79581'
+          description: "ZipCode/PinCode for address.\n \n Shouldn't match:\n - ```/^[\\W_]+$/```"
+        state:
+          type: string
+          example: Central Region
+          default: ''
+          description: "State of the director\n \n Shouldn't match:\n - ```/^\\d+$/```\n\n - ```/^[\\W_]+$/```"
+        district:
+          type: string
+          example: Bedok
+          default: ''
+          description: "District of the director\n \n Shouldn't match:\n - ```/^\\d+$/```\n\n - ```/^[\\W_]+$/```"
+        city:
+          type: string
+          example: Downtown
+          default: ''
+          description: "City of the director\n \n Shouldn't match:\n - ```/^\\d+$/```\n\n - ```/^[\\W_]+$/```"
+        area:
+          type: string
+          example: PC garden
+          default: ''
+          description: "Area of the director\n \n Shouldn't match:\n - ```/^\\d+$/```\n\n - ```/^[\\W_]+$/```"
+        street:
+          type: string
+          example: SD School St
+          default: ''
+          description: "Street in which director is located.\n \n Shouldn't match:\n - ```/^\\d+$/```\n\n - ```/^[\\W_]+$/```"
+        phone:
+          type: string
+          default: ''
+          example: '+6545457414'
+          description: "Contact phone number of director.\n \n Shouldn't match:\n - ```/^[\\W_]+$/```"
+        country:
+          type: string
+          default: ''
+          example: Singapore
+          description: "Country of director.\n \n Shouldn't match:\n - ```/^\\d+$/```\n\n - ```/^[\\W_]+$/```"
+        files:
+          description: Director KYC Documents
+          type: array
+          items:
+            type: string
+            format: binary
+        status:
+          type: string
+          description: Director Status
+          example: active
+          enum:
+          - active
+          - inactive
+        applicationId:
+          type: string
+          default: ''
+          example: d8eb1219-gg24-4773-97d8-b05264621e60
+          description: Application Id
+        businessId:
+          type: string
+          default: ''
+          example: d8eb1219-gg24-4773-97d8-b05264621e60
+          description: Business Id
+      required:
+      - directorName
+      - personalIdentificationNumber
+      - shareholding
+      - email
+      - address
+      - zipCode
+      - state
+      - phone
+      - country
+      - status
+      - applicationId
+      - businessId
+    DirectorKYCResponse:
       type: object
       properties:
         statusCode:
           type: number
-          default: 403
+          default: 200
           description: The HTTP status code of the error
-        error:
-          type: string
-          default: string
-          description: Human-readable generic error message
-        errorCode:
-          type: string
-          default: E_FORBIDDEN
-          description: Computer-readable code for error handling
+        data:
+          description: Response Data from the operation
+          allOf:
+          - $ref: '#/components/schemas/DirectorKYC'
         message:
           type: string
-          default: string
-          description: Human-readable error message containing all available details about how the error occurred
+          default: Success
+          description: Human-readable message containing all available details about the operation
         success:
           type: boolean
-          default: false
+          default: true
           description: A boolean indicating whether this was a success response or an error response
       required:
       - statusCode
-      - error
-      - errorCode
+      - data
       - message
       - success
     InternalErrorResponse:
@@ -1516,79 +1565,7 @@ components:
       - errorCode
       - message
       - success
-    DirectorKYC:
-      type: object
-      properties:
-        applicationId:
-          type: string
-          default: string
-          description: Id of the application
-        businessId:
-          type: string
-          default: string
-          description: Id of the business
-        directorId:
-          type: string
-          default: string
-          description: Id of the director
-      required:
-      - applicationId
-      - businessId
-      - directorId
-    IndividualCustomerKYCResponse:
-      type: object
-      properties:
-        statusCode:
-          type: number
-          default: 200
-          description: The HTTP status code of the error
-        data:
-          description: Response Data from the operation
-          allOf:
-          - $ref: '#/components/schemas/IndividualKYC'
-        message:
-          type: string
-          default: Success
-          description: Human-readable message containing all available details about the operation
-        success:
-          type: boolean
-          default: true
-          description: A boolean indicating whether this was a success response or an error response
-      required:
-      - statusCode
-      - data
-      - message
-      - success
-    KycDetailsDocumentsResponse:
-      type: object
-      properties:
-        createdAt:
-          type: string
-          default: '2025-01-08T05:12:18.005Z'
-          description: Created Timestamp of the payment in UTC Format eg. 2023-03-30T11:46:42.195Z
-        updatedAt:
-          type: string
-          default: '2025-01-08T05:12:18.005Z'
-          description: Updated Timestamp of the payment in UTC Format eg. 2023-03-30T11:46:42.195Z
-        documentId:
-          type: string
-          default: string
-          description: Id of the document
-        fileName:
-          type: string
-          default: string
-          description: Name of the document.
-        type:
-          type: string
-          default: string
-          description: Type of document Eg:(Passport or Utility Bill etc.)
-      required:
-      - createdAt
-      - updatedAt
-      - documentId
-      - fileName
-      - type
-    AddBusinessKycDTO:
+    UpdateIndividualKycDTO:
       type: object
       properties:
         customerReferenceNo:
@@ -1596,31 +1573,10 @@ components:
           default: ''
           example: c3eb1619-ff24-4773-97d8-b05264621e60
           description: Customer reference number
-        customerName:
+        businessName:
           type: string
-          description: "Customer or a Company's Full Name.\n - ``` /^(?:(?=^.*([0-9]|[a-z]|[A-Z]))(([0-9]|[a-z]|[A-Z]))|([0-9]|[a-z]|[A-Z]))/g ```\n \n Shouldn't match:\n - ```/^\\d+$/```\n\n - ```/^[\\W_]+$/```"
+          description: "Business Name\n \n Shouldn't match:\n - ```/^\\d+$/```\n\n - ```/^[\\W_]+$/```"
           default: ''
-          example: John Doe
-        customerEmail:
-          type: string
-          description: "Email address of Customer/company which is used for login to B2B PayLater portal.\n    \n - Email address which was used to check eligibility and initiate application. \n    \n - Should be valid email."
-          example: johndoe2@gmail.com
-          default: ''
-        companyRegistrationNo:
-          type: string
-          default: ''
-          example: 1111111ET
-          description: "Registration number with which company is registered.\n - ``` /^[A-Za-z0-9/-]+$/ ```"
-        companyRegistrationDate:
-          type: string
-          description: Company Registration Date is a date at which company is registered. Supported Date Formats (DD-MM-YYYY/DD MMM YYYY)
-          example: 13-07-2023
-          default: ''
-        incorporationCountry:
-          type: string
-          default: ''
-          example: Singapore
-          description: "Country of incorporation for company.\n \n Shouldn't match:\n - ```/^\\d+$/```\n\n - ```/^[\\W_]+$/```"
         industry:
           type: string
           default: ''
@@ -1645,61 +1601,51 @@ components:
           - Wholesale Trader
           description: Industry indicates the type of activity in which company is involved. For eg. Travel, Media, Manufacuring etc
           example: IT services
-        address:
+        businessAddress:
           type: string
           default: ''
-          example: 100 North St, Singapore
-          description: "Address of company.\n - ``` /^(?:(?=^.*([0-9]|[a-z]|[A-Z]))(([0-9]|[a-z]|[A-Z]))|([0-9]|[a-z]|[A-Z]))/g ```\n \n Shouldn't match:\n - ```/^\\d+$/```\n\n - ```/^[\\W_]+$/```"
-        zipCode:
-          type: string
-          default: ''
-          example: '155010'
-          description: "ZipCode/PinCode for address.\n - ``` /^[A-Za-z0-9]+$/ ```\n \n Shouldn't match:\n - ```/^[\\W_]+$/```"
-        state:
-          type: string
-          example: Central Region
-          default: ''
-          description: "State in which company is located.\n \n Shouldn't match:\n - ```/^\\d+$/```\n\n - ```/^[\\W_]+$/```"
-        district:
-          type: string
-          example: Bedok
-          default: ''
-          description: "District in which company is located.\n \n Shouldn't match:\n - ```/^\\d+$/```\n\n - ```/^[\\W_]+$/```"
-        city:
-          type: string
-          example: Downtown
-          default: ''
-          description: "City in which company is located.\n \n Shouldn't match:\n - ```/^\\d+$/```\n\n - ```/^[\\W_]+$/```"
-        area:
+          example: 45 West Region, Singpoare
+          description: "Address of business. This could be same address as owner address\n \n Shouldn't match:\n - ```/^\\d+$/```\n\n - ```/^[\\W_]+$/```"
+        businessArea:
           type: string
           example: PC garden
           default: ''
-          description: "Area in which company is located.\n \n Shouldn't match:\n - ```/^\\d+$/```\n\n - ```/^[\\W_]+$/```"
-        street:
+          description: "Area of the business\n \n Shouldn't match:\n - ```/^\\d+$/```\n\n - ```/^[\\W_]+$/```"
+        businessStreet:
           type: string
           example: SD School St
           default: ''
           description: "Street in which company is located.\n \n Shouldn't match:\n - ```/^\\d+$/```\n\n - ```/^[\\W_]+$/```"
-        country:
+        businessZipCode:
           type: string
           default: ''
-          example: Singapore
-          description: "Country in which company is located.\n \n Shouldn't match:\n - ```/^\\d+$/```\n\n - ```/^[\\W_]+$/```"
-        mobileNo:
+          example: '79581'
+          description: "ZipCode/PinCode for address.\n \n Shouldn't match:\n - ```/^[\\W_]+$/```"
+        businessState:
           type: string
+          example: Central Region
           default: ''
-          example: '+6578787141'
-          description: "Company/Customer's Mobile number along with country code.\n - ```<= 15 characters```\n - ``` /^(\\+\\d{1,4}[-. ]?)?(\\()?\\d{3}(\\))?[-. ]?\\d{3}[-. ]?\\d{3,4}$/```"
-        companyDescription:
+          description: "State of the business\n \n Shouldn't match:\n - ```/^\\d+$/```\n\n - ```/^[\\W_]+$/```"
+        businessDistrict:
+          type: string
+          example: Bedok
+          default: ''
+          description: "District of the business\n \n Shouldn't match:\n - ```/^\\d+$/```\n\n - ```/^[\\W_]+$/```"
+        businessCity:
+          type: string
+          example: Downtown
+          default: ''
+          description: "City of the business\n \n Shouldn't match:\n - ```/^\\d+$/```\n\n - ```/^[\\W_]+$/```"
+        businessDescription:
           type: string
           default: ''
           example: An Insurance company...
           description: "Some description of company\n \n Shouldn't match:\n - ```/^\\d+$/```\n\n - ```/^[\\W_]+$/```"
-        taxIdNumber:
+        businessMobileNumber:
           type: string
           default: ''
-          example: '12155154'
-          description: "Registered tax identifixation number for company\n - ``` /^[A-Za-z0-9+-]+$/ ```\n \n Shouldn't match:\n - ```/^[a-z]+$/i```\n\n - ```/^[\\W_]+$/```"
+          example: '+6578787141'
+          description: "Company/Customer's Mobile number along with country code.\n - ```<= 15 characters```\n - ``` /^(\\+\\d{1,4}[-. ]?)?(\\()?\\d{3}(\\))?[-. ]?\\d{3}[-. ]?\\d{3,4}$/```"
         bankName:
           type: string
           default: ''
@@ -1736,17 +1682,82 @@ components:
           example: '78948142'
           description: "Intermediary Bank Swift code.\n - ``` /^[A-Za-z0-9]+$/ ```\n \n Shouldn't match:\n - ```/^[\\W_]+$/```"
         wireRemittanceRouteNumber:
-          type: string
+          type: number
           default: ''
           example: 074000078
           description: "Wire Remittance Route Number.\n - ```<= 20 characters```\n - ``` /^\\d+$/```"
         achRoutingNumber:
-          type: string
+          type: number
           default: ''
           example: 074000078
           description: "ACH Routing Number.\n - ```<= 20 characters```\n - ``` /^\\d+$/```"
+        fullName:
+          type: string
+          default: ''
+          example: Marques Brownlee
+          description: "Name of the owner.\n \n Shouldn't match:\n - ```/^\\d+$/```\n\n - ```/^[\\W_]+$/```"
+        email:
+          type: string
+          example: m.brownlee@healthify.com
+          default: ''
+          description: Email address of owner.
+        numberOfShareholding:
+          type: string
+          description: The amount of shares that owner owns in a company or business
+          example: '10'
+        ownerStatus:
+          type: string
+          description: Owner Status
+          example: active
+          enum:
+          - active
+          - inactive
+        personalIdentificationNumber:
+          type: string
+          example: B88964115515A
+          description: "Personal identification number.\n - ``` /^[A-Za-z0-9+-]+$/ ```\n \n Shouldn't match:\n - ```/^[\\W_]+$/```"
+        ownersResidentialAddress:
+          type: string
+          default: ''
+          example: 45 West Region, Singpoare
+          description: "Address of owner.\n \n Shouldn't match:\n - ```/^\\d+$/```\n\n - ```/^[\\W_]+$/```"
+        ownerArea:
+          type: string
+          example: PC garden
+          default: ''
+          description: "Area of the owner\n \n Shouldn't match:\n - ```/^\\d+$/```\n\n - ```/^[\\W_]+$/```"
+        ownerStreet:
+          type: string
+          example: SD School St
+          default: ''
+          description: "Street in which owner is located.\n \n Shouldn't match:\n - ```/^\\d+$/```\n\n - ```/^[\\W_]+$/```"
+        ownerZipCode:
+          type: string
+          default: ''
+          example: '79581'
+          description: "ZipCode/PinCode for address.\n \n Shouldn't match:\n - ```/^[\\W_]+$/```"
+        ownerState:
+          type: string
+          example: Central Region
+          default: ''
+          description: "State of the owner\n \n Shouldn't match:\n - ```/^\\d+$/```\n\n - ```/^[\\W_]+$/```"
+        ownerDistrict:
+          type: string
+          example: Bedok
+          default: ''
+          description: "District of the owner\n \n Shouldn't match:\n - ```/^\\d+$/```\n\n - ```/^[\\W_]+$/```"
+        ownerCity:
+          type: string
+          example: Downtown
+          default: ''
+          description: "City of the owner\n \n Shouldn't match:\n - ```/^\\d+$/```\n\n - ```/^[\\W_]+$/```"
+        ownerMobileNumber:
+          type: string
+          default: ''
+          example: '+6578787141'
+          description: "Owner's Mobile number along with country code.\n - ```<= 15 characters```\n - ``` /^(\\+\\d{1,4}[-. ]?)?(\\()?\\d{3}(\\))?[-. ]?\\d{3}[-. ]?\\d{3,4}$/```"
         files:
-          description: Customer KYC Documents
+          description: KYC Documents
           type: array
           items:
             type: string
@@ -1756,27 +1767,21 @@ components:
           default: ''
           example: d8eb1219-gg24-4773-97d8-b05264621e60
           description: Application Id
+        businessId:
+          type: string
+          default: ''
+          example: d8eb1219-gg24-4773-97d8-b05264621e60
+          description: Business Id
+        directorId:
+          type: string
+          default: ''
+          example: d8eb1219-gg24-4773-97d8-b05264621e60
+          description: Director Id
       required:
-      - customerReferenceNo
-      - customerName
-      - customerEmail
-      - companyRegistrationNo
-      - companyRegistrationDate
-      - incorporationCountry
-      - industry
-      - address
-      - zipCode
-      - state
-      - district
-      - city
-      - area
-      - country
-      - mobileNo
-      - companyDescription
-      - taxIdNumber
-      - files
       - applicationId
-    DirectorKYCResponse:
+      - businessId
+      - directorId
+    CustomerKYCResponse:
       type: object
       properties:
         statusCode:
@@ -1786,7 +1791,7 @@ components:
         data:
           description: Response Data from the operation
           allOf:
-          - $ref: '#/components/schemas/DirectorKYC'
+          - $ref: '#/components/schemas/CustomerKYC'
         message:
           type: string
           default: Success
@@ -1800,20 +1805,6 @@ components:
       - data
       - message
       - success
-    CustomerKYC:
-      type: object
-      properties:
-        applicationId:
-          type: string
-          default: string
-          description: Id of the application
-        businessId:
-          type: string
-          default: string
-          description: Id of the business
-      required:
-      - applicationId
-      - businessId
     KycDetailsBusinessResponse:
       type: object
       properties:
@@ -1953,6 +1944,15 @@ components:
       - bankAddress
       - documents
       - directors
+    KycDetails:
+      type: object
+      properties:
+        applicationId:
+          type: string
+          default: string
+          description: Id of the application
+      required:
+      - applicationId
   securitySchemes:
     access-token:
       scheme: bearer

@@ -1,6 +1,6 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
-  title: CrediLinq Authentication Customers API
+  title: CrediLinq Customers API
   description: 'CrediLinq embedded finance API: B2B PayLater and GMV Financing for platforms and marketplaces. Covers Auth0 token generation, merchant onboarding and eligibility, customer and director KYC, credit line and loan (drawdown) management, payments and reconciliation, reporting, and demographic reference data.'
   version: '1.0'
   contact:
@@ -267,6 +267,103 @@ paths:
       - access-token: []
 components:
   schemas:
+    BankTransferType:
+      type: object
+      properties:
+        bankName:
+          type: string
+          default: ''
+          description: Deutche Bank
+        accountNumber:
+          type: number
+          description: For Eg. 1177441144
+          default: 0
+        bankSwiftCode:
+          type: string
+          description: IC114744
+          default: ''
+        accountName:
+          type: string
+          description: John Doe
+          default: ''
+      required:
+      - bankName
+      - accountNumber
+      - bankSwiftCode
+      - accountName
+    CustomerCreditLine:
+      type: object
+      properties:
+        customerReferenceNo:
+          type: string
+          default: string
+          description: Customer Reference Number
+        availableCredit:
+          type: number
+          default: 10000
+          description: Customer's available credit limit
+        approvedCredit:
+          type: number
+          default: 15000
+          description: Customer's approved credit limit
+        totalOutstandingAmount:
+          type: number
+          default: 1500000
+          description: Total payable outstanding amount by customer
+        totalUtilised:
+          type: number
+          default: 10000
+          description: Total utilised credit by customer
+        totalChargesApplied:
+          type: number
+          default: 500
+          description: Total charges applied on loans
+        totalLoanAmount:
+          type: number
+          default: 500
+          description: Total loan amount excluding charges
+        currency:
+          type: string
+          default: SGD
+          description: Currency Code
+      required:
+      - customerReferenceNo
+      - availableCredit
+      - approvedCredit
+      - totalOutstandingAmount
+      - totalUtilised
+      - totalChargesApplied
+      - totalLoanAmount
+      - currency
+    CustomerNotFoundResponse:
+      type: object
+      properties:
+        statusCode:
+          type: number
+          default: 404
+          description: The HTTP status code of the error
+        error:
+          type: string
+          default: string
+          description: Human-readable generic error message
+        errorCode:
+          type: string
+          default: E_C_CUSTOMER_NOT_FOUND
+          description: Computer-readable code for error handling
+        message:
+          type: string
+          default: string
+          description: Human-readable error message containing all available details about how the error occurred
+        success:
+          type: boolean
+          default: false
+          description: A boolean indicating whether this was a success response or an error response
+      required:
+      - statusCode
+      - error
+      - errorCode
+      - message
+      - success
     ForbiddenResponse:
       type: object
       properties:
@@ -296,12 +393,131 @@ components:
       - errorCode
       - message
       - success
-    InternalErrorResponse:
+    RepaymentScheduleV2Response:
+      type: object
+      properties:
+        dueDate:
+          type: string
+          description: Loan Due Date eg. 18 September 2023
+          default: 18 September 2023
+          example: 18 September 2023
+        totalDueForPeriod:
+          type: number
+          description: Total due payment for current period
+          example: 3599.17
+        penaltyDueForPeriod:
+          type: number
+          description: Total due penalty for current period
+          example: 0
+        totalServiceFeeForPeriod:
+          type: number
+          description: Total Service fee for current period
+          example: 99.17
+        totalServiceFeeDueForPeriod:
+          type: number
+          description: Total Service fee due for current period
+          example: 99.17
+        principalDueForPeriod:
+          type: number
+          description: Total due principal for current period
+          example: 3500
+        dueDatePostGracePeriod:
+          type: string
+          description: Due date with grace period eg. 21 September 2023
+          example: 21 September 2023
+        paid:
+          type: boolean
+          description: indicates that payment is completed or not
+          example: false
+      required:
+      - dueDate
+      - totalDueForPeriod
+      - penaltyDueForPeriod
+      - totalServiceFeeForPeriod
+      - totalServiceFeeDueForPeriod
+      - principalDueForPeriod
+      - dueDatePostGracePeriod
+      - paid
+    CustomerActiveLoansResponse:
       type: object
       properties:
         statusCode:
           type: number
-          default: 500
+          default: 200
+          description: The HTTP status code of the error
+        data:
+          description: Response Data from the operation
+          type: array
+          items:
+            $ref: '#/components/schemas/LoanSummaryResponse'
+        message:
+          type: string
+          default: Success
+          description: Human-readable message containing all available details about the operation
+        success:
+          type: boolean
+          default: true
+          description: A boolean indicating whether this was a success response or an error response
+      required:
+      - statusCode
+      - data
+      - message
+      - success
+    CreditLineResponse:
+      type: object
+      properties:
+        statusCode:
+          type: number
+          default: 200
+          description: The HTTP status code of the error
+        data:
+          description: Response Data from the operation
+          allOf:
+          - $ref: '#/components/schemas/CustomerCreditLine'
+        message:
+          type: string
+          default: Success
+          description: Human-readable message containing all available details about the operation
+        success:
+          type: boolean
+          default: true
+          description: A boolean indicating whether this was a success response or an error response
+      required:
+      - statusCode
+      - data
+      - message
+      - success
+    HolidayListResponse:
+      type: object
+      properties:
+        statusCode:
+          type: number
+          default: 200
+          description: The HTTP status code of the error
+        data:
+          description: Response Data from the operation
+          type: array
+          items:
+            $ref: '#/components/schemas/HolidayResponse'
+        message:
+          type: string
+          default: Success
+          description: Human-readable message containing all available details about the operation
+        success:
+          type: boolean
+          default: true
+          description: A boolean indicating whether this was a success response or an error response
+      required:
+      - statusCode
+      - data
+      - message
+      - success
+    BadRequestResponse:
+      type: object
+      properties:
+        statusCode:
+          type: number
+          default: 400
           description: The HTTP status code of the error
         error:
           type: string
@@ -309,7 +525,7 @@ components:
           description: Human-readable generic error message
         errorCode:
           type: string
-          default: E_INTERNAL_ERROR
+          default: E_BAD_REQUEST
           description: Computer-readable code for error handling
         message:
           type: string
@@ -325,6 +541,54 @@ components:
       - errorCode
       - message
       - success
+    UnauthorizedResponse:
+      type: object
+      properties:
+        statusCode:
+          type: number
+          default: 401
+          description: The HTTP status code of the error
+        error:
+          type: string
+          default: string
+          description: Human-readable generic error message
+        errorCode:
+          type: string
+          default: E_UNAUTHORIZED
+          description: Computer-readable code for error handling
+        message:
+          type: string
+          default: string
+          description: Human-readable error message containing all available details about how the error occurred
+        success:
+          type: boolean
+          default: false
+          description: A boolean indicating whether this was a success response or an error response
+      required:
+      - statusCode
+      - error
+      - errorCode
+      - message
+      - success
+    HolidayResponse:
+      type: object
+      properties:
+        date:
+          type: string
+          description: Date String
+          example: 01 Jan 2024
+        dateUTC:
+          type: string
+          description: Date ISO String
+          example: '2023-12-31T18:30:00.000Z'
+        isHoliday:
+          type: boolean
+          description: Date is holiday or not
+          example: true
+      required:
+      - date
+      - dateUTC
+      - isHoliday
     LoanSummaryResponse:
       type: object
       properties:
@@ -446,6 +710,49 @@ components:
       - requestedDate
       - repaymentSchedule
       - payments
+    PaymentMethodsResponse:
+      type: object
+      properties:
+        bankTransfer:
+          description: Bank Transfer Payment Method
+          allOf:
+          - $ref: '#/components/schemas/BankTransferType'
+        uenPayment:
+          description: UEN Payment Method
+          allOf:
+          - $ref: '#/components/schemas/BankTransferType'
+        qrPayment:
+          type: string
+          description: QR Payment Method
+      required:
+      - bankTransfer
+      - uenPayment
+      - qrPayment
+    CustomerChosenPaymentsResponse:
+      type: object
+      properties:
+        statusCode:
+          type: number
+          default: 200
+          description: The HTTP status code of the error
+        data:
+          description: Response Data from the operation
+          type: array
+          items:
+            $ref: '#/components/schemas/PaymentMethodsResponse'
+        message:
+          type: string
+          default: Success
+          description: Human-readable message containing all available details about the operation
+        success:
+          type: boolean
+          default: true
+          description: A boolean indicating whether this was a success response or an error response
+      required:
+      - statusCode
+      - data
+      - message
+      - success
     LoanPayment:
       type: object
       properties:
@@ -531,228 +838,12 @@ components:
       - createdAt
       - updatedAt
       - currency
-    BadRequestResponse:
+    InternalErrorResponse:
       type: object
       properties:
         statusCode:
-          type: number
-          default: 400
-          description: The HTTP status code of the error
-        error:
-          type: string
-          default: string
-          description: Human-readable generic error message
-        errorCode:
-          type: string
-          default: E_BAD_REQUEST
-          description: Computer-readable code for error handling
-        message:
-          type: string
-          default: string
-          description: Human-readable error message containing all available details about how the error occurred
-        success:
-          type: boolean
-          default: false
-          description: A boolean indicating whether this was a success response or an error response
-      required:
-      - statusCode
-      - error
-      - errorCode
-      - message
-      - success
-    BankTransferType:
-      type: object
-      properties:
-        bankName:
-          type: string
-          default: ''
-          description: Deutche Bank
-        accountNumber:
-          type: number
-          description: For Eg. 1177441144
-          default: 0
-        bankSwiftCode:
-          type: string
-          description: IC114744
-          default: ''
-        accountName:
-          type: string
-          description: John Doe
-          default: ''
-      required:
-      - bankName
-      - accountNumber
-      - bankSwiftCode
-      - accountName
-    HolidayListResponse:
-      type: object
-      properties:
-        statusCode:
-          type: number
-          default: 200
-          description: The HTTP status code of the error
-        data:
-          description: Response Data from the operation
-          type: array
-          items:
-            $ref: '#/components/schemas/HolidayResponse'
-        message:
-          type: string
-          default: Success
-          description: Human-readable message containing all available details about the operation
-        success:
-          type: boolean
-          default: true
-          description: A boolean indicating whether this was a success response or an error response
-      required:
-      - statusCode
-      - data
-      - message
-      - success
-    CustomerCreditLine:
-      type: object
-      properties:
-        customerReferenceNo:
-          type: string
-          default: string
-          description: Customer Reference Number
-        availableCredit:
-          type: number
-          default: 10000
-          description: Customer's available credit limit
-        approvedCredit:
-          type: number
-          default: 15000
-          description: Customer's approved credit limit
-        totalOutstandingAmount:
-          type: number
-          default: 1500000
-          description: Total payable outstanding amount by customer
-        totalUtilised:
-          type: number
-          default: 10000
-          description: Total utilised credit by customer
-        totalChargesApplied:
           type: number
           default: 500
-          description: Total charges applied on loans
-        totalLoanAmount:
-          type: number
-          default: 500
-          description: Total loan amount excluding charges
-        currency:
-          type: string
-          default: SGD
-          description: Currency Code
-      required:
-      - customerReferenceNo
-      - availableCredit
-      - approvedCredit
-      - totalOutstandingAmount
-      - totalUtilised
-      - totalChargesApplied
-      - totalLoanAmount
-      - currency
-    RepaymentScheduleV2Response:
-      type: object
-      properties:
-        dueDate:
-          type: string
-          description: Loan Due Date eg. 18 September 2023
-          default: 18 September 2023
-          example: 18 September 2023
-        totalDueForPeriod:
-          type: number
-          description: Total due payment for current period
-          example: 3599.17
-        penaltyDueForPeriod:
-          type: number
-          description: Total due penalty for current period
-          example: 0
-        totalServiceFeeForPeriod:
-          type: number
-          description: Total Service fee for current period
-          example: 99.17
-        totalServiceFeeDueForPeriod:
-          type: number
-          description: Total Service fee due for current period
-          example: 99.17
-        principalDueForPeriod:
-          type: number
-          description: Total due principal for current period
-          example: 3500
-        dueDatePostGracePeriod:
-          type: string
-          description: Due date with grace period eg. 21 September 2023
-          example: 21 September 2023
-        paid:
-          type: boolean
-          description: indicates that payment is completed or not
-          example: false
-      required:
-      - dueDate
-      - totalDueForPeriod
-      - penaltyDueForPeriod
-      - totalServiceFeeForPeriod
-      - totalServiceFeeDueForPeriod
-      - principalDueForPeriod
-      - dueDatePostGracePeriod
-      - paid
-    CustomerActiveLoansResponse:
-      type: object
-      properties:
-        statusCode:
-          type: number
-          default: 200
-          description: The HTTP status code of the error
-        data:
-          description: Response Data from the operation
-          type: array
-          items:
-            $ref: '#/components/schemas/LoanSummaryResponse'
-        message:
-          type: string
-          default: Success
-          description: Human-readable message containing all available details about the operation
-        success:
-          type: boolean
-          default: true
-          description: A boolean indicating whether this was a success response or an error response
-      required:
-      - statusCode
-      - data
-      - message
-      - success
-    CreditLineResponse:
-      type: object
-      properties:
-        statusCode:
-          type: number
-          default: 200
-          description: The HTTP status code of the error
-        data:
-          description: Response Data from the operation
-          allOf:
-          - $ref: '#/components/schemas/CustomerCreditLine'
-        message:
-          type: string
-          default: Success
-          description: Human-readable message containing all available details about the operation
-        success:
-          type: boolean
-          default: true
-          description: A boolean indicating whether this was a success response or an error response
-      required:
-      - statusCode
-      - data
-      - message
-      - success
-    CustomerNotFoundResponse:
-      type: object
-      properties:
-        statusCode:
-          type: number
-          default: 404
           description: The HTTP status code of the error
         error:
           type: string
@@ -760,7 +851,7 @@ components:
           description: Human-readable generic error message
         errorCode:
           type: string
-          default: E_C_CUSTOMER_NOT_FOUND
+          default: E_INTERNAL_ERROR
           description: Computer-readable code for error handling
         message:
           type: string
@@ -776,97 +867,6 @@ components:
       - errorCode
       - message
       - success
-    HolidayResponse:
-      type: object
-      properties:
-        date:
-          type: string
-          description: Date String
-          example: 01 Jan 2024
-        dateUTC:
-          type: string
-          description: Date ISO String
-          example: '2023-12-31T18:30:00.000Z'
-        isHoliday:
-          type: boolean
-          description: Date is holiday or not
-          example: true
-      required:
-      - date
-      - dateUTC
-      - isHoliday
-    UnauthorizedResponse:
-      type: object
-      properties:
-        statusCode:
-          type: number
-          default: 401
-          description: The HTTP status code of the error
-        error:
-          type: string
-          default: string
-          description: Human-readable generic error message
-        errorCode:
-          type: string
-          default: E_UNAUTHORIZED
-          description: Computer-readable code for error handling
-        message:
-          type: string
-          default: string
-          description: Human-readable error message containing all available details about how the error occurred
-        success:
-          type: boolean
-          default: false
-          description: A boolean indicating whether this was a success response or an error response
-      required:
-      - statusCode
-      - error
-      - errorCode
-      - message
-      - success
-    CustomerChosenPaymentsResponse:
-      type: object
-      properties:
-        statusCode:
-          type: number
-          default: 200
-          description: The HTTP status code of the error
-        data:
-          description: Response Data from the operation
-          type: array
-          items:
-            $ref: '#/components/schemas/PaymentMethodsResponse'
-        message:
-          type: string
-          default: Success
-          description: Human-readable message containing all available details about the operation
-        success:
-          type: boolean
-          default: true
-          description: A boolean indicating whether this was a success response or an error response
-      required:
-      - statusCode
-      - data
-      - message
-      - success
-    PaymentMethodsResponse:
-      type: object
-      properties:
-        bankTransfer:
-          description: Bank Transfer Payment Method
-          allOf:
-          - $ref: '#/components/schemas/BankTransferType'
-        uenPayment:
-          description: UEN Payment Method
-          allOf:
-          - $ref: '#/components/schemas/BankTransferType'
-        qrPayment:
-          type: string
-          description: QR Payment Method
-      required:
-      - bankTransfer
-      - uenPayment
-      - qrPayment
   securitySchemes:
     access-token:
       scheme: bearer

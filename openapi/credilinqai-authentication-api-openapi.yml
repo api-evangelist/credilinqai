@@ -1,4 +1,4 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
   title: CrediLinq Authentication API
   description: 'CrediLinq embedded finance API: B2B PayLater and GMV Financing for platforms and marketplaces. Covers Auth0 token generation, merchant onboarding and eligibility, customer and director KYC, credit line and loan (drawdown) management, payments and reconciliation, reporting, and demographic reference data.'
@@ -54,6 +54,54 @@ paths:
       - Authentication
 components:
   schemas:
+    GenerateTokenSuccessResponse:
+      type: object
+      properties:
+        statusCode:
+          type: number
+          default: 200
+          description: The HTTP status code of the error
+        data:
+          description: Response Data from the operation
+          allOf:
+          - $ref: '#/components/schemas/TokenResponse'
+        message:
+          type: string
+          default: Success
+          description: Human-readable message containing all available details about the operation
+        success:
+          type: boolean
+          default: true
+          description: A boolean indicating whether this was a success response or an error response
+      required:
+      - statusCode
+      - data
+      - message
+      - success
+    TokenResponse:
+      type: object
+      properties:
+        access_token:
+          type: string
+          default: <token>
+          description: Access-Token, which will be used for all operations
+        scope:
+          type: string
+          default: <scope>
+          description: Scope of the access-token
+        expires_in:
+          type: number
+          default: 200000
+          description: Expiry of the access-token
+        token_type:
+          type: string
+          default: Bearer
+          description: Access-Token type
+      required:
+      - access_token
+      - scope
+      - expires_in
+      - token_type
     GenerateTokenDto:
       type: object
       properties:
@@ -95,54 +143,6 @@ components:
       - statusCode
       - error
       - errorCode
-      - message
-      - success
-    TokenResponse:
-      type: object
-      properties:
-        access_token:
-          type: string
-          default: <token>
-          description: Access-Token, which will be used for all operations
-        scope:
-          type: string
-          default: <scope>
-          description: Scope of the access-token
-        expires_in:
-          type: number
-          default: 200000
-          description: Expiry of the access-token
-        token_type:
-          type: string
-          default: Bearer
-          description: Access-Token type
-      required:
-      - access_token
-      - scope
-      - expires_in
-      - token_type
-    GenerateTokenSuccessResponse:
-      type: object
-      properties:
-        statusCode:
-          type: number
-          default: 200
-          description: The HTTP status code of the error
-        data:
-          description: Response Data from the operation
-          allOf:
-          - $ref: '#/components/schemas/TokenResponse'
-        message:
-          type: string
-          default: Success
-          description: Human-readable message containing all available details about the operation
-        success:
-          type: boolean
-          default: true
-          description: A boolean indicating whether this was a success response or an error response
-      required:
-      - statusCode
-      - data
       - message
       - success
   securitySchemes:

@@ -1,14 +1,7 @@
 {
   "provider": "credilinqai",
   "sources": [
-    "credilinqai-authentication-api-openapi.yml",
-    "credilinqai-customers-api-openapi.yml",
-    "credilinqai-kyc-api-openapi.yml",
-    "credilinqai-loans-api-openapi.yml",
-    "credilinqai-miscellaneous-api-openapi.yml",
-    "credilinqai-onboarding-api-openapi.yml",
-    "credilinqai-payment-api-openapi.yml",
-    "credilinqai-report-api-openapi.yml"
+    "_original/credilinqai-openapi.yml"
   ],
   "outputs": [
     "credilinqai-authentication-api-openapi.yml",
@@ -23,6 +16,19 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "credilinqai-openapi.yml: upgraded openapi 3.0.0 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "credilinqai-authentication-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "credilinqai-customers-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "credilinqai-kyc-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "credilinqai-loans-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "credilinqai-miscellaneous-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "credilinqai-onboarding-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "credilinqai-payment-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "credilinqai-report-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

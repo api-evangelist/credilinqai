@@ -1,6 +1,6 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
-  title: CrediLinq Authentication Miscellaneous API
+  title: CrediLinq Miscellaneous API
   description: 'CrediLinq embedded finance API: B2B PayLater and GMV Financing for platforms and marketplaces. Covers Auth0 token generation, merchant onboarding and eligibility, customer and director KYC, credit line and loan (drawdown) management, payments and reconciliation, reporting, and demographic reference data.'
   version: '1.0'
   contact:
@@ -192,6 +192,28 @@ paths:
       - Miscellaneous
 components:
   schemas:
+    Country:
+      type: object
+      properties:
+        country:
+          type: string
+          description: Name of the country
+        countryCode:
+          type: string
+          description: Code of the country
+      required:
+      - country
+      - countryCode
+    GetPostalCodes:
+      type: object
+      properties:
+        postalCodes:
+          description: Available Postal Codes of the country
+          type: array
+          items:
+            type: string
+      required:
+      - postalCodes
     ForbiddenResponse:
       type: object
       properties:
@@ -221,33 +243,28 @@ components:
       - errorCode
       - message
       - success
-    InternalErrorResponse:
+    GetAddressResponse:
       type: object
       properties:
         statusCode:
           type: number
-          default: 500
+          default: 200
           description: The HTTP status code of the error
-        error:
-          type: string
-          default: string
-          description: Human-readable generic error message
-        errorCode:
-          type: string
-          default: E_INTERNAL_ERROR
-          description: Computer-readable code for error handling
+        data:
+          description: Response Data from the operation
+          allOf:
+          - $ref: '#/components/schemas/GetAddress'
         message:
           type: string
-          default: string
-          description: Human-readable error message containing all available details about how the error occurred
+          default: Success
+          description: Human-readable message containing all available details about the operation
         success:
           type: boolean
-          default: false
+          default: true
           description: A boolean indicating whether this was a success response or an error response
       required:
       - statusCode
-      - error
-      - errorCode
+      - data
       - message
       - success
     GetCountriesResponse:
@@ -274,6 +291,40 @@ components:
       - data
       - message
       - success
+    GetPostalCodesResponse:
+      type: object
+      properties:
+        statusCode:
+          type: number
+          default: 200
+          description: The HTTP status code of the error
+        data:
+          description: Response Data from the operation
+          allOf:
+          - $ref: '#/components/schemas/GetPostalCodes'
+        message:
+          type: string
+          default: Success
+          description: Human-readable message containing all available details about the operation
+        success:
+          type: boolean
+          default: true
+          description: A boolean indicating whether this was a success response or an error response
+      required:
+      - statusCode
+      - data
+      - message
+      - success
+    GetCountries:
+      type: object
+      properties:
+        countries:
+          description: Available Counties
+          type: array
+          items:
+            $ref: '#/components/schemas/Country'
+      required:
+      - countries
     GetAddress:
       type: object
       properties:
@@ -306,18 +357,6 @@ components:
       - district
       - city
       - area
-    Country:
-      type: object
-      properties:
-        country:
-          type: string
-          description: Name of the country
-        countryCode:
-          type: string
-          description: Code of the country
-      required:
-      - country
-      - countryCode
     GetDocumentTypesResponse:
       type: object
       properties:
@@ -329,74 +368,6 @@ components:
           description: Response Data from the operation
           allOf:
           - $ref: '#/components/schemas/GetDocumentTypes'
-        message:
-          type: string
-          default: Success
-          description: Human-readable message containing all available details about the operation
-        success:
-          type: boolean
-          default: true
-          description: A boolean indicating whether this was a success response or an error response
-      required:
-      - statusCode
-      - data
-      - message
-      - success
-    GetCountries:
-      type: object
-      properties:
-        countries:
-          description: Available Counties
-          type: array
-          items:
-            $ref: '#/components/schemas/Country'
-      required:
-      - countries
-    GetAddressResponse:
-      type: object
-      properties:
-        statusCode:
-          type: number
-          default: 200
-          description: The HTTP status code of the error
-        data:
-          description: Response Data from the operation
-          allOf:
-          - $ref: '#/components/schemas/GetAddress'
-        message:
-          type: string
-          default: Success
-          description: Human-readable message containing all available details about the operation
-        success:
-          type: boolean
-          default: true
-          description: A boolean indicating whether this was a success response or an error response
-      required:
-      - statusCode
-      - data
-      - message
-      - success
-    GetPostalCodes:
-      type: object
-      properties:
-        postalCodes:
-          description: Available Postal Codes of the country
-          type: array
-          items:
-            type: string
-      required:
-      - postalCodes
-    GetPostalCodesResponse:
-      type: object
-      properties:
-        statusCode:
-          type: number
-          default: 200
-          description: The HTTP status code of the error
-        data:
-          description: Response Data from the operation
-          allOf:
-          - $ref: '#/components/schemas/GetPostalCodes'
         message:
           type: string
           default: Success
@@ -430,6 +401,35 @@ components:
       - localName
       - docType
       - optional
+    InternalErrorResponse:
+      type: object
+      properties:
+        statusCode:
+          type: number
+          default: 500
+          description: The HTTP status code of the error
+        error:
+          type: string
+          default: string
+          description: Human-readable generic error message
+        errorCode:
+          type: string
+          default: E_INTERNAL_ERROR
+          description: Computer-readable code for error handling
+        message:
+          type: string
+          default: string
+          description: Human-readable error message containing all available details about how the error occurred
+        success:
+          type: boolean
+          default: false
+          description: A boolean indicating whether this was a success response or an error response
+      required:
+      - statusCode
+      - error
+      - errorCode
+      - message
+      - success
   securitySchemes:
     access-token:
       scheme: bearer
