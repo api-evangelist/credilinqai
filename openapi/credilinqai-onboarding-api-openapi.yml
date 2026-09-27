@@ -192,6 +192,145 @@ paths:
       - access-token: []
 components:
   schemas:
+    NewAppResponse:
+      type: object
+      properties:
+        applicationId:
+          type: string
+          description: An unique id for application
+          default: string
+      required:
+      - applicationId
+    DataProcessingStatusResponse:
+      type: object
+      properties:
+        dataProcessingId:
+          type: string
+          default: string
+          description: An unique id for Data Processing
+      required:
+      - dataProcessingId
+    DataProcessingResponse:
+      type: object
+      properties:
+        statusCode:
+          type: number
+          default: 200
+          description: The HTTP status code of the error
+        data:
+          description: Response Data from the operation
+          allOf:
+          - $ref: '#/components/schemas/DataProcessingStatusResponse'
+        message:
+          type: string
+          default: Success
+          description: Human-readable message containing all available details about the operation
+        success:
+          type: boolean
+          default: true
+          description: A boolean indicating whether this was a success response or an error response
+      required:
+      - statusCode
+      - data
+      - message
+      - success
+    InternalErrorResponse:
+      type: object
+      properties:
+        statusCode:
+          type: number
+          default: 500
+          description: The HTTP status code of the error
+        error:
+          type: string
+          default: string
+          description: Human-readable generic error message
+        errorCode:
+          type: string
+          default: E_INTERNAL_ERROR
+          description: Computer-readable code for error handling
+        message:
+          type: string
+          default: string
+          description: Human-readable error message containing all available details about how the error occurred
+        success:
+          type: boolean
+          default: false
+          description: A boolean indicating whether this was a success response or an error response
+      required:
+      - statusCode
+      - error
+      - errorCode
+      - message
+      - success
+    SendAgreementDto:
+      type: object
+      properties:
+        customerReferenceNo:
+          type: string
+          maxLength: 100
+          default: ''
+          example: c3eb1619-ff24-4773-97d8-b05264621e60
+          description: "Customer Reference Number of company/business assigned by the platform to uniquely identify the customer. It's a unique number with a combination of alphabets, numeric and some special characters like dash, hash, ampersand and forward slash.\n - ``` /(^[a-zA-Z0-9#/-]+)$/ ```"
+      required:
+      - customerReferenceNo
+    InitiateAppDTO:
+      type: object
+      properties:
+        customerReferenceNo:
+          type: string
+          maxLength: 100
+          default: ''
+          example: c3eb1619-ff24-4773-97d8-b05264621e60
+          description: "Customer Reference Number of company/business assigned by the platform to uniquely identify the customer. It's a unique number with a combination of alphabets, numeric and some special characters like dash, hash, ampersand and forward slash.\n - ``` /(^[a-zA-Z0-9#/-]+)$/ ```"
+        customerName:
+          type: string
+          maxLength: 200
+          description: "Customer or a Company's Full Name\n - ``` /^[a-zA-Z][a-zA-Z0-9-@.'_/#&+ws]*$ ```"
+          example: John Doe
+        customerEmail:
+          type: string
+          maxLength: 75
+          description: "Email address of Customer/company\n  \n - Should be valid email."
+          example: johndoe2@gmail.com
+        dataConsentProvided:
+          type: boolean
+          description: 'Consent to access platform data. Possible values : true/false'
+          default: true
+        requiredLoanAmount:
+          type: number
+          example: 100000
+          description: Required loan amount
+      required:
+      - customerReferenceNo
+      - customerName
+      - customerEmail
+      - dataConsentProvided
+      - requiredLoanAmount
+    CheckEligibilityResponse:
+      type: object
+      properties:
+        statusCode:
+          type: number
+          default: 200
+          description: The HTTP status code of the error
+        data:
+          description: Response Data from the operation
+          allOf:
+          - $ref: '#/components/schemas/NewAppResponse'
+        message:
+          type: string
+          default: Success
+          description: Human-readable message containing all available details about the operation
+        success:
+          type: boolean
+          default: true
+          description: A boolean indicating whether this was a success response or an error response
+      required:
+      - statusCode
+      - data
+      - message
+      - success
     InitiateDataProcessingDTO:
       type: object
       properties:
@@ -244,97 +383,6 @@ components:
       - s3Paths
       - noOfFilesUploaded
       - additionalFields
-    DataProcessingStatusResponse:
-      type: object
-      properties:
-        dataProcessingId:
-          type: string
-          default: string
-          description: An unique id for Data Processing
-      required:
-      - dataProcessingId
-    ForbiddenResponse:
-      type: object
-      properties:
-        statusCode:
-          type: number
-          default: 403
-          description: The HTTP status code of the error
-        error:
-          type: string
-          default: string
-          description: Human-readable generic error message
-        errorCode:
-          type: string
-          default: E_FORBIDDEN
-          description: Computer-readable code for error handling
-        message:
-          type: string
-          default: string
-          description: Human-readable error message containing all available details about how the error occurred
-        success:
-          type: boolean
-          default: false
-          description: A boolean indicating whether this was a success response or an error response
-      required:
-      - statusCode
-      - error
-      - errorCode
-      - message
-      - success
-    NewAppResponse:
-      type: object
-      properties:
-        applicationId:
-          type: string
-          description: An unique id for application
-          default: string
-      required:
-      - applicationId
-    SendAgreementDto:
-      type: object
-      properties:
-        customerReferenceNo:
-          type: string
-          maxLength: 100
-          default: ''
-          example: c3eb1619-ff24-4773-97d8-b05264621e60
-          description: "Customer Reference Number of company/business assigned by the platform to uniquely identify the customer. It's a unique number with a combination of alphabets, numeric and some special characters like dash, hash, ampersand and forward slash.\n - ``` /(^[a-zA-Z0-9#/-]+)$/ ```"
-      required:
-      - customerReferenceNo
-    InitiateAppDTO:
-      type: object
-      properties:
-        customerReferenceNo:
-          type: string
-          maxLength: 100
-          default: ''
-          example: c3eb1619-ff24-4773-97d8-b05264621e60
-          description: "Customer Reference Number of company/business assigned by the platform to uniquely identify the customer. It's a unique number with a combination of alphabets, numeric and some special characters like dash, hash, ampersand and forward slash.\n - ``` /(^[a-zA-Z0-9#/-]+)$/ ```"
-        customerName:
-          type: string
-          maxLength: 200
-          description: "Customer or a Company's Full Name\n - ``` /^[a-zA-Z][a-zA-Z0-9-@.'_/#&+ws]*$ ```"
-          example: John Doe
-        customerEmail:
-          type: string
-          maxLength: 75
-          description: "Email address of Customer/company\n  \n - Should be valid email."
-          example: johndoe2@gmail.com
-        dataConsentProvided:
-          type: boolean
-          description: 'Consent to access platform data. Possible values : true/false'
-          default: true
-        requiredLoanAmount:
-          type: number
-          example: 100000
-          description: Required loan amount
-      required:
-      - customerReferenceNo
-      - customerName
-      - customerEmail
-      - dataConsentProvided
-      - requiredLoanAmount
     UnauthorizedResponse:
       type: object
       properties:
@@ -349,59 +397,6 @@ components:
         errorCode:
           type: string
           default: E_UNAUTHORIZED
-          description: Computer-readable code for error handling
-        message:
-          type: string
-          default: string
-          description: Human-readable error message containing all available details about how the error occurred
-        success:
-          type: boolean
-          default: false
-          description: A boolean indicating whether this was a success response or an error response
-      required:
-      - statusCode
-      - error
-      - errorCode
-      - message
-      - success
-    CheckEligibilityResponse:
-      type: object
-      properties:
-        statusCode:
-          type: number
-          default: 200
-          description: The HTTP status code of the error
-        data:
-          description: Response Data from the operation
-          allOf:
-          - $ref: '#/components/schemas/NewAppResponse'
-        message:
-          type: string
-          default: Success
-          description: Human-readable message containing all available details about the operation
-        success:
-          type: boolean
-          default: true
-          description: A boolean indicating whether this was a success response or an error response
-      required:
-      - statusCode
-      - data
-      - message
-      - success
-    BadRequestResponse:
-      type: object
-      properties:
-        statusCode:
-          type: number
-          default: 400
-          description: The HTTP status code of the error
-        error:
-          type: string
-          default: string
-          description: Human-readable generic error message
-        errorCode:
-          type: string
-          default: E_BAD_REQUEST
           description: Computer-readable code for error handling
         message:
           type: string
@@ -446,12 +441,12 @@ components:
       - errorCode
       - message
       - success
-    InternalErrorResponse:
+    BadRequestResponse:
       type: object
       properties:
         statusCode:
           type: number
-          default: 500
+          default: 400
           description: The HTTP status code of the error
         error:
           type: string
@@ -459,7 +454,36 @@ components:
           description: Human-readable generic error message
         errorCode:
           type: string
-          default: E_INTERNAL_ERROR
+          default: E_BAD_REQUEST
+          description: Computer-readable code for error handling
+        message:
+          type: string
+          default: string
+          description: Human-readable error message containing all available details about how the error occurred
+        success:
+          type: boolean
+          default: false
+          description: A boolean indicating whether this was a success response or an error response
+      required:
+      - statusCode
+      - error
+      - errorCode
+      - message
+      - success
+    ForbiddenResponse:
+      type: object
+      properties:
+        statusCode:
+          type: number
+          default: 403
+          description: The HTTP status code of the error
+        error:
+          type: string
+          default: string
+          description: Human-readable generic error message
+        errorCode:
+          type: string
+          default: E_FORBIDDEN
           description: Computer-readable code for error handling
         message:
           type: string
@@ -485,30 +509,6 @@ components:
         data:
           type: string
           description: Agreent sent status of application.
-        message:
-          type: string
-          default: Success
-          description: Human-readable message containing all available details about the operation
-        success:
-          type: boolean
-          default: true
-          description: A boolean indicating whether this was a success response or an error response
-      required:
-      - statusCode
-      - data
-      - message
-      - success
-    DataProcessingResponse:
-      type: object
-      properties:
-        statusCode:
-          type: number
-          default: 200
-          description: The HTTP status code of the error
-        data:
-          description: Response Data from the operation
-          allOf:
-          - $ref: '#/components/schemas/DataProcessingStatusResponse'
         message:
           type: string
           default: Success

@@ -196,30 +196,6 @@ paths:
       - access-token: []
 components:
   schemas:
-    GetCustomerDashboardResponse:
-      type: object
-      properties:
-        statusCode:
-          type: number
-          default: 200
-          description: The HTTP status code of the error
-        data:
-          description: Response Data from the operation
-          allOf:
-          - $ref: '#/components/schemas/CustomerSummaryResponse'
-        message:
-          type: string
-          default: Success
-          description: Human-readable message containing all available details about the operation
-        success:
-          type: boolean
-          default: true
-          description: A boolean indicating whether this was a success response or an error response
-      required:
-      - statusCode
-      - data
-      - message
-      - success
     ForbiddenResponse:
       type: object
       properties:
@@ -234,35 +210,6 @@ components:
         errorCode:
           type: string
           default: E_FORBIDDEN
-          description: Computer-readable code for error handling
-        message:
-          type: string
-          default: string
-          description: Human-readable error message containing all available details about how the error occurred
-        success:
-          type: boolean
-          default: false
-          description: A boolean indicating whether this was a success response or an error response
-      required:
-      - statusCode
-      - error
-      - errorCode
-      - message
-      - success
-    CustomerNotFoundResponse:
-      type: object
-      properties:
-        statusCode:
-          type: number
-          default: 404
-          description: The HTTP status code of the error
-        error:
-          type: string
-          default: string
-          description: Human-readable generic error message
-        errorCode:
-          type: string
-          default: E_C_CUSTOMER_NOT_FOUND
           description: Computer-readable code for error handling
         message:
           type: string
@@ -303,52 +250,7 @@ components:
       - data
       - message
       - success
-    RepaymentScheduleV2Response:
-      type: object
-      properties:
-        dueDate:
-          type: string
-          description: Loan Due Date eg. 18 September 2023
-          default: 18 September 2023
-          example: 18 September 2023
-        totalDueForPeriod:
-          type: number
-          description: Total due payment for current period
-          example: 3599.17
-        penaltyDueForPeriod:
-          type: number
-          description: Total due penalty for current period
-          example: 0
-        totalServiceFeeForPeriod:
-          type: number
-          description: Total Service fee for current period
-          example: 99.17
-        totalServiceFeeDueForPeriod:
-          type: number
-          description: Total Service fee due for current period
-          example: 99.17
-        principalDueForPeriod:
-          type: number
-          description: Total due principal for current period
-          example: 3500
-        dueDatePostGracePeriod:
-          type: string
-          description: Due date with grace period eg. 21 September 2023
-          example: 21 September 2023
-        paid:
-          type: boolean
-          description: indicates that payment is completed or not
-          example: false
-      required:
-      - dueDate
-      - totalDueForPeriod
-      - penaltyDueForPeriod
-      - totalServiceFeeForPeriod
-      - totalServiceFeeDueForPeriod
-      - principalDueForPeriod
-      - dueDatePostGracePeriod
-      - paid
-    GetPartnerDashboardResponse:
+    GetCustomerDashboardResponse:
       type: object
       properties:
         statusCode:
@@ -358,7 +260,7 @@ components:
         data:
           description: Response Data from the operation
           allOf:
-          - $ref: '#/components/schemas/PartnerDashboardResponse'
+          - $ref: '#/components/schemas/CustomerSummaryResponse'
         message:
           type: string
           default: Success
@@ -372,12 +274,12 @@ components:
       - data
       - message
       - success
-    UnauthorizedResponse:
+    InternalErrorResponse:
       type: object
       properties:
         statusCode:
           type: number
-          default: 401
+          default: 500
           description: The HTTP status code of the error
         error:
           type: string
@@ -385,7 +287,7 @@ components:
           description: Human-readable generic error message
         errorCode:
           type: string
-          default: E_UNAUTHORIZED
+          default: E_INTERNAL_ERROR
           description: Computer-readable code for error handling
         message:
           type: string
@@ -401,79 +303,66 @@ components:
       - errorCode
       - message
       - success
-    PartnerDashboardResponse:
+    CustomerSummaryResponse:
       type: object
       properties:
-        partnerId:
+        customerName:
           type: string
-          default: string
-          description: Id of the partner
+          description: Customer or a Company's Full Name
+          default: John Doe
+        customerEmail:
+          type: string
+          description: Email address of Customer/company which is used for login to B2B PayLater portal
+          default: johndoe2@gmail.com
         mobileNo:
           type: string
-          default: string
-          description: Mobile No of the partner
-        companyEmail:
+          description: Company/Customer's Mobile number along with country code
+          default: '7744559977'
+        businessRegistrationNo:
+          type: string
+          description: Business Registration Number is a company registration number provided by the government agency
+          default: ''
+        customerReferenceNo:
           type: string
           default: string
-          description: Email Address of the partner's company
-        companyName:
-          type: string
-          default: string
-          description: Name of the partner's company
-        positionWithinCompany:
-          type: string
-          default: string
-          description: Position of the partner in company
-        customers:
+          description: Customer Reference number this will be used to execute all APIs further to activate customer, to create loan and so on
+        availableCredit:
+          type: number
+          default: 10000
+          description: Customer's available credit limit
+        approvedCredit:
+          type: number
+          default: 15000
+          description: Customer's approved credit limit
+        totalOutstandingAmount:
+          type: number
+          default: 1500000
+          description: Total payable outstanding amount by customer
+        loans:
+          description: All loans of customer
           type: array
           items:
-            $ref: '#/components/schemas/CustomerSummaryResponse'
+            $ref: '#/components/schemas/LoanSummaryResponse'
         createdAt:
           type: string
-          default: '2025-01-08T05:12:17.426Z'
-          description: Created Timestamp of the partner in UTC Format eg. 2023-03-30T11:46:42.195Z
+          default: '2025-01-08T05:12:17.406Z'
+          description: Created Timestamp of the customer in UTC Format eg. 2023-03-30T11:46:42.195Z
         updatedAt:
           type: string
-          default: '2025-01-08T05:12:17.426Z'
-          description: Updated Timestamp of the partner in UTC Format eg. 2023-03-30T11:46:42.195Z
+          default: '2025-01-08T05:12:17.406Z'
+          description: Updated Timestamp of the customer in UTC Format eg. 2023-03-30T11:46:42.195Z
       required:
-      - partnerId
+      - customerName
+      - customerEmail
       - mobileNo
-      - companyEmail
-      - companyName
-      - positionWithinCompany
-      - customers
+      - businessRegistrationNo
+      - customerReferenceNo
+      - availableCredit
+      - approvedCredit
+      - totalOutstandingAmount
+      - loans
       - createdAt
       - updatedAt
-    BadRequestResponse:
-      type: object
-      properties:
-        statusCode:
-          type: number
-          default: 400
-          description: The HTTP status code of the error
-        error:
-          type: string
-          default: string
-          description: Human-readable generic error message
-        errorCode:
-          type: string
-          default: E_BAD_REQUEST
-          description: Computer-readable code for error handling
-        message:
-          type: string
-          default: string
-          description: Human-readable error message containing all available details about how the error occurred
-        success:
-          type: boolean
-          default: false
-          description: A boolean indicating whether this was a success response or an error response
-      required:
-      - statusCode
-      - error
-      - errorCode
-      - message
-      - success
     LoanSummaryResponse:
       type: object
       properties:
@@ -595,6 +484,79 @@ components:
       - requestedDate
       - repaymentSchedule
       - payments
+    CustomerNotFoundResponse:
+      type: object
+      properties:
+        statusCode:
+          type: number
+          default: 404
+          description: The HTTP status code of the error
+        error:
+          type: string
+          default: string
+          description: Human-readable generic error message
+        errorCode:
+          type: string
+          default: E_C_CUSTOMER_NOT_FOUND
+          description: Computer-readable code for error handling
+        message:
+          type: string
+          default: string
+          description: Human-readable error message containing all available details about how the error occurred
+        success:
+          type: boolean
+          default: false
+          description: A boolean indicating whether this was a success response or an error response
+      required:
+      - statusCode
+      - error
+      - errorCode
+      - message
+      - success
+    PartnerDashboardResponse:
+      type: object
+      properties:
+        partnerId:
+          type: string
+          default: string
+          description: Id of the partner
+        mobileNo:
+          type: string
+          default: string
+          description: Mobile No of the partner
+        companyEmail:
+          type: string
+          default: string
+          description: Email Address of the partner's company
+        companyName:
+          type: string
+          default: string
+          description: Name of the partner's company
+        positionWithinCompany:
+          type: string
+          default: string
+          description: Position of the partner in company
+        customers:
+          type: array
+          items:
+            $ref: '#/components/schemas/CustomerSummaryResponse'
+        createdAt:
+          type: string
+          default: '2025-01-08T05:12:17.426Z'
+          description: Created Timestamp of the partner in UTC Format eg. 2023-03-30T11:46:42.195Z
+        updatedAt:
+          type: string
+          default: '2025-01-08T05:12:17.426Z'
+          description: Updated Timestamp of the partner in UTC Format eg. 2023-03-30T11:46:42.195Z
+      required:
+      - partnerId
+      - mobileNo
+      - companyEmail
+      - companyName
+      - positionWithinCompany
+      - customers
+      - createdAt
+      - updatedAt
     GetPartnerReportDTO:
       type: object
       properties:
@@ -663,66 +625,6 @@ components:
           type: array
           items:
             type: number
-    CustomerSummaryResponse:
-      type: object
-      properties:
-        customerName:
-          type: string
-          description: Customer or a Company's Full Name
-          default: John Doe
-        customerEmail:
-          type: string
-          description: Email address of Customer/company which is used for login to B2B PayLater portal
-          default: johndoe2@gmail.com
-        mobileNo:
-          type: string
-          description: Company/Customer's Mobile number along with country code
-          default: '7744559977'
-        businessRegistrationNo:
-          type: string
-          description: Business Registration Number is a company registration number provided by the government agency
-          default: ''
-        customerReferenceNo:
-          type: string
-          default: string
-          description: Customer Reference number this will be used to execute all APIs further to activate customer, to create loan and so on
-        availableCredit:
-          type: number
-          default: 10000
-          description: Customer's available credit limit
-        approvedCredit:
-          type: number
-          default: 15000
-          description: Customer's approved credit limit
-        totalOutstandingAmount:
-          type: number
-          default: 1500000
-          description: Total payable outstanding amount by customer
-        loans:
-          description: All loans of customer
-          type: array
-          items:
-            $ref: '#/components/schemas/LoanSummaryResponse'
-        createdAt:
-          type: string
-          default: '2025-01-08T05:12:17.406Z'
-          description: Created Timestamp of the customer in UTC Format eg. 2023-03-30T11:46:42.195Z
-        updatedAt:
-          type: string
-          default: '2025-01-08T05:12:17.406Z'
-          description: Updated Timestamp of the customer in UTC Format eg. 2023-03-30T11:46:42.195Z
-      required:
-      - customerName
-      - customerEmail
-      - mobileNo
-      - businessRegistrationNo
-      - customerReferenceNo
-      - availableCredit
-      - approvedCredit
-      - totalOutstandingAmount
-      - loans
-      - createdAt
-      - updatedAt
     CreditHistoryResponse:
       type: object
       properties:
@@ -757,35 +659,6 @@ components:
       - createdAt
       - updatedAt
       - currency
-    PartnerNotFoundResponse:
-      type: object
-      properties:
-        statusCode:
-          type: number
-          default: 404
-          description: The HTTP status code of the error
-        error:
-          type: string
-          default: string
-          description: Human-readable generic error message
-        errorCode:
-          type: string
-          default: E_P_PARTNER_NOT_FOUND
-          description: Computer-readable code for error handling
-        message:
-          type: string
-          default: string
-          description: Human-readable error message containing all available details about how the error occurred
-        success:
-          type: boolean
-          default: false
-          description: A boolean indicating whether this was a success response or an error response
-      required:
-      - statusCode
-      - error
-      - errorCode
-      - message
-      - success
     LoanPayment:
       type: object
       properties:
@@ -871,12 +744,12 @@ components:
       - createdAt
       - updatedAt
       - currency
-    InternalErrorResponse:
+    UnauthorizedResponse:
       type: object
       properties:
         statusCode:
           type: number
-          default: 500
+          default: 401
           description: The HTTP status code of the error
         error:
           type: string
@@ -884,7 +757,134 @@ components:
           description: Human-readable generic error message
         errorCode:
           type: string
-          default: E_INTERNAL_ERROR
+          default: E_UNAUTHORIZED
+          description: Computer-readable code for error handling
+        message:
+          type: string
+          default: string
+          description: Human-readable error message containing all available details about how the error occurred
+        success:
+          type: boolean
+          default: false
+          description: A boolean indicating whether this was a success response or an error response
+      required:
+      - statusCode
+      - error
+      - errorCode
+      - message
+      - success
+    BadRequestResponse:
+      type: object
+      properties:
+        statusCode:
+          type: number
+          default: 400
+          description: The HTTP status code of the error
+        error:
+          type: string
+          default: string
+          description: Human-readable generic error message
+        errorCode:
+          type: string
+          default: E_BAD_REQUEST
+          description: Computer-readable code for error handling
+        message:
+          type: string
+          default: string
+          description: Human-readable error message containing all available details about how the error occurred
+        success:
+          type: boolean
+          default: false
+          description: A boolean indicating whether this was a success response or an error response
+      required:
+      - statusCode
+      - error
+      - errorCode
+      - message
+      - success
+    RepaymentScheduleV2Response:
+      type: object
+      properties:
+        dueDate:
+          type: string
+          description: Loan Due Date eg. 18 September 2023
+          default: 18 September 2023
+          example: 18 September 2023
+        totalDueForPeriod:
+          type: number
+          description: Total due payment for current period
+          example: 3599.17
+        penaltyDueForPeriod:
+          type: number
+          description: Total due penalty for current period
+          example: 0
+        totalServiceFeeForPeriod:
+          type: number
+          description: Total Service fee for current period
+          example: 99.17
+        totalServiceFeeDueForPeriod:
+          type: number
+          description: Total Service fee due for current period
+          example: 99.17
+        principalDueForPeriod:
+          type: number
+          description: Total due principal for current period
+          example: 3500
+        dueDatePostGracePeriod:
+          type: string
+          description: Due date with grace period eg. 21 September 2023
+          example: 21 September 2023
+        paid:
+          type: boolean
+          description: indicates that payment is completed or not
+          example: false
+      required:
+      - dueDate
+      - totalDueForPeriod
+      - penaltyDueForPeriod
+      - totalServiceFeeForPeriod
+      - totalServiceFeeDueForPeriod
+      - principalDueForPeriod
+      - dueDatePostGracePeriod
+      - paid
+    GetPartnerDashboardResponse:
+      type: object
+      properties:
+        statusCode:
+          type: number
+          default: 200
+          description: The HTTP status code of the error
+        data:
+          description: Response Data from the operation
+          allOf:
+          - $ref: '#/components/schemas/PartnerDashboardResponse'
+        message:
+          type: string
+          default: Success
+          description: Human-readable message containing all available details about the operation
+        success:
+          type: boolean
+          default: true
+          description: A boolean indicating whether this was a success response or an error response
+      required:
+      - statusCode
+      - data
+      - message
+      - success
+    PartnerNotFoundResponse:
+      type: object
+      properties:
+        statusCode:
+          type: number
+          default: 404
+          description: The HTTP status code of the error
+        error:
+          type: string
+          default: string
+          description: Human-readable generic error message
+        errorCode:
+          type: string
+          default: E_P_PARTNER_NOT_FOUND
           description: Computer-readable code for error handling
         message:
           type: string

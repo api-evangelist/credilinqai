@@ -204,22 +204,12 @@ components:
       required:
       - country
       - countryCode
-    GetPostalCodes:
-      type: object
-      properties:
-        postalCodes:
-          description: Available Postal Codes of the country
-          type: array
-          items:
-            type: string
-      required:
-      - postalCodes
-    ForbiddenResponse:
+    InternalErrorResponse:
       type: object
       properties:
         statusCode:
           type: number
-          default: 403
+          default: 500
           description: The HTTP status code of the error
         error:
           type: string
@@ -227,7 +217,7 @@ components:
           description: Human-readable generic error message
         errorCode:
           type: string
-          default: E_FORBIDDEN
+          default: E_INTERNAL_ERROR
           description: Computer-readable code for error handling
         message:
           type: string
@@ -243,6 +233,50 @@ components:
       - errorCode
       - message
       - success
+    GetDocumentTypesResponse:
+      type: object
+      properties:
+        statusCode:
+          type: number
+          default: 200
+          description: The HTTP status code of the error
+        data:
+          description: Response Data from the operation
+          allOf:
+          - $ref: '#/components/schemas/GetDocumentTypes'
+        message:
+          type: string
+          default: Success
+          description: Human-readable message containing all available details about the operation
+        success:
+          type: boolean
+          default: true
+          description: A boolean indicating whether this was a success response or an error response
+      required:
+      - statusCode
+      - data
+      - message
+      - success
+    GetDocumentTypes:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Document Type Id
+        localName:
+          type: string
+          description: Document Type Id
+        docType:
+          type: string
+          description: Document Type (Utility Bill/ Passport etc.)
+        optional:
+          type: boolean
+          description: Is this document type optional or not.
+      required:
+      - id
+      - localName
+      - docType
+      - optional
     GetAddressResponse:
       type: object
       properties:
@@ -291,28 +325,43 @@ components:
       - data
       - message
       - success
-    GetPostalCodesResponse:
+    GetPostalCodes:
+      type: object
+      properties:
+        postalCodes:
+          description: Available Postal Codes of the country
+          type: array
+          items:
+            type: string
+      required:
+      - postalCodes
+    ForbiddenResponse:
       type: object
       properties:
         statusCode:
           type: number
-          default: 200
+          default: 403
           description: The HTTP status code of the error
-        data:
-          description: Response Data from the operation
-          allOf:
-          - $ref: '#/components/schemas/GetPostalCodes'
+        error:
+          type: string
+          default: string
+          description: Human-readable generic error message
+        errorCode:
+          type: string
+          default: E_FORBIDDEN
+          description: Computer-readable code for error handling
         message:
           type: string
-          default: Success
-          description: Human-readable message containing all available details about the operation
+          default: string
+          description: Human-readable error message containing all available details about how the error occurred
         success:
           type: boolean
-          default: true
+          default: false
           description: A boolean indicating whether this was a success response or an error response
       required:
       - statusCode
-      - data
+      - error
+      - errorCode
       - message
       - success
     GetCountries:
@@ -357,7 +406,7 @@ components:
       - district
       - city
       - area
-    GetDocumentTypesResponse:
+    GetPostalCodesResponse:
       type: object
       properties:
         statusCode:
@@ -367,7 +416,7 @@ components:
         data:
           description: Response Data from the operation
           allOf:
-          - $ref: '#/components/schemas/GetDocumentTypes'
+          - $ref: '#/components/schemas/GetPostalCodes'
         message:
           type: string
           default: Success
@@ -379,55 +428,6 @@ components:
       required:
       - statusCode
       - data
-      - message
-      - success
-    GetDocumentTypes:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Document Type Id
-        localName:
-          type: string
-          description: Document Type Id
-        docType:
-          type: string
-          description: Document Type (Utility Bill/ Passport etc.)
-        optional:
-          type: boolean
-          description: Is this document type optional or not.
-      required:
-      - id
-      - localName
-      - docType
-      - optional
-    InternalErrorResponse:
-      type: object
-      properties:
-        statusCode:
-          type: number
-          default: 500
-          description: The HTTP status code of the error
-        error:
-          type: string
-          default: string
-          description: Human-readable generic error message
-        errorCode:
-          type: string
-          default: E_INTERNAL_ERROR
-          description: Computer-readable code for error handling
-        message:
-          type: string
-          default: string
-          description: Human-readable error message containing all available details about how the error occurred
-        success:
-          type: boolean
-          default: false
-          description: A boolean indicating whether this was a success response or an error response
-      required:
-      - statusCode
-      - error
-      - errorCode
       - message
       - success
   securitySchemes:
