@@ -54,20 +54,30 @@ paths:
       - Authentication
 components:
   schemas:
-    GenerateTokenDto:
+    GenerateTokenSuccessResponse:
       type: object
       properties:
-        client_id:
+        statusCode:
+          type: number
+          default: 200
+          description: The HTTP status code of the error
+        data:
+          description: Response Data from the operation
+          allOf:
+          - $ref: '#/components/schemas/TokenResponse'
+        message:
           type: string
-          description: Provide Client ID shared with you
-          example: 2Hancbwhybyfy2nusfbuwbuwb
-        client_secret:
-          type: string
-          description: Provide Client Secret shared with you
-          example: y6tydyy-swfnv34-fnjjnve_eknk
+          default: Success
+          description: Human-readable message containing all available details about the operation
+        success:
+          type: boolean
+          default: true
+          description: A boolean indicating whether this was a success response or an error response
       required:
-      - client_id
-      - client_secret
+      - statusCode
+      - data
+      - message
+      - success
     TokenResponse:
       type: object
       properties:
@@ -121,30 +131,20 @@ components:
       - errorCode
       - message
       - success
-    GenerateTokenSuccessResponse:
+    GenerateTokenDto:
       type: object
       properties:
-        statusCode:
-          type: number
-          default: 200
-          description: The HTTP status code of the error
-        data:
-          description: Response Data from the operation
-          allOf:
-          - $ref: '#/components/schemas/TokenResponse'
-        message:
+        client_id:
           type: string
-          default: Success
-          description: Human-readable message containing all available details about the operation
-        success:
-          type: boolean
-          default: true
-          description: A boolean indicating whether this was a success response or an error response
+          description: Provide Client ID shared with you
+          example: 2Hancbwhybyfy2nusfbuwbuwb
+        client_secret:
+          type: string
+          description: Provide Client Secret shared with you
+          example: y6tydyy-swfnv34-fnjjnve_eknk
       required:
-      - statusCode
-      - data
-      - message
-      - success
+      - client_id
+      - client_secret
   securitySchemes:
     access-token:
       scheme: bearer
