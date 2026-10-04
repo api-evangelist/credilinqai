@@ -256,6 +256,84 @@ paths:
       - access-token: []
 components:
   schemas:
+    GetLoanPaymentsResponse:
+      type: object
+      properties:
+        statusCode:
+          type: number
+          default: 200
+          description: The HTTP status code of the error
+        data:
+          description: Response Data from the operation
+          type: array
+          items:
+            $ref: '#/components/schemas/LoanPayment'
+        message:
+          type: string
+          default: Success
+          description: Human-readable message containing all available details about the operation
+        success:
+          type: boolean
+          default: true
+          description: A boolean indicating whether this was a success response or an error response
+      required:
+      - statusCode
+      - data
+      - message
+      - success
+    UnauthorizedResponse:
+      type: object
+      properties:
+        statusCode:
+          type: number
+          default: 401
+          description: The HTTP status code of the error
+        error:
+          type: string
+          default: string
+          description: Human-readable generic error message
+        errorCode:
+          type: string
+          default: E_UNAUTHORIZED
+          description: Computer-readable code for error handling
+        message:
+          type: string
+          default: string
+          description: Human-readable error message containing all available details about how the error occurred
+        success:
+          type: boolean
+          default: false
+          description: A boolean indicating whether this was a success response or an error response
+      required:
+      - statusCode
+      - error
+      - errorCode
+      - message
+      - success
+    MakeLoanPaymentV1Dto:
+      type: object
+      properties:
+        loanId:
+          type: string
+          default: ''
+          example: c3eb1619-ff24-4773-97d8-b05264621e60
+          description: Loan Id, for which you want to make payment
+        paymentAmount:
+          type: number
+          example: 1000
+          description: "Payment Amount.\n    \n - Support decimal values as well."
+        paymentTypeId:
+          type: number
+          example: 1
+          description: "We have 3 types of payments. \n    \n For payment via bank transfer: ```1``` \n    \n For payment using UEN number: ```2```\n    \n For payment using QR code: ```3```"
+        paymentReferenceNo:
+          type: string
+          example: asd123
+          description: Payment reference number.
+      required:
+      - loanId
+      - paymentAmount
+      - paymentTypeId
     VerifyPayment:
       type: object
       properties:
@@ -346,62 +424,28 @@ components:
       - updatedAt
       - currency
       - remark
-    InternalErrorResponse:
+    VerifyLoanPaymentsResponse:
       type: object
       properties:
         statusCode:
           type: number
-          default: 500
+          default: 201
           description: The HTTP status code of the error
-        error:
-          type: string
-          default: string
-          description: Human-readable generic error message
-        errorCode:
-          type: string
-          default: E_INTERNAL_ERROR
-          description: Computer-readable code for error handling
+        data:
+          description: Response Data from the operation
+          allOf:
+          - $ref: '#/components/schemas/VerifyPayment'
         message:
           type: string
-          default: string
-          description: Human-readable error message containing all available details about how the error occurred
+          default: Success
+          description: Human-readable message containing all available details about the operation
         success:
           type: boolean
-          default: false
+          default: true
           description: A boolean indicating whether this was a success response or an error response
       required:
       - statusCode
-      - error
-      - errorCode
-      - message
-      - success
-    UnauthorizedResponse:
-      type: object
-      properties:
-        statusCode:
-          type: number
-          default: 401
-          description: The HTTP status code of the error
-        error:
-          type: string
-          default: string
-          description: Human-readable generic error message
-        errorCode:
-          type: string
-          default: E_UNAUTHORIZED
-          description: Computer-readable code for error handling
-        message:
-          type: string
-          default: string
-          description: Human-readable error message containing all available details about how the error occurred
-        success:
-          type: boolean
-          default: false
-          description: A boolean indicating whether this was a success response or an error response
-      required:
-      - statusCode
-      - error
-      - errorCode
+      - data
       - message
       - success
     LoanPayment:
@@ -489,17 +533,17 @@ components:
       - createdAt
       - updatedAt
       - currency
-    VerifyLoanPaymentsResponse:
+    MakeLoanPaymentResponse:
       type: object
       properties:
         statusCode:
           type: number
-          default: 201
+          default: 200
           description: The HTTP status code of the error
         data:
           description: Response Data from the operation
           allOf:
-          - $ref: '#/components/schemas/VerifyPayment'
+          - $ref: '#/components/schemas/LoanPayment'
         message:
           type: string
           default: Success
@@ -526,60 +570,29 @@ components:
       required:
       - paymentId
       - remark
-    MakeLoanPaymentResponse:
+    InternalErrorResponse:
       type: object
       properties:
         statusCode:
           type: number
-          default: 200
+          default: 500
           description: The HTTP status code of the error
-        data:
-          description: Response Data from the operation
-          allOf:
-          - $ref: '#/components/schemas/LoanPayment'
+        error:
+          type: string
+          default: string
+          description: Human-readable generic error message
+        errorCode:
+          type: string
+          default: E_INTERNAL_ERROR
+          description: Computer-readable code for error handling
         message:
           type: string
-          default: Success
-          description: Human-readable message containing all available details about the operation
-        success:
-          type: boolean
-          default: true
-          description: A boolean indicating whether this was a success response or an error response
-      required:
-      - statusCode
-      - data
-      - message
-      - success
-    BadRequestDrawdownResponse:
-      type: object
-      properties:
-        statusCode:
-          type: number
-          default: 400
-        error:
-          default: ''
-          oneOf:
-          - type: string
-          - type: array
-            items:
-              type: string
-        errorCode:
-          default: ''
-          oneOf:
-          - type: string
-          - type: array
-            items:
-              type: string
-        message:
-          default: Error
-          oneOf:
-          - type: string
-          - type: array
-            items:
-              type: string
+          default: string
+          description: Human-readable error message containing all available details about how the error occurred
         success:
           type: boolean
           default: false
+          description: A boolean indicating whether this was a success response or an error response
       required:
       - statusCode
       - error
@@ -615,55 +628,6 @@ components:
       - errorCode
       - message
       - success
-    GetLoanPaymentsResponse:
-      type: object
-      properties:
-        statusCode:
-          type: number
-          default: 200
-          description: The HTTP status code of the error
-        data:
-          description: Response Data from the operation
-          type: array
-          items:
-            $ref: '#/components/schemas/LoanPayment'
-        message:
-          type: string
-          default: Success
-          description: Human-readable message containing all available details about the operation
-        success:
-          type: boolean
-          default: true
-          description: A boolean indicating whether this was a success response or an error response
-      required:
-      - statusCode
-      - data
-      - message
-      - success
-    MakeLoanPaymentV1Dto:
-      type: object
-      properties:
-        loanId:
-          type: string
-          default: ''
-          example: c3eb1619-ff24-4773-97d8-b05264621e60
-          description: Loan Id, for which you want to make payment
-        paymentAmount:
-          type: number
-          example: 1000
-          description: "Payment Amount.\n    \n - Support decimal values as well."
-        paymentTypeId:
-          type: number
-          example: 1
-          description: "We have 3 types of payments. \n    \n For payment via bank transfer: ```1``` \n    \n For payment using UEN number: ```2```\n    \n For payment using QR code: ```3```"
-        paymentReferenceNo:
-          type: string
-          example: asd123
-          description: Payment reference number.
-      required:
-      - loanId
-      - paymentAmount
-      - paymentTypeId
     DrawdownNotFoundResponse:
       type: object
       properties:
@@ -687,6 +651,42 @@ components:
           type: boolean
           default: false
           description: A boolean indicating whether this was a success response or an error response
+      required:
+      - statusCode
+      - error
+      - errorCode
+      - message
+      - success
+    BadRequestDrawdownResponse:
+      type: object
+      properties:
+        statusCode:
+          type: number
+          default: 400
+        error:
+          default: ''
+          oneOf:
+          - type: string
+          - type: array
+            items:
+              type: string
+        errorCode:
+          default: ''
+          oneOf:
+          - type: string
+          - type: array
+            items:
+              type: string
+        message:
+          default: Error
+          oneOf:
+          - type: string
+          - type: array
+            items:
+              type: string
+        success:
+          type: boolean
+          default: false
       required:
       - statusCode
       - error

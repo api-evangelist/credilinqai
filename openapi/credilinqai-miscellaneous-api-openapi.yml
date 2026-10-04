@@ -192,26 +192,78 @@ paths:
       - Miscellaneous
 components:
   schemas:
-    GetCountries:
+    GetPostalCodesResponse:
       type: object
       properties:
-        countries:
-          description: Available Counties
-          type: array
-          items:
-            $ref: '#/components/schemas/Country'
+        statusCode:
+          type: number
+          default: 200
+          description: The HTTP status code of the error
+        data:
+          description: Response Data from the operation
+          allOf:
+          - $ref: '#/components/schemas/GetPostalCodes'
+        message:
+          type: string
+          default: Success
+          description: Human-readable message containing all available details about the operation
+        success:
+          type: boolean
+          default: true
+          description: A boolean indicating whether this was a success response or an error response
       required:
-      - countries
-    GetPostalCodes:
+      - statusCode
+      - data
+      - message
+      - success
+    GetCountriesResponse:
       type: object
       properties:
-        postalCodes:
-          description: Available Postal Codes of the country
-          type: array
-          items:
-            type: string
+        statusCode:
+          type: number
+          default: 200
+          description: The HTTP status code of the error
+        data:
+          description: Response Data from the operation
+          allOf:
+          - $ref: '#/components/schemas/GetCountries'
+        message:
+          type: string
+          default: Success
+          description: Human-readable message containing all available details about the operation
+        success:
+          type: boolean
+          default: true
+          description: A boolean indicating whether this was a success response or an error response
       required:
-      - postalCodes
+      - statusCode
+      - data
+      - message
+      - success
+    GetAddressResponse:
+      type: object
+      properties:
+        statusCode:
+          type: number
+          default: 200
+          description: The HTTP status code of the error
+        data:
+          description: Response Data from the operation
+          allOf:
+          - $ref: '#/components/schemas/GetAddress'
+        message:
+          type: string
+          default: Success
+          description: Human-readable message containing all available details about the operation
+        success:
+          type: boolean
+          default: true
+          description: A boolean indicating whether this was a success response or an error response
+      required:
+      - statusCode
+      - data
+      - message
+      - success
     InternalErrorResponse:
       type: object
       properties:
@@ -241,30 +293,48 @@ components:
       - errorCode
       - message
       - success
-    GetDocumentTypesResponse:
+    GetDocumentTypes:
       type: object
       properties:
-        statusCode:
-          type: number
-          default: 200
-          description: The HTTP status code of the error
-        data:
-          description: Response Data from the operation
-          allOf:
-          - $ref: '#/components/schemas/GetDocumentTypes'
-        message:
+        id:
           type: string
-          default: Success
-          description: Human-readable message containing all available details about the operation
-        success:
+          description: Document Type Id
+        localName:
+          type: string
+          description: Document Type Id
+        docType:
+          type: string
+          description: Document Type (Utility Bill/ Passport etc.)
+        optional:
           type: boolean
-          default: true
-          description: A boolean indicating whether this was a success response or an error response
+          description: Is this document type optional or not.
       required:
-      - statusCode
-      - data
-      - message
-      - success
+      - id
+      - localName
+      - docType
+      - optional
+    Country:
+      type: object
+      properties:
+        country:
+          type: string
+          description: Name of the country
+        countryCode:
+          type: string
+          description: Code of the country
+      required:
+      - country
+      - countryCode
+    GetPostalCodes:
+      type: object
+      properties:
+        postalCodes:
+          description: Available Postal Codes of the country
+          type: array
+          items:
+            type: string
+      required:
+      - postalCodes
     ForbiddenResponse:
       type: object
       properties:
@@ -294,7 +364,17 @@ components:
       - errorCode
       - message
       - success
-    GetAddressResponse:
+    GetCountries:
+      type: object
+      properties:
+        countries:
+          description: Available Counties
+          type: array
+          items:
+            $ref: '#/components/schemas/Country'
+      required:
+      - countries
+    GetDocumentTypesResponse:
       type: object
       properties:
         statusCode:
@@ -304,7 +384,7 @@ components:
         data:
           description: Response Data from the operation
           allOf:
-          - $ref: '#/components/schemas/GetAddress'
+          - $ref: '#/components/schemas/GetDocumentTypes'
         message:
           type: string
           default: Success
@@ -350,86 +430,6 @@ components:
       - district
       - city
       - area
-    GetPostalCodesResponse:
-      type: object
-      properties:
-        statusCode:
-          type: number
-          default: 200
-          description: The HTTP status code of the error
-        data:
-          description: Response Data from the operation
-          allOf:
-          - $ref: '#/components/schemas/GetPostalCodes'
-        message:
-          type: string
-          default: Success
-          description: Human-readable message containing all available details about the operation
-        success:
-          type: boolean
-          default: true
-          description: A boolean indicating whether this was a success response or an error response
-      required:
-      - statusCode
-      - data
-      - message
-      - success
-    Country:
-      type: object
-      properties:
-        country:
-          type: string
-          description: Name of the country
-        countryCode:
-          type: string
-          description: Code of the country
-      required:
-      - country
-      - countryCode
-    GetDocumentTypes:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Document Type Id
-        localName:
-          type: string
-          description: Document Type Id
-        docType:
-          type: string
-          description: Document Type (Utility Bill/ Passport etc.)
-        optional:
-          type: boolean
-          description: Is this document type optional or not.
-      required:
-      - id
-      - localName
-      - docType
-      - optional
-    GetCountriesResponse:
-      type: object
-      properties:
-        statusCode:
-          type: number
-          default: 200
-          description: The HTTP status code of the error
-        data:
-          description: Response Data from the operation
-          allOf:
-          - $ref: '#/components/schemas/GetCountries'
-        message:
-          type: string
-          default: Success
-          description: Human-readable message containing all available details about the operation
-        success:
-          type: boolean
-          default: true
-          description: A boolean indicating whether this was a success response or an error response
-      required:
-      - statusCode
-      - data
-      - message
-      - success
   securitySchemes:
     access-token:
       scheme: bearer

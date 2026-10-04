@@ -54,30 +54,6 @@ paths:
       - Authentication
 components:
   schemas:
-    GenerateTokenSuccessResponse:
-      type: object
-      properties:
-        statusCode:
-          type: number
-          default: 200
-          description: The HTTP status code of the error
-        data:
-          description: Response Data from the operation
-          allOf:
-          - $ref: '#/components/schemas/TokenResponse'
-        message:
-          type: string
-          default: Success
-          description: Human-readable message containing all available details about the operation
-        success:
-          type: boolean
-          default: true
-          description: A boolean indicating whether this was a success response or an error response
-      required:
-      - statusCode
-      - data
-      - message
-      - success
     TokenResponse:
       type: object
       properties:
@@ -102,6 +78,44 @@ components:
       - scope
       - expires_in
       - token_type
+    GenerateTokenSuccessResponse:
+      type: object
+      properties:
+        statusCode:
+          type: number
+          default: 200
+          description: The HTTP status code of the error
+        data:
+          description: Response Data from the operation
+          allOf:
+          - $ref: '#/components/schemas/TokenResponse'
+        message:
+          type: string
+          default: Success
+          description: Human-readable message containing all available details about the operation
+        success:
+          type: boolean
+          default: true
+          description: A boolean indicating whether this was a success response or an error response
+      required:
+      - statusCode
+      - data
+      - message
+      - success
+    GenerateTokenDto:
+      type: object
+      properties:
+        client_id:
+          type: string
+          description: Provide Client ID shared with you
+          example: 2Hancbwhybyfy2nusfbuwbuwb
+        client_secret:
+          type: string
+          description: Provide Client Secret shared with you
+          example: y6tydyy-swfnv34-fnjjnve_eknk
+      required:
+      - client_id
+      - client_secret
     BadRequestResponse:
       type: object
       properties:
@@ -131,20 +145,6 @@ components:
       - errorCode
       - message
       - success
-    GenerateTokenDto:
-      type: object
-      properties:
-        client_id:
-          type: string
-          description: Provide Client ID shared with you
-          example: 2Hancbwhybyfy2nusfbuwbuwb
-        client_secret:
-          type: string
-          description: Provide Client Secret shared with you
-          example: y6tydyy-swfnv34-fnjjnve_eknk
-      required:
-      - client_id
-      - client_secret
   securitySchemes:
     access-token:
       scheme: bearer

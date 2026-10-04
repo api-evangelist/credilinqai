@@ -256,167 +256,28 @@ paths:
       - access-token: []
 components:
   schemas:
-    DisburseLoanStatusResponse:
-      type: object
-      properties:
-        loanId:
-          type: string
-          default: string
-          description: Id of the created loan
-        loanReferenceNo:
-          type: string
-          default: string
-          description: Reference Number of the created loan for eg. BNPL***
-        customerReferenceNo:
-          type: string
-          default: ''
-          description: Customer Reference number, for which loan is created
-        loanTerm:
-          type: number
-          example: 30
-          description: Duration of the loan. Based on loan terms selected at the cusomer level, The customer for whom loan is being created should be
-          enum:
-          - 30
-          - 45
-          - 60
-          - 90
-          - 120
-          - 150
-          - 180
-          - 210
-          - 240
-          - 270
-          - 300
-          - 330
-          - 360
-          default: 30
-        loanType:
-          type: string
-          description: "Type of loan\n    \n We support these two types,\n    \n 1. ```BNPL``` - Buyer Financing\n    \n 2. ```GMV``` - Seller Financing"
-          example: BNPL
-        loanStatus:
-          type: string
-          description: "Status of loan\n    \n We support these three statuses,\n    \n 1. ```pending-for-approval``` - Loan is pending for approval\n    \n 2. ```waiting-for-disbursal``` - Loan is pending for disbursal,\n    \n 3. ```active``` - Loan is active,\n    \n 4. ```rejected``` - Loan is rejected for some reason,\n    \n 5. ```closed``` - Loan is paid & closed"
-          example: active
-        disbursalAmount:
-          type: number
-          description: Loan Amount
-          default: 2000
-        totalDueAmount:
-          type: number
-          description: Total Loan Due Amount
-          default: 2000
-        loanDueDate:
-          type: string
-          description: Loan Due Date in Local Format eg. 21 Aug 2023
-          default: 21 August 2023
-          example: 21 August 2023
-        loanDueDateUTC:
-          type: string
-          description: Loan Due Date in UTC Format eg. 2023-08-20T18:30:00.000Z
-          default: '2023-08-20T18:30:00.000Z'
-          example: '2023-08-20T18:30:00.000Z'
-        dueDatePostGracePeriod:
-          type: string
-          description: Loan Due Date with grace period in Local Format eg. 24 Aug 2023
-          default: 24 August 2023
-          example: 24 August 2023
-        dueDatePostGracePeriodUTC:
-          type: string
-          description: Loan Due Date with grace period in UTC Format eg. 2023-08-23T18:30:00.000Z
-          default: '2023-08-23T18:30:00.000Z'
-          example: '2023-08-23T18:30:00.000Z'
-        gracePeriodInDays:
-          type: number
-          description: Grace Period(In Days), After which loan goes into overdue.
-          default: 3
-          example: 3
-        charges:
-          type: number
-          description: Total Monthly Charges(%) Applied on Loan Amount
-          default: 1
-        chargesApplied:
-          type: number
-          description: Total Amount of Charges Applied on Loan Amount
-          default: 50
-        customerApprovedCredit:
-          type: number
-          description: Customer Approved Credit Line
-          default: 20000
-        customerAvailableCredit:
-          type: number
-          description: Customer Remaining Credit Line after loan
-          default: 17500
-        remark:
-          type: string
-          description: Remark given while requesting for loan
-          default: string
-        metadata:
-          type: string
-          default: string
-          description: Metadata for loans. It can be used for reporting, reconciliation purpose.
-        createdAt:
-          type: string
-          default: '2025-01-08T05:12:17.405Z'
-          description: Created Timestamp of the created loan in UTC Format eg. 2023-03-30T11:46:42.195Z
-        updatedAt:
-          type: string
-          default: '2025-01-08T05:12:17.405Z'
-          description: Updated Timestamp of the created loan in UTC Format eg. 2023-03-30T11:46:42.195Z
-        currency:
-          type: string
-          default: SGD
-          description: Currency Code
-      required:
-      - loanId
-      - loanReferenceNo
-      - customerReferenceNo
-      - loanTerm
-      - loanType
-      - loanStatus
-      - disbursalAmount
-      - totalDueAmount
-      - loanDueDate
-      - loanDueDateUTC
-      - dueDatePostGracePeriod
-      - dueDatePostGracePeriodUTC
-      - gracePeriodInDays
-      - charges
-      - chargesApplied
-      - customerApprovedCredit
-      - customerAvailableCredit
-      - remark
-      - metadata
-      - createdAt
-      - updatedAt
-      - currency
-    UnauthorizedResponse:
+    DisburseDrawdownResponse:
       type: object
       properties:
         statusCode:
           type: number
-          default: 401
+          default: 200
           description: The HTTP status code of the error
-        error:
-          type: string
-          default: string
-          description: Human-readable generic error message
-        errorCode:
-          type: string
-          default: E_UNAUTHORIZED
-          description: Computer-readable code for error handling
+        data:
+          description: Response Data from the operation
+          allOf:
+          - $ref: '#/components/schemas/DisburseLoanStatusResponse'
         message:
           type: string
-          default: string
-          description: Human-readable error message containing all available details about how the error occurred
+          default: Success
+          description: Human-readable message containing all available details about the operation
         success:
           type: boolean
-          default: false
+          default: true
           description: A boolean indicating whether this was a success response or an error response
       required:
       - statusCode
-      - error
-      - errorCode
+      - data
       - message
       - success
     LoanPayment:
@@ -504,254 +365,62 @@ components:
       - createdAt
       - updatedAt
       - currency
-    BadRequestDrawdownResponse:
+    InternalErrorResponse:
       type: object
       properties:
         statusCode:
           type: number
-          default: 400
+          default: 500
+          description: The HTTP status code of the error
         error:
-          default: ''
-          oneOf:
-          - type: string
-          - type: array
-            items:
-              type: string
+          type: string
+          default: string
+          description: Human-readable generic error message
         errorCode:
-          default: ''
-          oneOf:
-          - type: string
-          - type: array
-            items:
-              type: string
+          type: string
+          default: E_INTERNAL_ERROR
+          description: Computer-readable code for error handling
         message:
-          default: Error
-          oneOf:
-          - type: string
-          - type: array
-            items:
-              type: string
+          type: string
+          default: string
+          description: Human-readable error message containing all available details about how the error occurred
         success:
           type: boolean
           default: false
+          description: A boolean indicating whether this was a success response or an error response
       required:
       - statusCode
       - error
       - errorCode
       - message
       - success
-    GetLoanSummaryResponse:
+    CustomerNotFoundResponse:
       type: object
       properties:
         statusCode:
           type: number
-          default: 200
+          default: 404
           description: The HTTP status code of the error
-        data:
-          description: Response Data from the operation
-          allOf:
-          - $ref: '#/components/schemas/LoanSummaryResponse'
-        message:
-          type: string
-          default: Success
-          description: Human-readable message containing all available details about the operation
-        success:
-          type: boolean
-          default: true
-          description: A boolean indicating whether this was a success response or an error response
-      required:
-      - statusCode
-      - data
-      - message
-      - success
-    CalculateLoanScheduleV1Dto:
-      type: object
-      properties:
-        customerReferenceNo:
-          type: string
-          default: ''
-          example: c3eb1619-ff24-4773-97d8-b05264621e60
-          description: "Customer Reference number. Each customer has unique reference number. Enter reference number of the customer for whom loan should be created.\n - ``` /^S*$/ ```"
-        loanAmount:
-          type: number
-          description: "Loan Amount.\n    \n - Support decimal values as well."
-          example: 50000
-        loanTerm:
-          type: number
-          example: 30
-          description: Duration of the loan. Based on loan terms selected at the cusomer level, The customer for whom loan is being created should be.
-          enum:
-          - 30
-          - 45
-          - 60
-          - 90
-          - 120
-          - 150
-          - 180
-          - 210
-          - 240
-          - 270
-          - 300
-          - 330
-          - 360
-          default: 30
-        loanType:
-          type: string
-          description: "\nType of loan.\n    \n We support these two types,\n    \n 1. ```BNPL``` - Buyer Financing\n    \n 2. ```GMV``` - Seller Financing"
-          enum:
-          - BNPL
-          - GMV
-          - BNPL_Term
-          - GMV_Term
-          example: BNPL
-      required:
-      - customerReferenceNo
-      - loanAmount
-      - loanTerm
-      - loanType
-    LoanSummaryResponse:
-      type: object
-      properties:
-        loanId:
+        error:
           type: string
           default: string
-          description: Id of the created loan
-        loanStatus:
+          description: Human-readable generic error message
+        errorCode:
           type: string
-          description: "Status of loan\n    \n We support these three statuses,\n    \n 1. ```pending-for-approval``` - Loan is pending for approval\n    \n 2. ```waiting-for-disbursal``` - Loan is pending for disbursal,\n    \n 3. ```active``` - Loan is active,\n    \n 4. ```rejected``` - Loan is rejected for some reason,\n    \n 5. ```closed``` - Loan is paid & closed"
-          example: active
-        loanReferenceNo:
-          type: string
-          default: BNPL180820235070
-          description: Loan Reference number
-        loanType:
-          type: string
-          description: "Type of loan\n    \n We support these 4 types,\n    \n 1. ```BNPL``` - Buyer Financing\n    \n 2. ```BNPL_Term``` - Buyer Financing Term Loan\n    \n 3. ```GMV``` - Seller Financing\n    \n 4. ```GMV_Term``` - Seller Financing Term Loan"
-          example: BNPL
-        customerReferenceNo:
-          type: string
-          default: ''
-          description: Customer Reference number, for which loan is created
-        loanTerm:
-          type: number
-          example: 30
-          description: Duration of the loan. Based on loan terms selected at the cusomer level, The customer for whom loan is being created should be
-          enum:
-          - 30
-          - 45
-          - 60
-          - 90
-          - 120
-          - 150
-          - 180
-          - 210
-          - 240
-          - 270
-          - 300
-          - 330
-          - 360
-          default: 30
-        loanAmount:
-          type: number
-          description: Loan Amount
-          example: 3500
-        totalServiceFee:
-          type: number
-          description: Total Service fee applied on loan
-          example: 99.17
-        totalServiceFeeDue:
-          type: number
-          description: Total Service fee Due for loan
-          example: 99.17
-        expectedRepaymentAmount:
-          type: number
-          description: Total Expected Repayment Amount
-          default: 3599.17
-        totalDueAmount:
-          type: number
-          description: Total Due amount that is remaining to repay
-          default: 3599.17
-        loanDueDate:
-          type: string
-          description: Loan Due Date eg. 18 September 2023
-          default: 18 September 2023
-          example: 18 September 2023
-        dueDatePostGracePeriod:
-          type: string
-          description: Due date with Grace Period, eg. Loan Due date is 18 September 2023, and grace period is 3 days. so dueDatePostGracePeriod will be 21 September 2023
-          default: 18 September 2023
-          example: 21 September 2023
-        gracePeriodInDays:
-          type: number
-          description: Grace Period(In Days), After which loan goes into overdue.
-          default: 3
-          example: 3
-        totalPenaltyDue:
-          type: number
-          description: Penalty outstanding that needs to repay
-          default: 0
-          example: 0
-        currency:
-          type: string
-          default: SGD
-          description: Currency Code
-        requestedDate:
-          type: string
-          description: Loan Due Date eg. 18 Aug 2023
-          default: 18 Aug 2023
-          example: 18 Aug 2023
-        repaymentSchedule:
-          description: Repayment schedule for loan
-          type: array
-          items:
-            $ref: '#/components/schemas/RepaymentScheduleV2Response'
-        payments:
-          description: All payments done by customer for the loan
-          type: array
-          items:
-            $ref: '#/components/schemas/LoanPayment'
-      required:
-      - loanId
-      - loanStatus
-      - loanReferenceNo
-      - loanType
-      - customerReferenceNo
-      - loanTerm
-      - loanAmount
-      - totalServiceFee
-      - totalServiceFeeDue
-      - expectedRepaymentAmount
-      - totalDueAmount
-      - loanDueDate
-      - dueDatePostGracePeriod
-      - gracePeriodInDays
-      - totalPenaltyDue
-      - currency
-      - requestedDate
-      - repaymentSchedule
-      - payments
-    GetCalculateLoanResponse:
-      type: object
-      properties:
-        statusCode:
-          type: number
-          default: 200
-          description: The HTTP status code of the error
-        data:
-          description: Response Data from the operation
-          allOf:
-          - $ref: '#/components/schemas/CalculateLoanResponse'
+          default: E_C_CUSTOMER_NOT_FOUND
+          description: Computer-readable code for error handling
         message:
           type: string
-          default: Success
-          description: Human-readable message containing all available details about the operation
+          default: string
+          description: Human-readable error message containing all available details about how the error occurred
         success:
           type: boolean
-          default: true
+          default: false
           description: A boolean indicating whether this was a success response or an error response
       required:
       - statusCode
-      - data
+      - error
+      - errorCode
       - message
       - success
     LoanResponse:
@@ -888,6 +557,127 @@ components:
       - createdAt
       - updatedAt
       - currency
+    LoanSummaryResponse:
+      type: object
+      properties:
+        loanId:
+          type: string
+          default: string
+          description: Id of the created loan
+        loanStatus:
+          type: string
+          description: "Status of loan\n    \n We support these three statuses,\n    \n 1. ```pending-for-approval``` - Loan is pending for approval\n    \n 2. ```waiting-for-disbursal``` - Loan is pending for disbursal,\n    \n 3. ```active``` - Loan is active,\n    \n 4. ```rejected``` - Loan is rejected for some reason,\n    \n 5. ```closed``` - Loan is paid & closed"
+          example: active
+        loanReferenceNo:
+          type: string
+          default: BNPL180820235070
+          description: Loan Reference number
+        loanType:
+          type: string
+          description: "Type of loan\n    \n We support these 4 types,\n    \n 1. ```BNPL``` - Buyer Financing\n    \n 2. ```BNPL_Term``` - Buyer Financing Term Loan\n    \n 3. ```GMV``` - Seller Financing\n    \n 4. ```GMV_Term``` - Seller Financing Term Loan"
+          example: BNPL
+        customerReferenceNo:
+          type: string
+          default: ''
+          description: Customer Reference number, for which loan is created
+        loanTerm:
+          type: number
+          example: 30
+          description: Duration of the loan. Based on loan terms selected at the cusomer level, The customer for whom loan is being created should be
+          enum:
+          - 30
+          - 45
+          - 60
+          - 90
+          - 120
+          - 150
+          - 180
+          - 210
+          - 240
+          - 270
+          - 300
+          - 330
+          - 360
+          default: 30
+        loanAmount:
+          type: number
+          description: Loan Amount
+          example: 3500
+        totalServiceFee:
+          type: number
+          description: Total Service fee applied on loan
+          example: 99.17
+        totalServiceFeeDue:
+          type: number
+          description: Total Service fee Due for loan
+          example: 99.17
+        expectedRepaymentAmount:
+          type: number
+          description: Total Expected Repayment Amount
+          default: 3599.17
+        totalDueAmount:
+          type: number
+          description: Total Due amount that is remaining to repay
+          default: 3599.17
+        loanDueDate:
+          type: string
+          description: Loan Due Date eg. 18 September 2023
+          default: 18 September 2023
+          example: 18 September 2023
+        dueDatePostGracePeriod:
+          type: string
+          description: Due date with Grace Period, eg. Loan Due date is 18 September 2023, and grace period is 3 days. so dueDatePostGracePeriod will be 21 September 2023
+          default: 18 September 2023
+          example: 21 September 2023
+        gracePeriodInDays:
+          type: number
+          description: Grace Period(In Days), After which loan goes into overdue.
+          default: 3
+          example: 3
+        totalPenaltyDue:
+          type: number
+          description: Penalty outstanding that needs to repay
+          default: 0
+          example: 0
+        currency:
+          type: string
+          default: SGD
+          description: Currency Code
+        requestedDate:
+          type: string
+          description: Loan Due Date eg. 18 Aug 2023
+          default: 18 Aug 2023
+          example: 18 Aug 2023
+        repaymentSchedule:
+          description: Repayment schedule for loan
+          type: array
+          items:
+            $ref: '#/components/schemas/RepaymentScheduleV2Response'
+        payments:
+          description: All payments done by customer for the loan
+          type: array
+          items:
+            $ref: '#/components/schemas/LoanPayment'
+      required:
+      - loanId
+      - loanStatus
+      - loanReferenceNo
+      - loanType
+      - customerReferenceNo
+      - loanTerm
+      - loanAmount
+      - totalServiceFee
+      - totalServiceFeeDue
+      - expectedRepaymentAmount
+      - totalDueAmount
+      - loanDueDate
+      - dueDatePostGracePeriod
+      - gracePeriodInDays
+      - totalPenaltyDue
+      - currency
+      - requestedDate
+      - repaymentSchedule
+      - payments
     CreateLoanV1Dto:
       type: object
       properties:
@@ -945,35 +735,65 @@ components:
       - loanAmount
       - loanType
       - loanTerm
-    CustomerNotFoundResponse:
+    DisburseLoanDto:
       type: object
       properties:
-        statusCode:
-          type: number
-          default: 404
-          description: The HTTP status code of the error
-        error:
+        loanId:
           type: string
-          default: string
-          description: Human-readable generic error message
-        errorCode:
+          default: ''
+          example: c3eb1619-ff24-4773-97d8-b05264621e60
+          description: Loan Id
+        metadata:
           type: string
-          default: E_C_CUSTOMER_NOT_FOUND
-          description: Computer-readable code for error handling
-        message:
-          type: string
-          default: string
-          description: Human-readable error message containing all available details about how the error occurred
-        success:
-          type: boolean
-          default: false
-          description: A boolean indicating whether this was a success response or an error response
+          description: Metadata for loans. It can be used for reporting, reconciliation purpose.
+          example: ''
       required:
-      - statusCode
-      - error
-      - errorCode
-      - message
-      - success
+      - loanId
+    RepaymentScheduleV2Response:
+      type: object
+      properties:
+        dueDate:
+          type: string
+          description: Loan Due Date eg. 18 September 2023
+          default: 18 September 2023
+          example: 18 September 2023
+        totalDueForPeriod:
+          type: number
+          description: Total due payment for current period
+          example: 3599.17
+        penaltyDueForPeriod:
+          type: number
+          description: Total due penalty for current period
+          example: 0
+        totalServiceFeeForPeriod:
+          type: number
+          description: Total Service fee for current period
+          example: 99.17
+        totalServiceFeeDueForPeriod:
+          type: number
+          description: Total Service fee due for current period
+          example: 99.17
+        principalDueForPeriod:
+          type: number
+          description: Total due principal for current period
+          example: 3500
+        dueDatePostGracePeriod:
+          type: string
+          description: Due date with grace period eg. 21 September 2023
+          example: 21 September 2023
+        paid:
+          type: boolean
+          description: indicates that payment is completed or not
+          example: false
+      required:
+      - dueDate
+      - totalDueForPeriod
+      - penaltyDueForPeriod
+      - totalServiceFeeForPeriod
+      - totalServiceFeeDueForPeriod
+      - principalDueForPeriod
+      - dueDatePostGracePeriod
+      - paid
     CalculateLoanResponse:
       type: object
       properties:
@@ -1033,7 +853,141 @@ components:
       - chargesApplied
       - totalRepaymentExpected
       - currency
-    DisburseDrawdownResponse:
+    DisburseLoanStatusResponse:
+      type: object
+      properties:
+        loanId:
+          type: string
+          default: string
+          description: Id of the created loan
+        loanReferenceNo:
+          type: string
+          default: string
+          description: Reference Number of the created loan for eg. BNPL***
+        customerReferenceNo:
+          type: string
+          default: ''
+          description: Customer Reference number, for which loan is created
+        loanTerm:
+          type: number
+          example: 30
+          description: Duration of the loan. Based on loan terms selected at the cusomer level, The customer for whom loan is being created should be
+          enum:
+          - 30
+          - 45
+          - 60
+          - 90
+          - 120
+          - 150
+          - 180
+          - 210
+          - 240
+          - 270
+          - 300
+          - 330
+          - 360
+          default: 30
+        loanType:
+          type: string
+          description: "Type of loan\n    \n We support these two types,\n    \n 1. ```BNPL``` - Buyer Financing\n    \n 2. ```GMV``` - Seller Financing"
+          example: BNPL
+        loanStatus:
+          type: string
+          description: "Status of loan\n    \n We support these three statuses,\n    \n 1. ```pending-for-approval``` - Loan is pending for approval\n    \n 2. ```waiting-for-disbursal``` - Loan is pending for disbursal,\n    \n 3. ```active``` - Loan is active,\n    \n 4. ```rejected``` - Loan is rejected for some reason,\n    \n 5. ```closed``` - Loan is paid & closed"
+          example: active
+        disbursalAmount:
+          type: number
+          description: Loan Amount
+          default: 2000
+        totalDueAmount:
+          type: number
+          description: Total Loan Due Amount
+          default: 2000
+        loanDueDate:
+          type: string
+          description: Loan Due Date in Local Format eg. 21 Aug 2023
+          default: 21 August 2023
+          example: 21 August 2023
+        loanDueDateUTC:
+          type: string
+          description: Loan Due Date in UTC Format eg. 2023-08-20T18:30:00.000Z
+          default: '2023-08-20T18:30:00.000Z'
+          example: '2023-08-20T18:30:00.000Z'
+        dueDatePostGracePeriod:
+          type: string
+          description: Loan Due Date with grace period in Local Format eg. 24 Aug 2023
+          default: 24 August 2023
+          example: 24 August 2023
+        dueDatePostGracePeriodUTC:
+          type: string
+          description: Loan Due Date with grace period in UTC Format eg. 2023-08-23T18:30:00.000Z
+          default: '2023-08-23T18:30:00.000Z'
+          example: '2023-08-23T18:30:00.000Z'
+        gracePeriodInDays:
+          type: number
+          description: Grace Period(In Days), After which loan goes into overdue.
+          default: 3
+          example: 3
+        charges:
+          type: number
+          description: Total Monthly Charges(%) Applied on Loan Amount
+          default: 1
+        chargesApplied:
+          type: number
+          description: Total Amount of Charges Applied on Loan Amount
+          default: 50
+        customerApprovedCredit:
+          type: number
+          description: Customer Approved Credit Line
+          default: 20000
+        customerAvailableCredit:
+          type: number
+          description: Customer Remaining Credit Line after loan
+          default: 17500
+        remark:
+          type: string
+          description: Remark given while requesting for loan
+          default: string
+        metadata:
+          type: string
+          default: string
+          description: Metadata for loans. It can be used for reporting, reconciliation purpose.
+        createdAt:
+          type: string
+          default: '2025-01-08T05:12:17.405Z'
+          description: Created Timestamp of the created loan in UTC Format eg. 2023-03-30T11:46:42.195Z
+        updatedAt:
+          type: string
+          default: '2025-01-08T05:12:17.405Z'
+          description: Updated Timestamp of the created loan in UTC Format eg. 2023-03-30T11:46:42.195Z
+        currency:
+          type: string
+          default: SGD
+          description: Currency Code
+      required:
+      - loanId
+      - loanReferenceNo
+      - customerReferenceNo
+      - loanTerm
+      - loanType
+      - loanStatus
+      - disbursalAmount
+      - totalDueAmount
+      - loanDueDate
+      - loanDueDateUTC
+      - dueDatePostGracePeriod
+      - dueDatePostGracePeriodUTC
+      - gracePeriodInDays
+      - charges
+      - chargesApplied
+      - customerApprovedCredit
+      - customerAvailableCredit
+      - remark
+      - metadata
+      - createdAt
+      - updatedAt
+      - currency
+    GetLoanSummaryResponse:
       type: object
       properties:
         statusCode:
@@ -1043,7 +997,7 @@ components:
         data:
           description: Response Data from the operation
           allOf:
-          - $ref: '#/components/schemas/DisburseLoanStatusResponse'
+          - $ref: '#/components/schemas/LoanSummaryResponse'
         message:
           type: string
           default: Success
@@ -1057,35 +1011,6 @@ components:
       - data
       - message
       - success
-    InternalErrorResponse:
-      type: object
-      properties:
-        statusCode:
-          type: number
-          default: 500
-          description: The HTTP status code of the error
-        error:
-          type: string
-          default: string
-          description: Human-readable generic error message
-        errorCode:
-          type: string
-          default: E_INTERNAL_ERROR
-          description: Computer-readable code for error handling
-        message:
-          type: string
-          default: string
-          description: Human-readable error message containing all available details about how the error occurred
-        success:
-          type: boolean
-          default: false
-          description: A boolean indicating whether this was a success response or an error response
-      required:
-      - statusCode
-      - error
-      - errorCode
-      - message
-      - success
     CreateDrawdownResponse:
       type: object
       properties:
@@ -1097,6 +1022,75 @@ components:
           description: Response Data from the operation
           allOf:
           - $ref: '#/components/schemas/LoanResponse'
+        message:
+          type: string
+          default: Success
+          description: Human-readable message containing all available details about the operation
+        success:
+          type: boolean
+          default: true
+          description: A boolean indicating whether this was a success response or an error response
+      required:
+      - statusCode
+      - data
+      - message
+      - success
+    CalculateLoanScheduleV1Dto:
+      type: object
+      properties:
+        customerReferenceNo:
+          type: string
+          default: ''
+          example: c3eb1619-ff24-4773-97d8-b05264621e60
+          description: "Customer Reference number. Each customer has unique reference number. Enter reference number of the customer for whom loan should be created.\n - ``` /^S*$/ ```"
+        loanAmount:
+          type: number
+          description: "Loan Amount.\n    \n - Support decimal values as well."
+          example: 50000
+        loanTerm:
+          type: number
+          example: 30
+          description: Duration of the loan. Based on loan terms selected at the cusomer level, The customer for whom loan is being created should be.
+          enum:
+          - 30
+          - 45
+          - 60
+          - 90
+          - 120
+          - 150
+          - 180
+          - 210
+          - 240
+          - 270
+          - 300
+          - 330
+          - 360
+          default: 30
+        loanType:
+          type: string
+          description: "\nType of loan.\n    \n We support these two types,\n    \n 1. ```BNPL``` - Buyer Financing\n    \n 2. ```GMV``` - Seller Financing"
+          enum:
+          - BNPL
+          - GMV
+          - BNPL_Term
+          - GMV_Term
+          example: BNPL
+      required:
+      - customerReferenceNo
+      - loanAmount
+      - loanTerm
+      - loanType
+    GetCalculateLoanResponse:
+      type: object
+      properties:
+        statusCode:
+          type: number
+          default: 200
+          description: The HTTP status code of the error
+        data:
+          description: Response Data from the operation
+          allOf:
+          - $ref: '#/components/schemas/CalculateLoanResponse'
         message:
           type: string
           default: Success
@@ -1139,20 +1133,35 @@ components:
       - errorCode
       - message
       - success
-    DisburseLoanDto:
+    UnauthorizedResponse:
       type: object
       properties:
-        loanId:
+        statusCode:
+          type: number
+          default: 401
+          description: The HTTP status code of the error
+        error:
           type: string
-          default: ''
-          example: c3eb1619-ff24-4773-97d8-b05264621e60
-          description: Loan Id
-        metadata:
+          default: string
+          description: Human-readable generic error message
+        errorCode:
           type: string
-          description: Metadata for loans. It can be used for reporting, reconciliation purpose.
-          example: ''
+          default: E_UNAUTHORIZED
+          description: Computer-readable code for error handling
+        message:
+          type: string
+          default: string
+          description: Human-readable error message containing all available details about how the error occurred
+        success:
+          type: boolean
+          default: false
+          description: A boolean indicating whether this was a success response or an error response
       required:
-      - loanId
+      - statusCode
+      - error
+      - errorCode
+      - message
+      - success
     DrawdownNotFoundResponse:
       type: object
       properties:
@@ -1182,51 +1191,42 @@ components:
       - errorCode
       - message
       - success
-    RepaymentScheduleV2Response:
+    BadRequestDrawdownResponse:
       type: object
       properties:
-        dueDate:
-          type: string
-          description: Loan Due Date eg. 18 September 2023
-          default: 18 September 2023
-          example: 18 September 2023
-        totalDueForPeriod:
+        statusCode:
           type: number
-          description: Total due payment for current period
-          example: 3599.17
-        penaltyDueForPeriod:
-          type: number
-          description: Total due penalty for current period
-          example: 0
-        totalServiceFeeForPeriod:
-          type: number
-          description: Total Service fee for current period
-          example: 99.17
-        totalServiceFeeDueForPeriod:
-          type: number
-          description: Total Service fee due for current period
-          example: 99.17
-        principalDueForPeriod:
-          type: number
-          description: Total due principal for current period
-          example: 3500
-        dueDatePostGracePeriod:
-          type: string
-          description: Due date with grace period eg. 21 September 2023
-          example: 21 September 2023
-        paid:
+          default: 400
+        error:
+          default: ''
+          oneOf:
+          - type: string
+          - type: array
+            items:
+              type: string
+        errorCode:
+          default: ''
+          oneOf:
+          - type: string
+          - type: array
+            items:
+              type: string
+        message:
+          default: Error
+          oneOf:
+          - type: string
+          - type: array
+            items:
+              type: string
+        success:
           type: boolean
-          description: indicates that payment is completed or not
-          example: false
+          default: false
       required:
-      - dueDate
-      - totalDueForPeriod
-      - penaltyDueForPeriod
-      - totalServiceFeeForPeriod
-      - totalServiceFeeDueForPeriod
-      - principalDueForPeriod
-      - dueDatePostGracePeriod
-      - paid
+      - statusCode
+      - error
+      - errorCode
+      - message
+      - success
   securitySchemes:
     access-token:
       scheme: bearer
