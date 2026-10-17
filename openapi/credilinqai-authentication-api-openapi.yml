@@ -54,30 +54,20 @@ paths:
       - Authentication
 components:
   schemas:
-    TokenResponse:
+    GenerateTokenDto:
       type: object
       properties:
-        access_token:
+        client_id:
           type: string
-          default: <token>
-          description: Access-Token, which will be used for all operations
-        scope:
+          description: Provide Client ID shared with you
+          example: 2Hancbwhybyfy2nusfbuwbuwb
+        client_secret:
           type: string
-          default: <scope>
-          description: Scope of the access-token
-        expires_in:
-          type: number
-          default: 200000
-          description: Expiry of the access-token
-        token_type:
-          type: string
-          default: Bearer
-          description: Access-Token type
+          description: Provide Client Secret shared with you
+          example: y6tydyy-swfnv34-fnjjnve_eknk
       required:
-      - access_token
-      - scope
-      - expires_in
-      - token_type
+      - client_id
+      - client_secret
     GenerateTokenSuccessResponse:
       type: object
       properties:
@@ -102,20 +92,30 @@ components:
       - data
       - message
       - success
-    GenerateTokenDto:
+    TokenResponse:
       type: object
       properties:
-        client_id:
+        access_token:
           type: string
-          description: Provide Client ID shared with you
-          example: 2Hancbwhybyfy2nusfbuwbuwb
-        client_secret:
+          default: <token>
+          description: Access-Token, which will be used for all operations
+        scope:
           type: string
-          description: Provide Client Secret shared with you
-          example: y6tydyy-swfnv34-fnjjnve_eknk
+          default: <scope>
+          description: Scope of the access-token
+        expires_in:
+          type: number
+          default: 200000
+          description: Expiry of the access-token
+        token_type:
+          type: string
+          default: Bearer
+          description: Access-Token type
       required:
-      - client_id
-      - client_secret
+      - access_token
+      - scope
+      - expires_in
+      - token_type
     BadRequestResponse:
       type: object
       properties:

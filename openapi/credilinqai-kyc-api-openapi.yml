@@ -399,231 +399,35 @@ paths:
       - access-token: []
 components:
   schemas:
-    AddDirectorKycDTO:
+    KycDetailsDocumentsResponse:
       type: object
       properties:
-        directorName:
+        createdAt:
           type: string
-          default: ''
-          example: Marques Brownlee
-          description: "Name of the director.\n \n Shouldn't match:\n - ```/^\\d+$/```\n\n - ```/^[\\W_]+$/```"
-        personalIdentificationNumber:
+          default: '2025-01-08T05:12:18.005Z'
+          description: Created Timestamp of the payment in UTC Format eg. 2023-03-30T11:46:42.195Z
+        updatedAt:
           type: string
-          default: ''
-          example: B88964115515A
-          description: "Personal identification number.\n - ``` /^[A-Za-z0-9+-]+$/ ```\n \n Shouldn't match:\n - ```/^[\\W_]+$/```"
-        shareholding:
+          default: '2025-01-08T05:12:18.005Z'
+          description: Updated Timestamp of the payment in UTC Format eg. 2023-03-30T11:46:42.195Z
+        documentId:
           type: string
-          description: The amount of shares that director owns in a company or business
-          example: '10'
-        email:
+          default: string
+          description: Id of the document
+        fileName:
           type: string
-          example: m.brownlee@healthify.com
-          default: ''
-          description: Email address of director.
-        address:
+          default: string
+          description: Name of the document.
+        type:
           type: string
-          default: ''
-          example: 45 West Region, Singpoare
-          description: "Address of director.\n \n Shouldn't match:\n - ```/^\\d+$/```\n\n - ```/^[\\W_]+$/```"
-        zipCode:
-          type: string
-          default: ''
-          example: '79581'
-          description: "ZipCode/PinCode for address.\n \n Shouldn't match:\n - ```/^[\\W_]+$/```"
-        state:
-          type: string
-          example: Central Region
-          default: ''
-          description: "State of the director\n \n Shouldn't match:\n - ```/^\\d+$/```\n\n - ```/^[\\W_]+$/```"
-        district:
-          type: string
-          example: Bedok
-          default: ''
-          description: "District of the director\n \n Shouldn't match:\n - ```/^\\d+$/```\n\n - ```/^[\\W_]+$/```"
-        city:
-          type: string
-          example: Downtown
-          default: ''
-          description: "City of the director\n \n Shouldn't match:\n - ```/^\\d+$/```\n\n - ```/^[\\W_]+$/```"
-        area:
-          type: string
-          example: PC garden
-          default: ''
-          description: "Area of the director\n \n Shouldn't match:\n - ```/^\\d+$/```\n\n - ```/^[\\W_]+$/```"
-        street:
-          type: string
-          example: SD School St
-          default: ''
-          description: "Street in which director is located.\n \n Shouldn't match:\n - ```/^\\d+$/```\n\n - ```/^[\\W_]+$/```"
-        phone:
-          type: string
-          default: ''
-          example: '+6545457414'
-          description: "Contact phone number of director.\n \n Shouldn't match:\n - ```/^[\\W_]+$/```"
-        country:
-          type: string
-          default: ''
-          example: Singapore
-          description: "Country of director.\n \n Shouldn't match:\n - ```/^\\d+$/```\n\n - ```/^[\\W_]+$/```"
-        files:
-          description: Director KYC Documents
-          type: array
-          items:
-            type: string
-            format: binary
-        status:
-          type: string
-          description: Director Status
-          example: active
-          enum:
-          - active
-          - inactive
-        applicationId:
-          type: string
-          default: ''
-          example: d8eb1219-gg24-4773-97d8-b05264621e60
-          description: Application Id
-        businessId:
-          type: string
-          default: ''
-          example: d8eb1219-gg24-4773-97d8-b05264621e60
-          description: Business Id
+          default: string
+          description: Type of document Eg:(Passport or Utility Bill etc.)
       required:
-      - directorName
-      - personalIdentificationNumber
-      - shareholding
-      - email
-      - address
-      - zipCode
-      - state
-      - phone
-      - country
-      - status
-      - applicationId
-      - businessId
-    UpdateDirectorKycDTO:
-      type: object
-      properties:
-        directorName:
-          type: string
-          default: ''
-          example: Marques Brownlee
-          description: "Name of the director.\n \n Shouldn't match:\n - ```/^\\d+$/```\n\n - ```/^[\\W_]+$/```"
-        personalIdentificationNumber:
-          type: string
-          example: B88964115515A
-          description: "Personal identification number.\n - ``` /^[A-Za-z0-9+-]+$/ ```\n \n Shouldn't match:\n - ```/^[\\W_]+$/```"
-        shareholding:
-          type: string
-          description: The amount of shares that director owns in a company or business
-          example: '10'
-        email:
-          type: string
-          example: m.brownlee@healthify.com
-          default: ''
-          description: Email address of director.
-        address:
-          type: string
-          default: ''
-          example: 45 West Region, Singpoare
-          description: "Address of director.\n \n Shouldn't match:\n - ```/^\\d+$/```\n\n - ```/^[\\W_]+$/```"
-        zipCode:
-          type: string
-          default: ''
-          example: '79581'
-          description: "ZipCode/PinCode for address.\n \n Shouldn't match:\n - ```/^[\\W_]+$/```"
-        state:
-          type: string
-          example: Central Region
-          default: ''
-          description: "State of the director\n \n Shouldn't match:\n - ```/^\\d+$/```\n\n - ```/^[\\W_]+$/```"
-        district:
-          type: string
-          example: Bedok
-          default: ''
-          description: "District of the director\n \n Shouldn't match:\n - ```/^\\d+$/```\n\n - ```/^[\\W_]+$/```"
-        city:
-          type: string
-          example: Downtown
-          default: ''
-          description: "City of the director\n \n Shouldn't match:\n - ```/^\\d+$/```\n\n - ```/^[\\W_]+$/```"
-        area:
-          type: string
-          example: PC garden
-          default: ''
-          description: "Area of the director\n \n Shouldn't match:\n - ```/^\\d+$/```\n\n - ```/^[\\W_]+$/```"
-        street:
-          type: string
-          example: SD School St
-          default: ''
-          description: "Street in which director is located\n \n Shouldn't match:\n - ```/^\\d+$/```\n\n - ```/^[\\W_]+$/```"
-        phone:
-          type: string
-          default: ''
-          example: '+6545457414'
-          description: "Contact phone number of director.\n \n Shouldn't match:\n - ```/^[\\W_]+$/```"
-        country:
-          type: string
-          default: ''
-          example: Singapore
-          description: "Country of director.\n \n Shouldn't match:\n - ```/^\\d+$/```\n\n - ```/^[\\W_]+$/```"
-        files:
-          description: Director KYC Documents
-          type: array
-          items:
-            type: string
-            format: binary
-        status:
-          type: string
-          description: Director Status
-          example: active
-          enum:
-          - active
-          - inactive
-        applicationId:
-          type: string
-          default: ''
-          example: d8eb1219-gg24-4773-97d8-b05264621e60
-          description: Application Id
-        businessId:
-          type: string
-          default: ''
-          example: d8eb1219-gg24-4773-97d8-b05264621e60
-          description: Business Id
-        directorId:
-          type: string
-          default: ''
-          example: d8eb1219-gg24-4773-97d8-b05264621e60
-          description: Director Id
-      required:
-      - applicationId
-      - businessId
-      - directorId
-    KycApprovalSubmitResponse:
-      type: object
-      properties:
-        statusCode:
-          type: number
-          default: 200
-          description: The HTTP status code of the error
-        data:
-          description: Response Data from the operation
-          allOf:
-          - $ref: '#/components/schemas/KycDetails'
-        message:
-          type: string
-          default: Success
-          description: Human-readable message containing all available details about the operation
-        success:
-          type: boolean
-          default: true
-          description: A boolean indicating whether this was a success response or an error response
-      required:
-      - statusCode
-      - data
-      - message
-      - success
+      - createdAt
+      - updatedAt
+      - documentId
+      - fileName
+      - type
     UpdateBusinessKycDTO:
       type: object
       properties:
@@ -790,7 +594,256 @@ components:
       required:
       - applicationId
       - businessId
-    IndividualKYC:
+    KycApprovalSubmitResponse:
+      type: object
+      properties:
+        statusCode:
+          type: number
+          default: 200
+          description: The HTTP status code of the error
+        data:
+          description: Response Data from the operation
+          allOf:
+          - $ref: '#/components/schemas/KycDetails'
+        message:
+          type: string
+          default: Success
+          description: Human-readable message containing all available details about the operation
+        success:
+          type: boolean
+          default: true
+          description: A boolean indicating whether this was a success response or an error response
+      required:
+      - statusCode
+      - data
+      - message
+      - success
+    UpdateDirectorKycDTO:
+      type: object
+      properties:
+        directorName:
+          type: string
+          default: ''
+          example: Marques Brownlee
+          description: "Name of the director.\n \n Shouldn't match:\n - ```/^\\d+$/```\n\n - ```/^[\\W_]+$/```"
+        personalIdentificationNumber:
+          type: string
+          example: B88964115515A
+          description: "Personal identification number.\n - ``` /^[A-Za-z0-9+-]+$/ ```\n \n Shouldn't match:\n - ```/^[\\W_]+$/```"
+        shareholding:
+          type: string
+          description: The amount of shares that director owns in a company or business
+          example: '10'
+        email:
+          type: string
+          example: m.brownlee@healthify.com
+          default: ''
+          description: Email address of director.
+        address:
+          type: string
+          default: ''
+          example: 45 West Region, Singpoare
+          description: "Address of director.\n \n Shouldn't match:\n - ```/^\\d+$/```\n\n - ```/^[\\W_]+$/```"
+        zipCode:
+          type: string
+          default: ''
+          example: '79581'
+          description: "ZipCode/PinCode for address.\n \n Shouldn't match:\n - ```/^[\\W_]+$/```"
+        state:
+          type: string
+          example: Central Region
+          default: ''
+          description: "State of the director\n \n Shouldn't match:\n - ```/^\\d+$/```\n\n - ```/^[\\W_]+$/```"
+        district:
+          type: string
+          example: Bedok
+          default: ''
+          description: "District of the director\n \n Shouldn't match:\n - ```/^\\d+$/```\n\n - ```/^[\\W_]+$/```"
+        city:
+          type: string
+          example: Downtown
+          default: ''
+          description: "City of the director\n \n Shouldn't match:\n - ```/^\\d+$/```\n\n - ```/^[\\W_]+$/```"
+        area:
+          type: string
+          example: PC garden
+          default: ''
+          description: "Area of the director\n \n Shouldn't match:\n - ```/^\\d+$/```\n\n - ```/^[\\W_]+$/```"
+        street:
+          type: string
+          example: SD School St
+          default: ''
+          description: "Street in which director is located\n \n Shouldn't match:\n - ```/^\\d+$/```\n\n - ```/^[\\W_]+$/```"
+        phone:
+          type: string
+          default: ''
+          example: '+6545457414'
+          description: "Contact phone number of director.\n \n Shouldn't match:\n - ```/^[\\W_]+$/```"
+        country:
+          type: string
+          default: ''
+          example: Singapore
+          description: "Country of director.\n \n Shouldn't match:\n - ```/^\\d+$/```\n\n - ```/^[\\W_]+$/```"
+        files:
+          description: Director KYC Documents
+          type: array
+          items:
+            type: string
+            format: binary
+        status:
+          type: string
+          description: Director Status
+          example: active
+          enum:
+          - active
+          - inactive
+        applicationId:
+          type: string
+          default: ''
+          example: d8eb1219-gg24-4773-97d8-b05264621e60
+          description: Application Id
+        businessId:
+          type: string
+          default: ''
+          example: d8eb1219-gg24-4773-97d8-b05264621e60
+          description: Business Id
+        directorId:
+          type: string
+          default: ''
+          example: d8eb1219-gg24-4773-97d8-b05264621e60
+          description: Director Id
+      required:
+      - applicationId
+      - businessId
+      - directorId
+    IndividualCustomerKYCResponse:
+      type: object
+      properties:
+        statusCode:
+          type: number
+          default: 200
+          description: The HTTP status code of the error
+        data:
+          description: Response Data from the operation
+          allOf:
+          - $ref: '#/components/schemas/IndividualKYC'
+        message:
+          type: string
+          default: Success
+          description: Human-readable message containing all available details about the operation
+        success:
+          type: boolean
+          default: true
+          description: A boolean indicating whether this was a success response or an error response
+      required:
+      - statusCode
+      - data
+      - message
+      - success
+    AddDirectorKycDTO:
+      type: object
+      properties:
+        directorName:
+          type: string
+          default: ''
+          example: Marques Brownlee
+          description: "Name of the director.\n \n Shouldn't match:\n - ```/^\\d+$/```\n\n - ```/^[\\W_]+$/```"
+        personalIdentificationNumber:
+          type: string
+          default: ''
+          example: B88964115515A
+          description: "Personal identification number.\n - ``` /^[A-Za-z0-9+-]+$/ ```\n \n Shouldn't match:\n - ```/^[\\W_]+$/```"
+        shareholding:
+          type: string
+          description: The amount of shares that director owns in a company or business
+          example: '10'
+        email:
+          type: string
+          example: m.brownlee@healthify.com
+          default: ''
+          description: Email address of director.
+        address:
+          type: string
+          default: ''
+          example: 45 West Region, Singpoare
+          description: "Address of director.\n \n Shouldn't match:\n - ```/^\\d+$/```\n\n - ```/^[\\W_]+$/```"
+        zipCode:
+          type: string
+          default: ''
+          example: '79581'
+          description: "ZipCode/PinCode for address.\n \n Shouldn't match:\n - ```/^[\\W_]+$/```"
+        state:
+          type: string
+          example: Central Region
+          default: ''
+          description: "State of the director\n \n Shouldn't match:\n - ```/^\\d+$/```\n\n - ```/^[\\W_]+$/```"
+        district:
+          type: string
+          example: Bedok
+          default: ''
+          description: "District of the director\n \n Shouldn't match:\n - ```/^\\d+$/```\n\n - ```/^[\\W_]+$/```"
+        city:
+          type: string
+          example: Downtown
+          default: ''
+          description: "City of the director\n \n Shouldn't match:\n - ```/^\\d+$/```\n\n - ```/^[\\W_]+$/```"
+        area:
+          type: string
+          example: PC garden
+          default: ''
+          description: "Area of the director\n \n Shouldn't match:\n - ```/^\\d+$/```\n\n - ```/^[\\W_]+$/```"
+        street:
+          type: string
+          example: SD School St
+          default: ''
+          description: "Street in which director is located.\n \n Shouldn't match:\n - ```/^\\d+$/```\n\n - ```/^[\\W_]+$/```"
+        phone:
+          type: string
+          default: ''
+          example: '+6545457414'
+          description: "Contact phone number of director.\n \n Shouldn't match:\n - ```/^[\\W_]+$/```"
+        country:
+          type: string
+          default: ''
+          example: Singapore
+          description: "Country of director.\n \n Shouldn't match:\n - ```/^\\d+$/```\n\n - ```/^[\\W_]+$/```"
+        files:
+          description: Director KYC Documents
+          type: array
+          items:
+            type: string
+            format: binary
+        status:
+          type: string
+          description: Director Status
+          example: active
+          enum:
+          - active
+          - inactive
+        applicationId:
+          type: string
+          default: ''
+          example: d8eb1219-gg24-4773-97d8-b05264621e60
+          description: Application Id
+        businessId:
+          type: string
+          default: ''
+          example: d8eb1219-gg24-4773-97d8-b05264621e60
+          description: Business Id
+      required:
+      - directorName
+      - personalIdentificationNumber
+      - shareholding
+      - email
+      - address
+      - zipCode
+      - state
+      - phone
+      - country
+      - status
+      - applicationId
+      - businessId
+    CustomerKYC:
       type: object
       properties:
         applicationId:
@@ -801,43 +854,52 @@ components:
           type: string
           default: string
           description: Id of the business
-        directorId:
-          type: string
-          default: string
-          description: Id of the director
       required:
       - applicationId
       - businessId
-      - directorId
-    InternalErrorResponse:
+    KYCDetailsResponse:
       type: object
       properties:
         statusCode:
           type: number
-          default: 500
+          default: 200
           description: The HTTP status code of the error
-        error:
-          type: string
-          default: string
-          description: Human-readable generic error message
-        errorCode:
-          type: string
-          default: E_INTERNAL_ERROR
-          description: Computer-readable code for error handling
+        data:
+          description: Response Data from the operation
+          allOf:
+          - $ref: '#/components/schemas/KycDetailsAggResponse'
         message:
           type: string
-          default: string
-          description: Human-readable error message containing all available details about how the error occurred
+          default: Success
+          description: Human-readable message containing all available details about the operation
         success:
           type: boolean
-          default: false
+          default: true
           description: A boolean indicating whether this was a success response or an error response
       required:
       - statusCode
-      - error
-      - errorCode
+      - data
       - message
       - success
+    KycDetailsAggResponse:
+      type: object
+      properties:
+        applicationId:
+          type: string
+          default: string
+          description: Id of the application
+        dataConsent:
+          type: boolean
+          default: true
+          description: Data Consent
+        business:
+          type: array
+          items:
+            $ref: '#/components/schemas/KycDetailsBusinessResponse'
+      required:
+      - applicationId
+      - dataConsent
+      - business
     KycDetailsBusinessResponse:
       type: object
       properties:
@@ -977,6 +1039,25 @@ components:
       - bankAddress
       - documents
       - directors
+    IndividualKYC:
+      type: object
+      properties:
+        applicationId:
+          type: string
+          default: string
+          description: Id of the application
+        businessId:
+          type: string
+          default: string
+          description: Id of the business
+        directorId:
+          type: string
+          default: string
+          description: Id of the director
+      required:
+      - applicationId
+      - businessId
+      - directorId
     KycDetails:
       type: object
       properties:
@@ -986,6 +1067,112 @@ components:
           description: Id of the application
       required:
       - applicationId
+    InternalErrorResponse:
+      type: object
+      properties:
+        statusCode:
+          type: number
+          default: 500
+          description: The HTTP status code of the error
+        error:
+          type: string
+          default: string
+          description: Human-readable generic error message
+        errorCode:
+          type: string
+          default: E_INTERNAL_ERROR
+          description: Computer-readable code for error handling
+        message:
+          type: string
+          default: string
+          description: Human-readable error message containing all available details about how the error occurred
+        success:
+          type: boolean
+          default: false
+          description: A boolean indicating whether this was a success response or an error response
+      required:
+      - statusCode
+      - error
+      - errorCode
+      - message
+      - success
+    ForbiddenResponse:
+      type: object
+      properties:
+        statusCode:
+          type: number
+          default: 403
+          description: The HTTP status code of the error
+        error:
+          type: string
+          default: string
+          description: Human-readable generic error message
+        errorCode:
+          type: string
+          default: E_FORBIDDEN
+          description: Computer-readable code for error handling
+        message:
+          type: string
+          default: string
+          description: Human-readable error message containing all available details about how the error occurred
+        success:
+          type: boolean
+          default: false
+          description: A boolean indicating whether this was a success response or an error response
+      required:
+      - statusCode
+      - error
+      - errorCode
+      - message
+      - success
+    CustomerKYCResponse:
+      type: object
+      properties:
+        statusCode:
+          type: number
+          default: 200
+          description: The HTTP status code of the error
+        data:
+          description: Response Data from the operation
+          allOf:
+          - $ref: '#/components/schemas/CustomerKYC'
+        message:
+          type: string
+          default: Success
+          description: Human-readable message containing all available details about the operation
+        success:
+          type: boolean
+          default: true
+          description: A boolean indicating whether this was a success response or an error response
+      required:
+      - statusCode
+      - data
+      - message
+      - success
+    DirectorKYCResponse:
+      type: object
+      properties:
+        statusCode:
+          type: number
+          default: 200
+          description: The HTTP status code of the error
+        data:
+          description: Response Data from the operation
+          allOf:
+          - $ref: '#/components/schemas/DirectorKYC'
+        message:
+          type: string
+          default: Success
+          description: Human-readable message containing all available details about the operation
+        success:
+          type: boolean
+          default: true
+          description: A boolean indicating whether this was a success response or an error response
+      required:
+      - statusCode
+      - data
+      - message
+      - success
     UpdateIndividualKycDTO:
       type: object
       properties:
@@ -1202,205 +1389,21 @@ components:
       - applicationId
       - businessId
       - directorId
-    KycDetailsAggResponse:
+    SendForKycReviewDto:
       type: object
       properties:
         applicationId:
           type: string
-          default: string
-          description: Id of the application
-        dataConsent:
-          type: boolean
-          default: true
-          description: Data Consent
-        business:
-          type: array
-          items:
-            $ref: '#/components/schemas/KycDetailsBusinessResponse'
+          default: ''
+          example: d8eb1219-gg24-4773-97d8-b05264621e60
+          description: Application Id
+        kycType:
+          type: string
+          default: business
+          example: individual
+          description: individual | business
       required:
       - applicationId
-      - dataConsent
-      - business
-    KycDetailsDocumentsResponse:
-      type: object
-      properties:
-        createdAt:
-          type: string
-          default: '2025-01-08T05:12:18.005Z'
-          description: Created Timestamp of the payment in UTC Format eg. 2023-03-30T11:46:42.195Z
-        updatedAt:
-          type: string
-          default: '2025-01-08T05:12:18.005Z'
-          description: Updated Timestamp of the payment in UTC Format eg. 2023-03-30T11:46:42.195Z
-        documentId:
-          type: string
-          default: string
-          description: Id of the document
-        fileName:
-          type: string
-          default: string
-          description: Name of the document.
-        type:
-          type: string
-          default: string
-          description: Type of document Eg:(Passport or Utility Bill etc.)
-      required:
-      - createdAt
-      - updatedAt
-      - documentId
-      - fileName
-      - type
-    IndividualCustomerKYCResponse:
-      type: object
-      properties:
-        statusCode:
-          type: number
-          default: 200
-          description: The HTTP status code of the error
-        data:
-          description: Response Data from the operation
-          allOf:
-          - $ref: '#/components/schemas/IndividualKYC'
-        message:
-          type: string
-          default: Success
-          description: Human-readable message containing all available details about the operation
-        success:
-          type: boolean
-          default: true
-          description: A boolean indicating whether this was a success response or an error response
-      required:
-      - statusCode
-      - data
-      - message
-      - success
-    KycDetailsDirectorResponse:
-      type: object
-      properties:
-        directorId:
-          type: string
-          default: string
-          description: Id of the director
-        status:
-          type: string
-          description: Director Status
-          example: active
-          enum:
-          - active
-          - inactive
-        directorName:
-          type: string
-          default: string
-          description: Name of the director.
-        email:
-          type: string
-          default: string
-          description: Email address of director.
-        mobileNo:
-          type: string
-          default: string
-          description: Contact phone number of director.
-        shareholding:
-          type: string
-          default: string
-          description: The amount of shares that director owns in a company or business
-        personalIdentificationNumber:
-          type: string
-          default: string
-          description: Personal identification number.
-        address:
-          type: string
-          default: string
-          description: Address of director.
-        country:
-          type: string
-          default: string
-          description: Country of director.
-        zipCode:
-          type: string
-          default: string
-          description: ZipCode/PinCode for address.
-        state:
-          type: string
-          default: string
-          description: State of the director
-        district:
-          type: string
-          default: string
-          description: District of the director
-        city:
-          type: string
-          default: string
-          description: City of the director
-        area:
-          type: string
-          default: string
-          description: Area of the director
-        street:
-          type: string
-          default: string
-          description: Street of the director
-        documents:
-          $ref: '#/components/schemas/KycDetailsDocumentsResponse'
-      required:
-      - directorId
-      - directorName
-      - email
-      - mobileNo
-      - shareholding
-      - personalIdentificationNumber
-      - address
-      - country
-      - zipCode
-      - state
-      - district
-      - city
-      - area
-      - street
-      - documents
-    ForbiddenResponse:
-      type: object
-      properties:
-        statusCode:
-          type: number
-          default: 403
-          description: The HTTP status code of the error
-        error:
-          type: string
-          default: string
-          description: Human-readable generic error message
-        errorCode:
-          type: string
-          default: E_FORBIDDEN
-          description: Computer-readable code for error handling
-        message:
-          type: string
-          default: string
-          description: Human-readable error message containing all available details about how the error occurred
-        success:
-          type: boolean
-          default: false
-          description: A boolean indicating whether this was a success response or an error response
-      required:
-      - statusCode
-      - error
-      - errorCode
-      - message
-      - success
-    CustomerKYC:
-      type: object
-      properties:
-        applicationId:
-          type: string
-          default: string
-          description: Id of the application
-        businessId:
-          type: string
-          default: string
-          description: Id of the business
-      required:
-      - applicationId
-      - businessId
     AddBusinessKycDTO:
       type: object
       properties:
@@ -1589,6 +1592,25 @@ components:
       - taxIdNumber
       - files
       - applicationId
+    DirectorKYC:
+      type: object
+      properties:
+        applicationId:
+          type: string
+          default: string
+          description: Id of the application
+        businessId:
+          type: string
+          default: string
+          description: Id of the business
+        directorId:
+          type: string
+          default: string
+          description: Id of the director
+      required:
+      - applicationId
+      - businessId
+      - directorId
     UnauthorizedResponse:
       type: object
       properties:
@@ -1618,97 +1640,90 @@ components:
       - errorCode
       - message
       - success
-    CustomerKYCResponse:
+    KycDetailsDirectorResponse:
       type: object
       properties:
-        statusCode:
-          type: number
-          default: 200
-          description: The HTTP status code of the error
-        data:
-          description: Response Data from the operation
-          allOf:
-          - $ref: '#/components/schemas/CustomerKYC'
-        message:
-          type: string
-          default: Success
-          description: Human-readable message containing all available details about the operation
-        success:
-          type: boolean
-          default: true
-          description: A boolean indicating whether this was a success response or an error response
-      required:
-      - statusCode
-      - data
-      - message
-      - success
-    DirectorKYC:
-      type: object
-      properties:
-        applicationId:
-          type: string
-          default: string
-          description: Id of the application
-        businessId:
-          type: string
-          default: string
-          description: Id of the business
         directorId:
           type: string
           default: string
           description: Id of the director
+        status:
+          type: string
+          description: Director Status
+          example: active
+          enum:
+          - active
+          - inactive
+        directorName:
+          type: string
+          default: string
+          description: Name of the director.
+        email:
+          type: string
+          default: string
+          description: Email address of director.
+        mobileNo:
+          type: string
+          default: string
+          description: Contact phone number of director.
+        shareholding:
+          type: string
+          default: string
+          description: The amount of shares that director owns in a company or business
+        personalIdentificationNumber:
+          type: string
+          default: string
+          description: Personal identification number.
+        address:
+          type: string
+          default: string
+          description: Address of director.
+        country:
+          type: string
+          default: string
+          description: Country of director.
+        zipCode:
+          type: string
+          default: string
+          description: ZipCode/PinCode for address.
+        state:
+          type: string
+          default: string
+          description: State of the director
+        district:
+          type: string
+          default: string
+          description: District of the director
+        city:
+          type: string
+          default: string
+          description: City of the director
+        area:
+          type: string
+          default: string
+          description: Area of the director
+        street:
+          type: string
+          default: string
+          description: Street of the director
+        documents:
+          $ref: '#/components/schemas/KycDetailsDocumentsResponse'
       required:
-      - applicationId
-      - businessId
       - directorId
-    KYCDetailsResponse:
-      type: object
-      properties:
-        statusCode:
-          type: number
-          default: 200
-          description: The HTTP status code of the error
-        data:
-          description: Response Data from the operation
-          allOf:
-          - $ref: '#/components/schemas/KycDetailsAggResponse'
-        message:
-          type: string
-          default: Success
-          description: Human-readable message containing all available details about the operation
-        success:
-          type: boolean
-          default: true
-          description: A boolean indicating whether this was a success response or an error response
-      required:
-      - statusCode
-      - data
-      - message
-      - success
-    DirectorKYCResponse:
-      type: object
-      properties:
-        statusCode:
-          type: number
-          default: 200
-          description: The HTTP status code of the error
-        data:
-          description: Response Data from the operation
-          allOf:
-          - $ref: '#/components/schemas/DirectorKYC'
-        message:
-          type: string
-          default: Success
-          description: Human-readable message containing all available details about the operation
-        success:
-          type: boolean
-          default: true
-          description: A boolean indicating whether this was a success response or an error response
-      required:
-      - statusCode
-      - data
-      - message
-      - success
+      - directorName
+      - email
+      - mobileNo
+      - shareholding
+      - personalIdentificationNumber
+      - address
+      - country
+      - zipCode
+      - state
+      - district
+      - city
+      - area
+      - street
+      - documents
     AddIndividualKycDTO:
       type: object
       properties:
@@ -1937,21 +1952,6 @@ components:
       - ownerState
       - ownerMobileNumber
       - files
-      - applicationId
-    SendForKycReviewDto:
-      type: object
-      properties:
-        applicationId:
-          type: string
-          default: ''
-          example: d8eb1219-gg24-4773-97d8-b05264621e60
-          description: Application Id
-        kycType:
-          type: string
-          default: business
-          example: individual
-          description: individual | business
-      required:
       - applicationId
   securitySchemes:
     access-token:

@@ -192,169 +192,6 @@ paths:
       - access-token: []
 components:
   schemas:
-    SendAgreementDto:
-      type: object
-      properties:
-        customerReferenceNo:
-          type: string
-          maxLength: 100
-          default: ''
-          example: c3eb1619-ff24-4773-97d8-b05264621e60
-          description: "Customer Reference Number of company/business assigned by the platform to uniquely identify the customer. It's a unique number with a combination of alphabets, numeric and some special characters like dash, hash, ampersand and forward slash.\n - ``` /(^[a-zA-Z0-9#/-]+)$/ ```"
-      required:
-      - customerReferenceNo
-    NewAppResponse:
-      type: object
-      properties:
-        applicationId:
-          type: string
-          description: An unique id for application
-          default: string
-      required:
-      - applicationId
-    AgreementEmailResponse:
-      type: object
-      properties:
-        statusCode:
-          type: number
-          default: 200
-          description: The HTTP status code of the error
-        data:
-          type: string
-          description: Agreent sent status of application.
-        message:
-          type: string
-          default: Success
-          description: Human-readable message containing all available details about the operation
-        success:
-          type: boolean
-          default: true
-          description: A boolean indicating whether this was a success response or an error response
-      required:
-      - statusCode
-      - data
-      - message
-      - success
-    UnauthorizedResponse:
-      type: object
-      properties:
-        statusCode:
-          type: number
-          default: 401
-          description: The HTTP status code of the error
-        error:
-          type: string
-          default: string
-          description: Human-readable generic error message
-        errorCode:
-          type: string
-          default: E_UNAUTHORIZED
-          description: Computer-readable code for error handling
-        message:
-          type: string
-          default: string
-          description: Human-readable error message containing all available details about how the error occurred
-        success:
-          type: boolean
-          default: false
-          description: A boolean indicating whether this was a success response or an error response
-      required:
-      - statusCode
-      - error
-      - errorCode
-      - message
-      - success
-    ApplicationNotFoundResponse:
-      type: object
-      properties:
-        statusCode:
-          type: number
-          default: 404
-          description: The HTTP status code of the error
-        error:
-          type: string
-          default: string
-          description: Human-readable generic error message
-        errorCode:
-          type: string
-          default: E_O_APPLICATION_NOT_FOUND
-          description: Computer-readable code for error handling
-        message:
-          type: string
-          default: string
-          description: Human-readable error message containing all available details about how the error occurred
-        success:
-          type: boolean
-          default: false
-          description: A boolean indicating whether this was a success response or an error response
-      required:
-      - statusCode
-      - error
-      - errorCode
-      - message
-      - success
-    DataProcessingResponse:
-      type: object
-      properties:
-        statusCode:
-          type: number
-          default: 200
-          description: The HTTP status code of the error
-        data:
-          description: Response Data from the operation
-          allOf:
-          - $ref: '#/components/schemas/DataProcessingStatusResponse'
-        message:
-          type: string
-          default: Success
-          description: Human-readable message containing all available details about the operation
-        success:
-          type: boolean
-          default: true
-          description: A boolean indicating whether this was a success response or an error response
-      required:
-      - statusCode
-      - data
-      - message
-      - success
-    DataProcessingStatusResponse:
-      type: object
-      properties:
-        dataProcessingId:
-          type: string
-          default: string
-          description: An unique id for Data Processing
-      required:
-      - dataProcessingId
-    InternalErrorResponse:
-      type: object
-      properties:
-        statusCode:
-          type: number
-          default: 500
-          description: The HTTP status code of the error
-        error:
-          type: string
-          default: string
-          description: Human-readable generic error message
-        errorCode:
-          type: string
-          default: E_INTERNAL_ERROR
-          description: Computer-readable code for error handling
-        message:
-          type: string
-          default: string
-          description: Human-readable error message containing all available details about how the error occurred
-        success:
-          type: boolean
-          default: false
-          description: A boolean indicating whether this was a success response or an error response
-      required:
-      - statusCode
-      - error
-      - errorCode
-      - message
-      - success
     InitiateDataProcessingDTO:
       type: object
       properties:
@@ -407,12 +244,12 @@ components:
       - s3Paths
       - noOfFilesUploaded
       - additionalFields
-    BadRequestResponse:
+    ApplicationNotFoundResponse:
       type: object
       properties:
         statusCode:
           type: number
-          default: 400
+          default: 404
           description: The HTTP status code of the error
         error:
           type: string
@@ -420,7 +257,7 @@ components:
           description: Human-readable generic error message
         errorCode:
           type: string
-          default: E_BAD_REQUEST
+          default: E_O_APPLICATION_NOT_FOUND
           description: Computer-readable code for error handling
         message:
           type: string
@@ -436,6 +273,71 @@ components:
       - errorCode
       - message
       - success
+    NewAppResponse:
+      type: object
+      properties:
+        applicationId:
+          type: string
+          description: An unique id for application
+          default: string
+      required:
+      - applicationId
+    DataProcessingResponse:
+      type: object
+      properties:
+        statusCode:
+          type: number
+          default: 200
+          description: The HTTP status code of the error
+        data:
+          description: Response Data from the operation
+          allOf:
+          - $ref: '#/components/schemas/DataProcessingStatusResponse'
+        message:
+          type: string
+          default: Success
+          description: Human-readable message containing all available details about the operation
+        success:
+          type: boolean
+          default: true
+          description: A boolean indicating whether this was a success response or an error response
+      required:
+      - statusCode
+      - data
+      - message
+      - success
+    AgreementEmailResponse:
+      type: object
+      properties:
+        statusCode:
+          type: number
+          default: 200
+          description: The HTTP status code of the error
+        data:
+          type: string
+          description: Agreent sent status of application.
+        message:
+          type: string
+          default: Success
+          description: Human-readable message containing all available details about the operation
+        success:
+          type: boolean
+          default: true
+          description: A boolean indicating whether this was a success response or an error response
+      required:
+      - statusCode
+      - data
+      - message
+      - success
+    DataProcessingStatusResponse:
+      type: object
+      properties:
+        dataProcessingId:
+          type: string
+          default: string
+          description: An unique id for Data Processing
+      required:
+      - dataProcessingId
     InitiateAppDTO:
       type: object
       properties:
@@ -469,6 +371,99 @@ components:
       - customerEmail
       - dataConsentProvided
       - requiredLoanAmount
+    SendAgreementDto:
+      type: object
+      properties:
+        customerReferenceNo:
+          type: string
+          maxLength: 100
+          default: ''
+          example: c3eb1619-ff24-4773-97d8-b05264621e60
+          description: "Customer Reference Number of company/business assigned by the platform to uniquely identify the customer. It's a unique number with a combination of alphabets, numeric and some special characters like dash, hash, ampersand and forward slash.\n - ``` /(^[a-zA-Z0-9#/-]+)$/ ```"
+      required:
+      - customerReferenceNo
+    CheckEligibilityResponse:
+      type: object
+      properties:
+        statusCode:
+          type: number
+          default: 200
+          description: The HTTP status code of the error
+        data:
+          description: Response Data from the operation
+          allOf:
+          - $ref: '#/components/schemas/NewAppResponse'
+        message:
+          type: string
+          default: Success
+          description: Human-readable message containing all available details about the operation
+        success:
+          type: boolean
+          default: true
+          description: A boolean indicating whether this was a success response or an error response
+      required:
+      - statusCode
+      - data
+      - message
+      - success
+    InternalErrorResponse:
+      type: object
+      properties:
+        statusCode:
+          type: number
+          default: 500
+          description: The HTTP status code of the error
+        error:
+          type: string
+          default: string
+          description: Human-readable generic error message
+        errorCode:
+          type: string
+          default: E_INTERNAL_ERROR
+          description: Computer-readable code for error handling
+        message:
+          type: string
+          default: string
+          description: Human-readable error message containing all available details about how the error occurred
+        success:
+          type: boolean
+          default: false
+          description: A boolean indicating whether this was a success response or an error response
+      required:
+      - statusCode
+      - error
+      - errorCode
+      - message
+      - success
+    BadRequestResponse:
+      type: object
+      properties:
+        statusCode:
+          type: number
+          default: 400
+          description: The HTTP status code of the error
+        error:
+          type: string
+          default: string
+          description: Human-readable generic error message
+        errorCode:
+          type: string
+          default: E_BAD_REQUEST
+          description: Computer-readable code for error handling
+        message:
+          type: string
+          default: string
+          description: Human-readable error message containing all available details about how the error occurred
+        success:
+          type: boolean
+          default: false
+          description: A boolean indicating whether this was a success response or an error response
+      required:
+      - statusCode
+      - error
+      - errorCode
+      - message
+      - success
     ForbiddenResponse:
       type: object
       properties:
@@ -498,28 +493,33 @@ components:
       - errorCode
       - message
       - success
-    CheckEligibilityResponse:
+    UnauthorizedResponse:
       type: object
       properties:
         statusCode:
           type: number
-          default: 200
+          default: 401
           description: The HTTP status code of the error
-        data:
-          description: Response Data from the operation
-          allOf:
-          - $ref: '#/components/schemas/NewAppResponse'
+        error:
+          type: string
+          default: string
+          description: Human-readable generic error message
+        errorCode:
+          type: string
+          default: E_UNAUTHORIZED
+          description: Computer-readable code for error handling
         message:
           type: string
-          default: Success
-          description: Human-readable message containing all available details about the operation
+          default: string
+          description: Human-readable error message containing all available details about how the error occurred
         success:
           type: boolean
-          default: true
+          default: false
           description: A boolean indicating whether this was a success response or an error response
       required:
       - statusCode
-      - data
+      - error
+      - errorCode
       - message
       - success
   securitySchemes:

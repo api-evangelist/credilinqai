@@ -192,188 +192,6 @@ paths:
       - Miscellaneous
 components:
   schemas:
-    GetPostalCodesResponse:
-      type: object
-      properties:
-        statusCode:
-          type: number
-          default: 200
-          description: The HTTP status code of the error
-        data:
-          description: Response Data from the operation
-          allOf:
-          - $ref: '#/components/schemas/GetPostalCodes'
-        message:
-          type: string
-          default: Success
-          description: Human-readable message containing all available details about the operation
-        success:
-          type: boolean
-          default: true
-          description: A boolean indicating whether this was a success response or an error response
-      required:
-      - statusCode
-      - data
-      - message
-      - success
-    GetCountriesResponse:
-      type: object
-      properties:
-        statusCode:
-          type: number
-          default: 200
-          description: The HTTP status code of the error
-        data:
-          description: Response Data from the operation
-          allOf:
-          - $ref: '#/components/schemas/GetCountries'
-        message:
-          type: string
-          default: Success
-          description: Human-readable message containing all available details about the operation
-        success:
-          type: boolean
-          default: true
-          description: A boolean indicating whether this was a success response or an error response
-      required:
-      - statusCode
-      - data
-      - message
-      - success
-    GetAddressResponse:
-      type: object
-      properties:
-        statusCode:
-          type: number
-          default: 200
-          description: The HTTP status code of the error
-        data:
-          description: Response Data from the operation
-          allOf:
-          - $ref: '#/components/schemas/GetAddress'
-        message:
-          type: string
-          default: Success
-          description: Human-readable message containing all available details about the operation
-        success:
-          type: boolean
-          default: true
-          description: A boolean indicating whether this was a success response or an error response
-      required:
-      - statusCode
-      - data
-      - message
-      - success
-    InternalErrorResponse:
-      type: object
-      properties:
-        statusCode:
-          type: number
-          default: 500
-          description: The HTTP status code of the error
-        error:
-          type: string
-          default: string
-          description: Human-readable generic error message
-        errorCode:
-          type: string
-          default: E_INTERNAL_ERROR
-          description: Computer-readable code for error handling
-        message:
-          type: string
-          default: string
-          description: Human-readable error message containing all available details about how the error occurred
-        success:
-          type: boolean
-          default: false
-          description: A boolean indicating whether this was a success response or an error response
-      required:
-      - statusCode
-      - error
-      - errorCode
-      - message
-      - success
-    GetDocumentTypes:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Document Type Id
-        localName:
-          type: string
-          description: Document Type Id
-        docType:
-          type: string
-          description: Document Type (Utility Bill/ Passport etc.)
-        optional:
-          type: boolean
-          description: Is this document type optional or not.
-      required:
-      - id
-      - localName
-      - docType
-      - optional
-    Country:
-      type: object
-      properties:
-        country:
-          type: string
-          description: Name of the country
-        countryCode:
-          type: string
-          description: Code of the country
-      required:
-      - country
-      - countryCode
-    GetPostalCodes:
-      type: object
-      properties:
-        postalCodes:
-          description: Available Postal Codes of the country
-          type: array
-          items:
-            type: string
-      required:
-      - postalCodes
-    ForbiddenResponse:
-      type: object
-      properties:
-        statusCode:
-          type: number
-          default: 403
-          description: The HTTP status code of the error
-        error:
-          type: string
-          default: string
-          description: Human-readable generic error message
-        errorCode:
-          type: string
-          default: E_FORBIDDEN
-          description: Computer-readable code for error handling
-        message:
-          type: string
-          default: string
-          description: Human-readable error message containing all available details about how the error occurred
-        success:
-          type: boolean
-          default: false
-          description: A boolean indicating whether this was a success response or an error response
-      required:
-      - statusCode
-      - error
-      - errorCode
-      - message
-      - success
-    GetCountries:
-      type: object
-      properties:
-        countries:
-          description: Available Counties
-          type: array
-          items:
-            $ref: '#/components/schemas/Country'
-      required:
-      - countries
     GetDocumentTypesResponse:
       type: object
       properties:
@@ -398,6 +216,72 @@ components:
       - data
       - message
       - success
+    GetPostalCodes:
+      type: object
+      properties:
+        postalCodes:
+          description: Available Postal Codes of the country
+          type: array
+          items:
+            type: string
+      required:
+      - postalCodes
+    GetAddressResponse:
+      type: object
+      properties:
+        statusCode:
+          type: number
+          default: 200
+          description: The HTTP status code of the error
+        data:
+          description: Response Data from the operation
+          allOf:
+          - $ref: '#/components/schemas/GetAddress'
+        message:
+          type: string
+          default: Success
+          description: Human-readable message containing all available details about the operation
+        success:
+          type: boolean
+          default: true
+          description: A boolean indicating whether this was a success response or an error response
+      required:
+      - statusCode
+      - data
+      - message
+      - success
+    Country:
+      type: object
+      properties:
+        country:
+          type: string
+          description: Name of the country
+        countryCode:
+          type: string
+          description: Code of the country
+      required:
+      - country
+      - countryCode
+    GetDocumentTypes:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Document Type Id
+        localName:
+          type: string
+          description: Document Type Id
+        docType:
+          type: string
+          description: Document Type (Utility Bill/ Passport etc.)
+        optional:
+          type: boolean
+          description: Is this document type optional or not.
+      required:
+      - id
+      - localName
+      - docType
+      - optional
     GetAddress:
       type: object
       properties:
@@ -430,6 +314,122 @@ components:
       - district
       - city
       - area
+    InternalErrorResponse:
+      type: object
+      properties:
+        statusCode:
+          type: number
+          default: 500
+          description: The HTTP status code of the error
+        error:
+          type: string
+          default: string
+          description: Human-readable generic error message
+        errorCode:
+          type: string
+          default: E_INTERNAL_ERROR
+          description: Computer-readable code for error handling
+        message:
+          type: string
+          default: string
+          description: Human-readable error message containing all available details about how the error occurred
+        success:
+          type: boolean
+          default: false
+          description: A boolean indicating whether this was a success response or an error response
+      required:
+      - statusCode
+      - error
+      - errorCode
+      - message
+      - success
+    GetPostalCodesResponse:
+      type: object
+      properties:
+        statusCode:
+          type: number
+          default: 200
+          description: The HTTP status code of the error
+        data:
+          description: Response Data from the operation
+          allOf:
+          - $ref: '#/components/schemas/GetPostalCodes'
+        message:
+          type: string
+          default: Success
+          description: Human-readable message containing all available details about the operation
+        success:
+          type: boolean
+          default: true
+          description: A boolean indicating whether this was a success response or an error response
+      required:
+      - statusCode
+      - data
+      - message
+      - success
+    GetCountries:
+      type: object
+      properties:
+        countries:
+          description: Available Counties
+          type: array
+          items:
+            $ref: '#/components/schemas/Country'
+      required:
+      - countries
+    GetCountriesResponse:
+      type: object
+      properties:
+        statusCode:
+          type: number
+          default: 200
+          description: The HTTP status code of the error
+        data:
+          description: Response Data from the operation
+          allOf:
+          - $ref: '#/components/schemas/GetCountries'
+        message:
+          type: string
+          default: Success
+          description: Human-readable message containing all available details about the operation
+        success:
+          type: boolean
+          default: true
+          description: A boolean indicating whether this was a success response or an error response
+      required:
+      - statusCode
+      - data
+      - message
+      - success
+    ForbiddenResponse:
+      type: object
+      properties:
+        statusCode:
+          type: number
+          default: 403
+          description: The HTTP status code of the error
+        error:
+          type: string
+          default: string
+          description: Human-readable generic error message
+        errorCode:
+          type: string
+          default: E_FORBIDDEN
+          description: Computer-readable code for error handling
+        message:
+          type: string
+          default: string
+          description: Human-readable error message containing all available details about how the error occurred
+        success:
+          type: boolean
+          default: false
+          description: A boolean indicating whether this was a success response or an error response
+      required:
+      - statusCode
+      - error
+      - errorCode
+      - message
+      - success
   securitySchemes:
     access-token:
       scheme: bearer

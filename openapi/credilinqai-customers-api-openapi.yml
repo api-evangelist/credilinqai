@@ -267,295 +267,6 @@ paths:
       - access-token: []
 components:
   schemas:
-    BankTransferType:
-      type: object
-      properties:
-        bankName:
-          type: string
-          default: ''
-          description: Deutche Bank
-        accountNumber:
-          type: number
-          description: For Eg. 1177441144
-          default: 0
-        bankSwiftCode:
-          type: string
-          description: IC114744
-          default: ''
-        accountName:
-          type: string
-          description: John Doe
-          default: ''
-      required:
-      - bankName
-      - accountNumber
-      - bankSwiftCode
-      - accountName
-    HolidayListResponse:
-      type: object
-      properties:
-        statusCode:
-          type: number
-          default: 200
-          description: The HTTP status code of the error
-        data:
-          description: Response Data from the operation
-          type: array
-          items:
-            $ref: '#/components/schemas/HolidayResponse'
-        message:
-          type: string
-          default: Success
-          description: Human-readable message containing all available details about the operation
-        success:
-          type: boolean
-          default: true
-          description: A boolean indicating whether this was a success response or an error response
-      required:
-      - statusCode
-      - data
-      - message
-      - success
-    CreditLineResponse:
-      type: object
-      properties:
-        statusCode:
-          type: number
-          default: 200
-          description: The HTTP status code of the error
-        data:
-          description: Response Data from the operation
-          allOf:
-          - $ref: '#/components/schemas/CustomerCreditLine'
-        message:
-          type: string
-          default: Success
-          description: Human-readable message containing all available details about the operation
-        success:
-          type: boolean
-          default: true
-          description: A boolean indicating whether this was a success response or an error response
-      required:
-      - statusCode
-      - data
-      - message
-      - success
-    HolidayResponse:
-      type: object
-      properties:
-        date:
-          type: string
-          description: Date String
-          example: 01 Jan 2024
-        dateUTC:
-          type: string
-          description: Date ISO String
-          example: '2023-12-31T18:30:00.000Z'
-        isHoliday:
-          type: boolean
-          description: Date is holiday or not
-          example: true
-      required:
-      - date
-      - dateUTC
-      - isHoliday
-    CustomerActiveLoansResponse:
-      type: object
-      properties:
-        statusCode:
-          type: number
-          default: 200
-          description: The HTTP status code of the error
-        data:
-          description: Response Data from the operation
-          type: array
-          items:
-            $ref: '#/components/schemas/LoanSummaryResponse'
-        message:
-          type: string
-          default: Success
-          description: Human-readable message containing all available details about the operation
-        success:
-          type: boolean
-          default: true
-          description: A boolean indicating whether this was a success response or an error response
-      required:
-      - statusCode
-      - data
-      - message
-      - success
-    UnauthorizedResponse:
-      type: object
-      properties:
-        statusCode:
-          type: number
-          default: 401
-          description: The HTTP status code of the error
-        error:
-          type: string
-          default: string
-          description: Human-readable generic error message
-        errorCode:
-          type: string
-          default: E_UNAUTHORIZED
-          description: Computer-readable code for error handling
-        message:
-          type: string
-          default: string
-          description: Human-readable error message containing all available details about how the error occurred
-        success:
-          type: boolean
-          default: false
-          description: A boolean indicating whether this was a success response or an error response
-      required:
-      - statusCode
-      - error
-      - errorCode
-      - message
-      - success
-    CustomerNotFoundResponse:
-      type: object
-      properties:
-        statusCode:
-          type: number
-          default: 404
-          description: The HTTP status code of the error
-        error:
-          type: string
-          default: string
-          description: Human-readable generic error message
-        errorCode:
-          type: string
-          default: E_C_CUSTOMER_NOT_FOUND
-          description: Computer-readable code for error handling
-        message:
-          type: string
-          default: string
-          description: Human-readable error message containing all available details about how the error occurred
-        success:
-          type: boolean
-          default: false
-          description: A boolean indicating whether this was a success response or an error response
-      required:
-      - statusCode
-      - error
-      - errorCode
-      - message
-      - success
-    InternalErrorResponse:
-      type: object
-      properties:
-        statusCode:
-          type: number
-          default: 500
-          description: The HTTP status code of the error
-        error:
-          type: string
-          default: string
-          description: Human-readable generic error message
-        errorCode:
-          type: string
-          default: E_INTERNAL_ERROR
-          description: Computer-readable code for error handling
-        message:
-          type: string
-          default: string
-          description: Human-readable error message containing all available details about how the error occurred
-        success:
-          type: boolean
-          default: false
-          description: A boolean indicating whether this was a success response or an error response
-      required:
-      - statusCode
-      - error
-      - errorCode
-      - message
-      - success
-    LoanPayment:
-      type: object
-      properties:
-        paymentId:
-          type: string
-          default: string
-          description: Id of the payment
-        paymentDate:
-          type: string
-          default: '2025-01-08T05:12:17.404Z'
-          description: Date of the payment in UTC Format eg. 2023-03-30T11:46:42.195Z
-        paymentAmount:
-          type: number
-          default: 1000
-          description: Payment Amount
-        paymentMethod:
-          type: string
-          default: 1000
-          description: Payment Amount
-          example: Bank Transfer/UEN Payment/QR Code Payment
-        paymentReferenceNo:
-          type: string
-          default: string
-          description: Payment reference number provided while making payment
-        accountNumber:
-          type: string
-          default: string
-          description: "Account Number varies based on payment types.\n      \n\nSo for bank transfer payment( this field will contain ```bank account number``` & for UEN number payment this will contain ```UEN Number```"
-        accountName:
-          type: string
-          default: string
-          description: Account Name to which payment has been made.
-        bankName:
-          type: string
-          default: string
-          description: "Bank Name varies based on payment types.\n      \n\nSo for bank transfer payment this field will be present, for rest of the types it will be empty"
-        bankSwiftCode:
-          type: string
-          default: string
-          description: "Bank Swift Code varies based on payment types.\n      \n\nSo for bank transfer payment this field will be present, for rest of the types it will be empty"
-        paymentStatus:
-          type: number
-          default: 2
-          description: "We have 3 types of payment status codes. \n    \n For payment rejected: ```0``` \n    \n For payment done, but verification pending: ```1```\n    \n For payment done & verified: ```2```"
-        loanId:
-          type: string
-          default: string
-          description: Loan Id, for which payment has been made.
-        customerReferenceNo:
-          type: string
-          default: string
-          description: Customer Reference Number, for which payment has been made.
-        metadata:
-          type: string
-          default: string
-          description: Metadata for payments. It can be used for reporting, reconciliation purpose.
-        createdAt:
-          type: string
-          default: '2025-01-08T05:12:17.405Z'
-          description: Created Timestamp of the payment in UTC Format eg. 2023-03-30T11:46:42.195Z
-        updatedAt:
-          type: string
-          default: '2025-01-08T05:12:17.405Z'
-          description: Updated Timestamp of the payment in UTC Format eg. 2023-03-30T11:46:42.195Z
-        currency:
-          type: string
-          default: SGD
-          description: Currency Code
-      required:
-      - paymentId
-      - paymentDate
-      - paymentAmount
-      - paymentMethod
-      - paymentReferenceNo
-      - accountNumber
-      - accountName
-      - bankName
-      - bankSwiftCode
-      - paymentStatus
-      - loanId
-      - customerReferenceNo
-      - metadata
-      - createdAt
-      - updatedAt
-      - currency
     RepaymentScheduleV2Response:
       type: object
       properties:
@@ -601,6 +312,54 @@ components:
       - principalDueForPeriod
       - dueDatePostGracePeriod
       - paid
+    CreditLineResponse:
+      type: object
+      properties:
+        statusCode:
+          type: number
+          default: 200
+          description: The HTTP status code of the error
+        data:
+          description: Response Data from the operation
+          allOf:
+          - $ref: '#/components/schemas/CustomerCreditLine'
+        message:
+          type: string
+          default: Success
+          description: Human-readable message containing all available details about the operation
+        success:
+          type: boolean
+          default: true
+          description: A boolean indicating whether this was a success response or an error response
+      required:
+      - statusCode
+      - data
+      - message
+      - success
+    BankTransferType:
+      type: object
+      properties:
+        bankName:
+          type: string
+          default: ''
+          description: Deutche Bank
+        accountNumber:
+          type: number
+          description: For Eg. 1177441144
+          default: 0
+        bankSwiftCode:
+          type: string
+          description: IC114744
+          default: ''
+        accountName:
+          type: string
+          description: John Doe
+          default: ''
+      required:
+      - bankName
+      - accountNumber
+      - bankSwiftCode
+      - accountName
     CustomerCreditLine:
       type: object
       properties:
@@ -766,6 +525,211 @@ components:
       - requestedDate
       - repaymentSchedule
       - payments
+    LoanPayment:
+      type: object
+      properties:
+        paymentId:
+          type: string
+          default: string
+          description: Id of the payment
+        paymentDate:
+          type: string
+          default: '2025-01-08T05:12:17.404Z'
+          description: Date of the payment in UTC Format eg. 2023-03-30T11:46:42.195Z
+        paymentAmount:
+          type: number
+          default: 1000
+          description: Payment Amount
+        paymentMethod:
+          type: string
+          default: 1000
+          description: Payment Amount
+          example: Bank Transfer/UEN Payment/QR Code Payment
+        paymentReferenceNo:
+          type: string
+          default: string
+          description: Payment reference number provided while making payment
+        accountNumber:
+          type: string
+          default: string
+          description: "Account Number varies based on payment types.\n      \n\nSo for bank transfer payment( this field will contain ```bank account number``` & for UEN number payment this will contain ```UEN Number```"
+        accountName:
+          type: string
+          default: string
+          description: Account Name to which payment has been made.
+        bankName:
+          type: string
+          default: string
+          description: "Bank Name varies based on payment types.\n      \n\nSo for bank transfer payment this field will be present, for rest of the types it will be empty"
+        bankSwiftCode:
+          type: string
+          default: string
+          description: "Bank Swift Code varies based on payment types.\n      \n\nSo for bank transfer payment this field will be present, for rest of the types it will be empty"
+        paymentStatus:
+          type: number
+          default: 2
+          description: "We have 3 types of payment status codes. \n    \n For payment rejected: ```0``` \n    \n For payment done, but verification pending: ```1```\n    \n For payment done & verified: ```2```"
+        loanId:
+          type: string
+          default: string
+          description: Loan Id, for which payment has been made.
+        customerReferenceNo:
+          type: string
+          default: string
+          description: Customer Reference Number, for which payment has been made.
+        metadata:
+          type: string
+          default: string
+          description: Metadata for payments. It can be used for reporting, reconciliation purpose.
+        createdAt:
+          type: string
+          default: '2025-01-08T05:12:17.405Z'
+          description: Created Timestamp of the payment in UTC Format eg. 2023-03-30T11:46:42.195Z
+        updatedAt:
+          type: string
+          default: '2025-01-08T05:12:17.405Z'
+          description: Updated Timestamp of the payment in UTC Format eg. 2023-03-30T11:46:42.195Z
+        currency:
+          type: string
+          default: SGD
+          description: Currency Code
+      required:
+      - paymentId
+      - paymentDate
+      - paymentAmount
+      - paymentMethod
+      - paymentReferenceNo
+      - accountNumber
+      - accountName
+      - bankName
+      - bankSwiftCode
+      - paymentStatus
+      - loanId
+      - customerReferenceNo
+      - metadata
+      - createdAt
+      - updatedAt
+      - currency
+    HolidayResponse:
+      type: object
+      properties:
+        date:
+          type: string
+          description: Date String
+          example: 01 Jan 2024
+        dateUTC:
+          type: string
+          description: Date ISO String
+          example: '2023-12-31T18:30:00.000Z'
+        isHoliday:
+          type: boolean
+          description: Date is holiday or not
+          example: true
+      required:
+      - date
+      - dateUTC
+      - isHoliday
+    CustomerNotFoundResponse:
+      type: object
+      properties:
+        statusCode:
+          type: number
+          default: 404
+          description: The HTTP status code of the error
+        error:
+          type: string
+          default: string
+          description: Human-readable generic error message
+        errorCode:
+          type: string
+          default: E_C_CUSTOMER_NOT_FOUND
+          description: Computer-readable code for error handling
+        message:
+          type: string
+          default: string
+          description: Human-readable error message containing all available details about how the error occurred
+        success:
+          type: boolean
+          default: false
+          description: A boolean indicating whether this was a success response or an error response
+      required:
+      - statusCode
+      - error
+      - errorCode
+      - message
+      - success
+    PaymentMethodsResponse:
+      type: object
+      properties:
+        bankTransfer:
+          description: Bank Transfer Payment Method
+          allOf:
+          - $ref: '#/components/schemas/BankTransferType'
+        uenPayment:
+          description: UEN Payment Method
+          allOf:
+          - $ref: '#/components/schemas/BankTransferType'
+        qrPayment:
+          type: string
+          description: QR Payment Method
+      required:
+      - bankTransfer
+      - uenPayment
+      - qrPayment
+    InternalErrorResponse:
+      type: object
+      properties:
+        statusCode:
+          type: number
+          default: 500
+          description: The HTTP status code of the error
+        error:
+          type: string
+          default: string
+          description: Human-readable generic error message
+        errorCode:
+          type: string
+          default: E_INTERNAL_ERROR
+          description: Computer-readable code for error handling
+        message:
+          type: string
+          default: string
+          description: Human-readable error message containing all available details about how the error occurred
+        success:
+          type: boolean
+          default: false
+          description: A boolean indicating whether this was a success response or an error response
+      required:
+      - statusCode
+      - error
+      - errorCode
+      - message
+      - success
+    HolidayListResponse:
+      type: object
+      properties:
+        statusCode:
+          type: number
+          default: 200
+          description: The HTTP status code of the error
+        data:
+          description: Response Data from the operation
+          type: array
+          items:
+            $ref: '#/components/schemas/HolidayResponse'
+        message:
+          type: string
+          default: Success
+          description: Human-readable message containing all available details about the operation
+        success:
+          type: boolean
+          default: true
+          description: A boolean indicating whether this was a success response or an error response
+      required:
+      - statusCode
+      - data
+      - message
+      - success
     CustomerChosenPaymentsResponse:
       type: object
       properties:
@@ -820,24 +784,6 @@ components:
       - errorCode
       - message
       - success
-    PaymentMethodsResponse:
-      type: object
-      properties:
-        bankTransfer:
-          description: Bank Transfer Payment Method
-          allOf:
-          - $ref: '#/components/schemas/BankTransferType'
-        uenPayment:
-          description: UEN Payment Method
-          allOf:
-          - $ref: '#/components/schemas/BankTransferType'
-        qrPayment:
-          type: string
-          description: QR Payment Method
-      required:
-      - bankTransfer
-      - uenPayment
-      - qrPayment
     ForbiddenResponse:
       type: object
       properties:
@@ -852,6 +798,60 @@ components:
         errorCode:
           type: string
           default: E_FORBIDDEN
+          description: Computer-readable code for error handling
+        message:
+          type: string
+          default: string
+          description: Human-readable error message containing all available details about how the error occurred
+        success:
+          type: boolean
+          default: false
+          description: A boolean indicating whether this was a success response or an error response
+      required:
+      - statusCode
+      - error
+      - errorCode
+      - message
+      - success
+    CustomerActiveLoansResponse:
+      type: object
+      properties:
+        statusCode:
+          type: number
+          default: 200
+          description: The HTTP status code of the error
+        data:
+          description: Response Data from the operation
+          type: array
+          items:
+            $ref: '#/components/schemas/LoanSummaryResponse'
+        message:
+          type: string
+          default: Success
+          description: Human-readable message containing all available details about the operation
+        success:
+          type: boolean
+          default: true
+          description: A boolean indicating whether this was a success response or an error response
+      required:
+      - statusCode
+      - data
+      - message
+      - success
+    UnauthorizedResponse:
+      type: object
+      properties:
+        statusCode:
+          type: number
+          default: 401
+          description: The HTTP status code of the error
+        error:
+          type: string
+          default: string
+          description: Human-readable generic error message
+        errorCode:
+          type: string
+          default: E_UNAUTHORIZED
           description: Computer-readable code for error handling
         message:
           type: string
