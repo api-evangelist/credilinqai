@@ -64,6 +64,153 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Credilinq.ai is a company surfaced as a portfolio company of 500-global and added to the API Evangelist network as a stub for enrichment. This profile is a lead awaiting the enrichment pipeline.
+CrediLinq is a Singapore-founded embedded-finance and B2B lending fintech that lets platforms and marketplaces offer white-labeled credit to their business customers. Its API-first "Credit as a Service" powers two products: B2B PayLater (buy-now-pay-later for buyers) and GMV Financing (working-capital advances for sellers), with AI/data-driven credit underwriting, automated onboarding and KYC, credit-line management, loan drawdowns, repayments and reconciliation, and partner reporting. The CrediLinq REST API (OpenAPI 3.0, Auth0 client-credentials bearer auth, sandbox/staging/production environments, HMAC-signed webhooks) is documented at docs.credilinq.ai.
 
-Backed by: 500-global — https://credilinq.ai
+**Areas:** Company · Fintech · Embedded Finance · Lending · Buy Now Pay Later · Credit · Payments · KYC · B2B
+
+## Credilinq.ai on APIs.io
+
+Everything profiled for Credilinq.ai is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/credilinqai/](https://apis.io/providers/credilinqai/)** — or go straight to one of the APIs or properties below.
+
+### APIs (8)
+
+- [Credilinq.ai Authentication API](https://apis.io/apis/credilinqai/credilinqai-authentication-api/) — The Authentication API from Credilinq.ai — 1 operation(s) for authentication.
+- [Credilinq.ai Customers API](https://apis.io/apis/credilinqai/credilinqai-customers-api/) — The Customers API from Credilinq.ai — 4 operation(s) for customers.
+- [Credilinq.ai KYC API](https://apis.io/apis/credilinqai/credilinqai-kyc-api/) — The KYC API from Credilinq.ai — 8 operation(s) for kyc.
+- [Credilinq.ai Loans API](https://apis.io/apis/credilinqai/credilinqai-loans-api/) — The Loans API from Credilinq.ai — 4 operation(s) for loans.
+- [Credilinq.ai Miscellaneous API](https://apis.io/apis/credilinqai/credilinqai-miscellaneous-api/) — The Miscellaneous API from Credilinq.ai — 4 operation(s) for miscellaneous.
+- [Credilinq.ai Onboarding API](https://apis.io/apis/credilinqai/credilinqai-onboarding-api/) — The Onboarding API from Credilinq.ai — 3 operation(s) for onboarding.
+- [Credilinq.ai Payment API](https://apis.io/apis/credilinqai/credilinqai-payment-api/) — The Payment API from Credilinq.ai — 4 operation(s) for payment.
+- [Credilinq.ai Report API](https://apis.io/apis/credilinqai/credilinqai-report-api/) — The Report API from Credilinq.ai — 3 operation(s) for report.
+
+### Published properties
+
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
+
+#### Arazzo workflows (2)
+
+Multi-step workflows that chain operations into a business task.
+
+- [CrediLinq — Create and disburse a loan](https://apis.io/arazzos/credilinqai/credilinqai-create-and-disburse-loan/)
+- [CrediLinq — Onboard a customer and complete KYC](https://apis.io/arazzos/credilinqai/credilinqai-onboard-and-kyc/)
+
+#### AsyncAPI (2)
+
+Event-driven and webhook contracts.
+
+- [CrediLinq Webhooks](https://apis.io/asyncapis/credilinqai/credilinqai-asyncapi/)
+- [Credilinqai Webhooks](https://apis.io/asyncapis/credilinqai/credilinqai-webhooks/)
+
+#### Event channels (1)
+
+Individual events and webhooks the provider emits.
+
+- [{redirect_url}](https://apis.io/channels/credilinqai/redirect-url/)
+
+#### MCP servers (1)
+
+Model Context Protocol servers that expose the API to agents.
+
+- [credilinq](https://apis.io/servers/credilinqai/credilinq/)
+
+#### Agentic access (1)
+
+Which operations an agent can call, which act, and which need a human in the loop.
+
+- [Credilinqai Agentic Access](https://apis.io/agentic-access/credilinqai/credilinqai-agentic-access/)
+
+#### Collections (8)
+
+Postman and Open Collection request collections.
+
+- [CrediLinq Authentication API](https://apis.io/collections/credilinqai/open-credilinqai-authentication-api/)
+- [CrediLinq Authentication Customers API](https://apis.io/collections/credilinqai/open-credilinqai-customers-api/)
+- [CrediLinq Authentication KYC API](https://apis.io/collections/credilinqai/open-credilinqai-kyc-api/)
+- [CrediLinq Authentication Loans API](https://apis.io/collections/credilinqai/open-credilinqai-loans-api/)
+- [CrediLinq Authentication Miscellaneous API](https://apis.io/collections/credilinqai/open-credilinqai-miscellaneous-api/)
+- [CrediLinq Authentication Onboarding API](https://apis.io/collections/credilinqai/open-credilinqai-onboarding-api/)
+- [CrediLinq Authentication Payment API](https://apis.io/collections/credilinqai/open-credilinqai-payment-api/)
+- [CrediLinq Authentication Report API](https://apis.io/collections/credilinqai/open-credilinqai-report-api/)
+
+#### Overlays (1)
+
+OpenAPI overlays, including conversational phrasing for each operation.
+
+- [Credilinqai Openapi Overlay](https://apis.io/overlays/credilinqai/credilinqai-openapi-overlay/)
+
+#### Security (2)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Credilinqai Authentication](https://apis.io/security/credilinqai/credilinqai-authentication/)
+- [Credilinqai Domain Security](https://apis.io/security/credilinqai/credilinqai-domain-security/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://credilinq.ai)
+- [Documentation](https://docs.credilinq.ai/)
+- [Getting started](https://docs.credilinq.ai/docs/introduction)
+- [API reference](https://docs.credilinq.ai/reference/authentication-3)
+- [Sign up](https://portal.credilinq.ai/customer-login/)
+- [Support](https://credilinq.ai/contact)
+- [Changelog](https://docs.credilinq.ai/docs/change-logs)
+- [Blog](https://credilinq.ai/news)
+- [Terms of service](https://credilinq.ai/termsandcondition/)
+- [Privacy policy](https://credilinq.ai/privacy-policy/)
+
+## API Evangelist rating
+
+**Kin Score 40.4** — developing · rubric 0.25.0 · scored 2026-10-23
+
+| Facet | Score |
+|---|---|
+| Discoverability | 73.2 |
+| Contract quality | 55.9 |
+| Contract governance | 4.5 |
+| Operational transparency | 15.8 |
+| Developer ergonomics | 47.0 |
+| Access clarity | 34.2 |
+
+**Agent readiness 37.2** — agent-ready
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | verified |
+| Error Semantics | verified |
+| OpenAPI Examples | partial |
+| Rate Limit Signal | — |
+| Event Surface Described | yes |
+| Agent Skills | derived (partial credit) |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+| Pagination Ratio | — |
+| Operation Distinctiveness | distinct |
+
+**Regulatory alignment 25.9** — Payments
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/credilinqai/](https://apis.io/providers/credilinqai/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Credilinq.ai: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/credilinqai/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
